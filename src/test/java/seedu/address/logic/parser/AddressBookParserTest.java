@@ -9,7 +9,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,6 +33,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -56,9 +59,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+
+        // parsing delete 1
+        DeleteCommand commandIndex = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), commandIndex);
+
+        // parsing single tag eg: delete t/word
+        DeleteCommand commandTag = (DeleteCommand) parser.parseCommand("delete t/word");
+        Set<Tag> testSet = Stream.of(new Tag("word")).collect(Collectors.toSet());
+        assertEquals(new DeleteCommand(testSet), commandTag);
+
+        // parsing multiple tags eg: delete t/friends t/enemy
+        DeleteCommand commandTag2 = (DeleteCommand) parser.parseCommand("delete t/friends t/enemy");
+        Set<Tag> testSet2 = Stream.of(new Tag("friends"), new Tag("enemy")).collect(Collectors.toSet());
+        assertEquals(new DeleteCommand(testSet2), commandTag2);
     }
 
     @Test
