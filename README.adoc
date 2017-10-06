@@ -2,10 +2,10 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 
-https://travis-ci.org/CS2103T-W09B1/addressbook-level4[image:https://travis-ci.org/CS2103T-W09B1/addressbook-level4.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/zacharytang/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/djhme9sfvicgi179?svg=true[Build status]]
-https://coveralls.io/github/CS2103T-W09B1/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/CS2103T-W09B1/addressbook-level4/badge.svg?branch=master[Coverage Status]]
-https://www.codacy.com/app/zacharytang/addressbook-level4?utm_source=github.com&utm_medium=referral&utm_content=CS2103T-W09B1/addressbook-level4&utm_campaign=Badge_Grade)[image:https://api.codacy.com/project/badge/Grade/cd980dd82b494db5bf584cfc9fd60a51[Codacy Badge]]
+https://travis-ci.org/CS2103AUG2017-W09B1/main[image:https://travis-ci.org/CS2103AUG2017-W09-B1/main.svg?branch=master["Build Status"]]
+https://ci.appveyor.com/project/zacharytang/main[image:https://ci.appveyor.com/api/projects/status/1kk36eq1wha8tcut?svg=true[Build status]]
+https://coveralls.io/github/CS2103aug2017-W09B1/main?branch=master[image:https://coveralls.io/repos/github/CS2103AUG2017-W09B1/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/zacharytang/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103AUG2017-W09-B1/main&amp;utm_campaign=Badge_Grade)[image:https://api.codacy.com/project/badge/Grade/67e717e8e66245b9881839446b7fb464[Codacy Badge]]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
