@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -27,6 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -49,6 +51,12 @@ public class EditCommandTest {
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_incompleteTagCommand_failure() throws Exception {
+        EditCommand incompleteEditCommand = prepareCommand(new Tag("old"), new Tag("new"));
+        assertCommandFailure(incompleteEditCommand, model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
 
     @Test
@@ -149,7 +157,8 @@ public class EditCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws Exception {
+        // For edit person
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
@@ -161,7 +170,7 @@ public class EditCommandTest {
         assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertFalse(standardCommand == null);
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
@@ -171,6 +180,34 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+        // For edit person
+        Tag oldtag = new Tag("old");
+        Tag newtag = new Tag("new");
+        Tag diffOldTag = new Tag("diffold");
+        Tag diffNewTag = new Tag("diffnew");
+        final EditCommand standardTagCommand = new EditCommand(oldtag, newtag);
+
+        // same tags -> returns true
+        EditCommand commandWithSameTags = new EditCommand(oldtag, newtag);
+        assertTrue(standardTagCommand.equals(commandWithSameTags));
+
+        // same object -> returns true
+        assertTrue(standardTagCommand.equals(commandWithSameTags));
+
+        // null -> return false
+        assertFalse(standardTagCommand == null);
+
+        // different types -> returns false
+        assertFalse(standardTagCommand.equals(new ClearCommand()));
+
+        // different old tag -> return false
+        assertFalse(standardTagCommand.equals(new EditCommand(diffOldTag, newtag)));
+
+        // different new tag -> return false
+        assertFalse(standardTagCommand.equals(new EditCommand(oldtag, diffNewTag)));
+
+
     }
 
     /**
@@ -178,6 +215,15 @@ public class EditCommandTest {
      */
     private EditCommand prepareCommand(Index index, EditPersonDescriptor descriptor) {
         EditCommand editCommand = new EditCommand(index, descriptor);
+        editCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return editCommand;
+    }
+
+    /**
+     * Returns an {@code EditCommand} with parameters {@code oldTag} and {@code newTag}
+     */
+    private EditCommand prepareCommand(Tag oldTag, Tag newTag) {
+        EditCommand editCommand = new EditCommand(oldTag, newTag);
         editCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return editCommand;
     }

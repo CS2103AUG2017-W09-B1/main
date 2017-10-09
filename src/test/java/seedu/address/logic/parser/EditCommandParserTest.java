@@ -54,13 +54,25 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
+        // no index specified e.g. edit thisIsNotAnIndex
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
+        // no field specified when edit a person e.g. edit 1
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
-        // no index and no field specified
+        // no index and no field specified e.g. edit
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parseTagEdit_missingParts_failure() {
+        // old tag but no new tag specified
+        assertParseFailure(parser, "old/oldTag", MESSAGE_INVALID_FORMAT);
+
+        // new tag but no old tag specified
+        assertParseFailure(parser, "new/newTag", MESSAGE_INVALID_FORMAT);
+
+        // no new tag and no old tag specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
