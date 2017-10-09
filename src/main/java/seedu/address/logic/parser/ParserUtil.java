@@ -53,6 +53,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Tag> parseOldTag(Optional<String> oldtag) throws IllegalValueException {
+        requireNonNull(oldtag);
+        return oldtag.isPresent() ? Optional.of(new Tag(oldtag.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Tag> parseNewTag(Optional<String> newTag) throws IllegalValueException {
+        requireNonNull(newTag);
+        return newTag.isPresent() ? Optional.of(new Tag(newTag.get())) : Optional.empty();
+    }
+
+    /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
