@@ -39,7 +39,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to the link:#features[Features] section below for details of each command.
 
-== Features
+== Command Line Features
 
 ====
 *Command Format*
@@ -69,13 +69,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing persons : `list`
 
 Shows a list of all persons in the address book. +
-Format: `list` +
+If a tag, or tags, is/are specified, then it shows a list of all persons containing one of the tags. +
+Format: `list [t/TAG]...` +
 Alternatives: `l` , `showall`, `viewall`
 
-=== Editing a person : `edit`
+Examples :
+
+* `list` +
+Lists all persons in the address book
+* `list t/jcfriends t/computing` +
+Lists all persons in the address book containing *either* 'JCfriends' or 'computing' (or *both*).
+
+
+
+=== Editing a person or a tag: `edit`
+==== Editing a person
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
@@ -95,6 +106,27 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+==== Editing a tag
+
+Replaces the specified tag word to a specified new word for all people containing the specified tag +
+Format: `edit old/OLDTAG new/NEWTAG` +
+Alternatives: `e` , `modify`, `change`
+
+****
+* The tag that you want to replace has to already exist.
+* Tags are case-sensitive
+* Editing a person's tag only edits the tag(s) for a single person. This command edits one tag name for all people.
+****
+
+Examples: +
+* `edit old/bestfriends new/enemies` +
+* `edit old/CS1010 new/CS1020`
+
+[TIP]
+This command is very useful to batch edit module tags of classmates when advancing from a prerequisite module! +
+(e.g. CS1010 -> CS1020)
+
 
 === Locating persons by name: `find`
 
@@ -117,7 +149,8 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a person or a tag: `delete`
+==== Deleting a Person
 
 Deletes the specified person from the address book. +
 Format: `delete INDEX` +
@@ -137,6 +170,29 @@ Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+
+==== Deleting a Tag (or multiple Tags)
+
+Deletes the specified tag from all people containing the tag in the address book. +
+Format: `delete t/TAG...`
+
+****
+* The tag specified is case-sensitive.
+* You can delete multiple tags with one delete command.
+* The tag (or all the tags) specified must already exist in the address book.
+****
+
+Examples:
+
+* `list` +
+`delete t/friends` +
+Deletes the tag 'friends' from all people containing the tag 'friends' in the address book.
+* `find Betsy` +
+`delete t/module1 t/module2` +
+Deletes the tags 'module1' and 'module2' from all people containing one of the tag, or both of the tags in the address book.
+
+[TIP]
+This command is most useful for batch deleting Tags. Especially when you've finished a project in a module.
 
 === Selecting a person : `select`
 
@@ -158,6 +214,83 @@ Selects the 2nd person in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
+
+=== Open a Google Maps view of a selected person's address : `gmaps`
+
+For a person selected with the `select` command, opens a Google Maps view of the person's address locaton.
+Format: `gmaps` +
+Alternatives: `g`, `map`, `maps`
+
+Examples:
+
+* `list` +
+`select 2` +
+`gmaps` +
+Opens the Google Maps view for the address of the 2nd person selected in the address book.
+* `find Betsy` +
+`select 1` +
+`gmaps` +
+Opens the Google Maps view for the address of the 1st person in the results of the `find` command.
+
+=== Location Commands
+[IMPORTANT]
+You must *set a location* `setlocation` first before using some of the location commands +
+
+==== Set location: `setlocation`
+Sets the point of reference/origin for the use of location commands. +
+This location will be the point of reference for the location commands +
+Format: `setlocaton a/ADDRESS` +
+Alternatives: `setloc`
+
+Example:
+
+* `setlocation a/Blk 123 Kent Ridge Drive`
+
+==== Listing persons who live nearby : `nearby`
+Shows a list of persons who's address is nearby the *location* set within a specified radius. +
+Format: `nearby d/DISTANCE` +
+Alternatives: `n`, `nearme`, `closeby`, `neighbours`
+
+****
+* The distance specified is in metres.
+****
+
+Example:
+
+* `setlocation a/Blk 123 Kent Ridge Drive` +
+ `nearby 500` +
+ Shows a list of people with address 500m away from Blk 123 Kent Ridge Drive.
+
+==== Finding a central location among a group of persons : `central` _(Coming in v2.0)_
+After listing persons, shows the central location among the persons most recently listed +
+Including the word 'withme' will include the set location in calculating central location
+If an index, or multiple indexes are specified, shows the central location among the specified people with these indexes
+
+Format: `central [withme] [INDEX]...` +
+Alternatives: `c`, `center`, `wheremeet`
+
+Example:
+
+* `list` +
+`central` +
+Show the central location among the persons most recently listed.
+
+* `setlocation a/Blk 123 Kent Ridge Drive` +
+`list` +
+`central me` +
+Show the central location among the persons most recently listed and Blk 123 Kent Ridge Drive.
+
+* `list` +
+`central 1 5 6` +
+Shows the central location among the persons most recently listed with Index 1, 5 and 6.
+
+* `list t/jcfriends` +
+`central` +
+Shows the central locaton among the persons tagged as 'jcfriends'.
+
+****
+* The index refers to the index number shown in the most recent listing.
+****
 
 === Listing entered commands : `history`
 
@@ -239,6 +372,19 @@ Alternatives: `x` , `quit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+== Other features
+Here are some features in the Address Book that are not command line based, but good to know to aid in your productivity
+
+
+=== Tag Bar
+
+=== Footer Bar
+
+=== Google Maps Integration with Address
+Clicking on the address in the address book will open a Google Map map view of the address location.
+
+
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -246,11 +392,13 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Delete (Person)* : `delete INDEX` +
 e.g. `delete 3`
+* *Delete (Tag)* : `delete [t/TAG]...` +
+e.g. `delete t/modulemate t/colleague`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +

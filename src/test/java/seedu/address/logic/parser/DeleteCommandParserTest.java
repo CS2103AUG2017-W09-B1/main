@@ -5,9 +5,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.tag.Tag;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -26,7 +31,17 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_validArgsTag_returnsDeleteCommand() throws Exception {
+        Set<Tag> expectedTagSet = Stream.of(new Tag("tag")).collect(Collectors.toSet());
+        assertParseSuccess(parser, "delete t/tag", new DeleteCommand(expectedTagSet));
+        Set<Tag> expectedTagSet2 = Stream.of(new Tag("tag"), new Tag("tags")).collect(Collectors.toSet());
+        assertParseSuccess(parser, "delete t/tag t/tags", new DeleteCommand(expectedTagSet2));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+
 }
