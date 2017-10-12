@@ -747,8 +747,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |exit the program |
 
-|`* * *` |user |add a remark to a contact |see more details
-
 |`* * *` |user who has many friends |view different groups of my friends by their tags |manage my large list of contacts well
 
 |`* * *` |user |view an link:#attribute[attribute] called 'matriculation no.' & 'gender' |see more details of my friends
