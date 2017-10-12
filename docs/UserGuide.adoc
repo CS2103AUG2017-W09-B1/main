@@ -257,7 +257,6 @@ Examples:
 * `delete old/2` +
 Deletes all the contacts which you haven't used the 'edit', 'photo' or 'find' command for the past 2 months.
 
-=======
 ==== Deleting a Tag (or multiple Tags)
 
 Deletes the specified tag from all people containing the tag in the address book. +
@@ -267,10 +266,10 @@ Format: `delete t/TAG...`
 * The tag specified is case-sensitive.
 * You can delete multiple tags with one delete command.
 * The tag (or all the tags) specified must already exist in the address book.
-
 ****
 
 Examples:
+
 * `list` +
 `delete t/friends` +
 Deletes the tag 'friends' from all people containing the tag 'friends' in the address book.
@@ -281,30 +280,6 @@ Deletes the tags 'module1' and 'module2' from all people containing one of the t
 
 [TIP]
 This command is most useful for batch deleting Tags. Especially when you've finished a project in a module.
-
-
-=== Editing the remark of a person : `remark`
-
-Adds or Deletes a remark to the specified person from the address book. +
-Format:
-Add a remark: `remark INDEX [r/REMARK]`
-Delete a remark: `remark INDEX [r/]`
-
-****
-* Edits the remark of the person at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`remark 2 r/Likes to drink coffee.` +
-Adds 'Likes to drink coffee' remark to the 2nd person in the address book.
-* `find Betsy` +
-`remark 1 r/` +
-Removes the remark from the 1st person in the results of the `find` command.
-
 
 === Selecting a person : `select`
 
@@ -603,8 +578,6 @@ e.g. `delete 3`
 e.g. `delete t/modulemate t/colleague`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Remark* : `remark INDEX [r/REMARK] ` +
-e.g. `remark 2 r/Likes to drink coffee.`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *Google Maps* `gmaps`
