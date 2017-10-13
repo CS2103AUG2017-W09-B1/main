@@ -111,11 +111,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parseTagEdit_invalidValue_failure() {
-        assertParseFailure(parser, "old/ new/", Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "old/ok new/", Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "edit old/ new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "edit old/* new/*", Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "edit old/* new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, " old/ new/", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, " old/ok new/", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, " old/ new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, " old/* new/*", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, " old/* new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
