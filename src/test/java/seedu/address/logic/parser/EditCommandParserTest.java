@@ -64,6 +64,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
+    /** Only Edit Command on a Person considers the preamble.
+     *  The preamble is the text before the first valid prefix, which in this case, is the index.
+     */
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
@@ -78,6 +81,7 @@ public class EditCommandParserTest {
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
+
 
     @Test
     public void parse_invalidValue_failure() {
@@ -103,6 +107,15 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_NAME_CONSTRAINTS);
+    }
+
+    @Test
+    public void parseTagEdit_invalidValue_failure() {
+        assertParseFailure(parser, "old/ new/", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "old/ok new/", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "edit old/ new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "edit old/* new/*", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "edit old/* new/ok", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
