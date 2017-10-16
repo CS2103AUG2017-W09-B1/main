@@ -33,15 +33,27 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgsTag_returnsDeleteCommand() throws Exception {
         Set<Tag> expectedTagSet = Stream.of(new Tag("tag")).collect(Collectors.toSet());
-        assertParseSuccess(parser, "delete t/tag", new DeleteCommand(expectedTagSet));
+        assertParseSuccess(parser, " t/tag", new DeleteCommand(expectedTagSet));
         Set<Tag> expectedTagSet2 = Stream.of(new Tag("tag"), new Tag("tags")).collect(Collectors.toSet());
-        assertParseSuccess(parser, "delete t/tag t/tags", new DeleteCommand(expectedTagSet2));
+        assertParseSuccess(parser, " t/tag t/tags", new DeleteCommand(expectedTagSet2));
     }
+
+    @Test
+    public void parse_invalidArgsTag_failure() throws Exception {
+        assertParseFailure(parser, " t/*",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/tag t/*",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/* t/*",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
-
 
 }

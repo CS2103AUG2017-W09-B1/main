@@ -23,23 +23,34 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
 
-            // check if the tag prefix '/t' is present
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
-            if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
-                Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-                return new DeleteCommand(tagList);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        String preamble = argMultimap.getPreamble();
+
+        if (preamble.equals("")) {
+            try {
+                if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+                    Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                    return new DeleteCommand(tagList);
+                }
+            } catch (IllegalValueException ive) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
-
-            // if not present then delete command is for a indexed person
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        } else if (preamble.matches("-?\\d+")) {
+            try {
+                Index index = ParserUtil.parseIndex(args);
+                return new DeleteCommand(index);
+            } catch (IllegalValueException ive) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
         }
+
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

@@ -17,6 +17,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -162,6 +163,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(t);
     }
 
+    /**
+     * Removes {@code tag} from this {@code AddressBook}.
+     * @throws TagNotFoundException if the {@code tag} is not in this {@code AddressBook}.
+     */
+    public boolean removeTag(Tag tag) throws TagNotFoundException {
+        if (tags.remove(tag)) {
+            return true;
+        } else {
+            throw new TagNotFoundException();
+        }
+    }
+
     //// util methods
 
     @Override
@@ -193,4 +206,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(persons, tags);
     }
+
+
 }
