@@ -257,7 +257,6 @@ Examples:
 * `delete old/2` +
 Deletes all the contacts which you haven't used the 'edit', 'photo' or 'find' command for the past 2 months.
 
-=======
 ==== Deleting a Tag (or multiple Tags)
 
 Deletes the specified tag from all people containing the tag in the address book. +
