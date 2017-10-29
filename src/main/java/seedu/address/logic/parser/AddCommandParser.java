@@ -17,16 +17,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Birthday;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Gender;
-import seedu.address.model.person.MatricNo;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
@@ -59,11 +50,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
             Timetable timetable = ParserUtil.parseTimetable(argMultimap.getValue(PREFIX_TIMETABLE)).get();
             Remark remark = new Remark("");
+            PhotoPath photoPath = new PhotoPath("");
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY)).get();
 
             ReadOnlyPerson person = new Person(name, gender, matricNo, phone, email, address, timetable,
-                    remark, tagList, birthday);
+                    remark, photoPath, tagList, birthday);
 
             return new AddCommand(person);
         } catch (IllegalValueException ive) {
