@@ -21,12 +21,16 @@ public class PhotoPath {
 
     public PhotoPath(String photoPath) throws IllegalValueException {
         requireNonNull(photoPath);
+        String trimmedPhotoPath = photoPath.trim();
 
         //copy the photo file in PC to the picture folders.
-        if (!isValidPhotoPath(photoPath)) {
+        if (photoPath.equals("") || isValidPhotoPath(trimmedPhotoPath)) {
+            //not specified yet
+            this.value = trimmedPhotoPath;
+        } else {
             throw new IllegalValueException(MESSAGE_PHOTOPATH_CONSTRAINTS);
         }
-        this.value = photoPath;
+
     }
 
 
