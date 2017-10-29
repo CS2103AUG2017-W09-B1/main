@@ -10,6 +10,7 @@
         <birthday isPrivate="false">19071997</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Ruth Mueller</name>
@@ -21,6 +22,7 @@
         <birthday isPrivate="false">03011988</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false">Likes to drink coffee</remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Heinz Kurz</name>
@@ -32,6 +34,7 @@
         <birthday isPrivate="false">05071979</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Cornelia Meier</name>
@@ -43,6 +46,7 @@
         <birthday isPrivate="false">23051978</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false">CAP5.0</remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Werner Meyer</name>
@@ -54,6 +58,7 @@
         <birthday isPrivate="false">04022000</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Lydia Kunz</name>
@@ -65,6 +70,7 @@
         <birthday isPrivate="false">09082001</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false">owe money</remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Anna Best</name>
@@ -76,6 +82,7 @@
         <birthday isPrivate="false">10101999</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Stefan Meier</name>
@@ -87,6 +94,7 @@
         <birthday isPrivate="false">24121993</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
     <persons>
         <name>Martin Mueller</name>
@@ -98,5 +106,6 @@
         <birthday isPrivate="false">09052001</birthday>
         <timetable isPrivate="false"></timetable>
         <remark isPrivate="false"></remark>
+        <photoPath isPrivate="false"></photoPath>
     </persons>
 </addressbook>
