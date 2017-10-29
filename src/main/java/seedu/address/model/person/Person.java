@@ -27,6 +27,7 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Address> address;
     private ObjectProperty<Timetable> timetable;
     private ObjectProperty<Remark> remark;
+    private ObjectProperty<PhotoPath> photoPath;
     private ObjectProperty<Birthday> birthday;
 
     private ObjectProperty<UniqueTagList> tags;
@@ -35,7 +36,7 @@ public class Person implements ReadOnlyPerson {
      * Every field must be present and not null.
      */
     public Person(Name name, Gender gender, MatricNo matricNo, Phone phone, Email email, Address address,
-                  Timetable timetable, Remark remark, Set<Tag> tags, Birthday birthday) {
+                  Timetable timetable, Remark remark, PhotoPath photoPath, Set<Tag> tags, Birthday birthday) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.gender = new SimpleObjectProperty<>(gender);
@@ -45,6 +46,7 @@ public class Person implements ReadOnlyPerson {
         this.address = new SimpleObjectProperty<>(address);
         this.timetable = new SimpleObjectProperty<>(timetable);
         this.remark = new SimpleObjectProperty<>(remark);
+        this.photoPath = new SimpleObjectProperty<>(photoPath);
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
         this.birthday = new SimpleObjectProperty<>(birthday);
@@ -55,7 +57,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getGender(), source.getMatricNo(), source.getPhone(), source.getEmail(),
-                source.getAddress(), source.getTimetable(), source.getRemark(), source.getTags(), source.getBirthday());
+                source.getAddress(), source.getTimetable(), source.getRemark(), source.getPhotoPath(), source.getTags(), source.getBirthday());
     }
 
     public void setName(Name name) {
@@ -168,6 +170,20 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Remark getRemark() {
         return remark.get();
+    }
+
+    public void setPhotoPath(PhotoPath photoPath) {
+        this.photoPath.set(requireNonNull(photoPath));
+    }
+
+    @Override
+    public ObjectProperty<PhotoPath> photoPathProperty() {
+        return photoPath;
+    }
+
+    @Override
+    public PhotoPath getPhotoPath() {
+        return photoPath.get();
     }
 
     /**
