@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.PhotoCommand.MESSAGE_DELETE_Photo_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHOTO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_Photo;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -14,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Photo;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
