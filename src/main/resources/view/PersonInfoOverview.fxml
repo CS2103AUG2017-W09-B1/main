@@ -6,11 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
 <StackPane styleClass="info-panel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <SplitPane dividerPositions="0.25" orientation="VERTICAL">
+    <!--Edit dividerPositions below to adjust vertical divider position between the person info and the timetable area -->
+    <SplitPane dividerPositions="0.3" orientation="VERTICAL">
         <AnchorPane>
-            <SplitPane dividerPositions="0.24" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <!--Edit dividerPositions below to adjust the divider position between the person photo and the person details-->
+            <SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <AnchorPane minHeight="0.0" minWidth="0.0" styleClass="info-name-cell">
                     <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="43.2" styleClass="display_big_label" text="\$name" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </AnchorPane>

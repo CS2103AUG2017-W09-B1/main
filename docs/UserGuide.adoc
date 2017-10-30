@@ -38,8 +38,8 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for UniFy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-.UniFy's Interface
 image::Ui.png[width="790"]
+_Figure 2.1 : UniFy's Interface_
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -105,8 +105,8 @@ Format: `add n/NAME g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MATRIC_NUMBER] 
 Alternatives: `a` , `insert` +
  +
 
-.A person with various contact information +
 image::PersonCard.png[]
+_Figure 3.2.1 : A person with various contact information_
 
 You can view the contacts you have added in UniFy in the form of _cards_.
 
@@ -159,7 +159,7 @@ Examples:
 * `add s/facebook John Doe`
 * `add s/Instagram John Doe`
 
-=== Adding/Deleting a Photo for a person : `photo` _(Coming in v2.0)_
+=== Adding/Deleting a Photo for a person : `photo` _(Coming in v1.4)_
 ____
 _When you study too much, sometimes, you forget how someone looks like._
 ____
@@ -195,8 +195,8 @@ Tags are too short, and your remarks for a person are more descriptive and uniqu
 ____
 Adds or Deletes a remark to the specified person from the address book. +
 Format: +
-(Add remark) `remark INDEX [r/REMARK]` +
-(Delete remark): `remark INDEX [r/]`
+(Add remark) `remark INDEX r/REMARK` +
+(Delete remark): `remark INDEX r/`
 
 ****
 * Edits the remark of the person at the specified `INDEX`.
@@ -211,52 +211,24 @@ Adds 'Likes to drink coffee' remark to the 2nd person in the address book.
 `remark 1 r/` +
 Removes the remark from the 1st person in the results of the `find` command.
 
-=== Listing persons : `list`
+=== Listing all people : `list`
 ____
-_Display your contacts how you like it. All of them? Just your classmates for a particular module? +
-Want to know who's birthday is in this month? Unify every common contact together and list them as one._
+_Want to list all contacts for an overview?_
 ____
-==== List all people
 
 Shows a list of all persons in the address book. +
 Format: `list` +
 Alternatives: `l` , `showall`, `viewall`
 
-==== List people by their tags _(Coming in v2.0)_
-
-Shows a list of all persons containing one of the specified tags. +
-Format: `list [t/TAG]...` +
-Alternatives: `l` , `showall`, `viewall`
-
-Example :
-
-* `list t/jcfriends t/computing` +
-Lists all persons in the address book containing *either* 'JCfriends' or 'computing' (or *both*).
-
-==== List people under a birthday month _(Coming in v2.0)_
-
-Shows a list of all persons having birthdays in one of the specified months. +
-Format: `list [b/MONTH]...` +
-Alternatives: `l` , `showall`, `viewall`
-
-****
-* MONTH should be inputted by numbers. e.g `12` searches for December babies
-* Single digit months needs to be preceded by a 0 in front.
-** Example: `02` searches for those born in February
-* Only the birthday month is searched.
-* The list will be ordered in terms of ascending order of their birthday dates.
-** Example: Person with birthday on October 10 is listed after someone with October 2.
-****
-
-Example :
-
-* `list b/12` +
-Lists all persons in the address book having birthdays in `December`
-
-==== Locating persons by filters _(Coming in v2.0)_
+=== Locating persons by filters : `find` _(Coming in v2.0)_
+____
+_Display your contacts how you like it. All of them? Just your classmates for a particular module? +
+Want to know who's birthday is in this month? Unify every common contact together and list them as one._
+____
 
 Finds persons whose information contain any of the given keywords from each category. +
-Format: `find t/Tag p/PHONE...`
+Format: `find t/Tag p/PHONE e/EMAIL b/BIRTHDAY MONTH...` +
+Alternatives: `f` , `search`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -264,6 +236,12 @@ Format: `find t/Tag p/PHONE...`
 * Mentioned attributes are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching all keyword will be returned.
+* MONTH should be inputted by numbers. e.g `12` searches for December babies
+* Single digit months needs to be preceded by a 0 in front.
+* Example: `02` searches for those born in February
+* Only the birthday month is searched.
+* The result will be ordered in terms of ascending order of their birthday dates.
+* Example: Person with birthday on October 10 is returned after someone with October 2.
 ****
 
 Examples:
@@ -272,14 +250,21 @@ Examples:
 Returns any person tagged by `friends`
 * `find t/friends p/1234` +
 Returns any person tagged by `friends`, and having phone numbers containing `1234`
+* `find t/jcfriends t/computing` +
+Returns all persons in the address book containing *either* 'JCfriends' or 'computing' (or *both*).
+* `find b/12` +
+Returns all persons in the address book having birthdays in `December`
 
-=== Sorting all persons : `sort` _(Coming in v2.0)_
+=== Sorting all persons : `sort` _(Coming in v1.5)_
 ____
 _Sometimes, you just meet too many people in University. Do not worry, get all your contacts in order._
 ____
 Shows a list of all persons in the address book by arranging their names in alphabetical order. +
-Format: `sort` +
+Format: +
+(Sort by name in ascending order) `sort ASC` +
+(Sort by name in descending order) `sort DESC`
 Alternatives: `s` , `sortall`, `arrange`
+
 
 === Editing a person or a tag: `edit`
 ==== Editing a person
@@ -678,13 +663,17 @@ e.g. `delete t/modulemate t/colleague`
 e.g. `edit 2 n/James Lee e/jameslee@example.com b/19051994`
 * *Edit (Tag)* : `edit old/TAG new/TAG` +
 e.g. `edit tag/friends tag/enemy`
-* *Remark* : `remark INDEX [r/REMARK] ` +
+* *Photo* : `photo INDEX ph/PHOTO_PATH` +
+e.g. `photo 1 ph/ C:/desktop/photo.jpg`
+* *Remark* : `remark INDEX r/REMARK ` +
 e.g. `remark 2 r/Likes to drink coffee.`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *Google Maps* `gmaps INDEX`
 * *Nearby* `nearby a/ADDRESS d/DISTANCE` +
 e.g. `nearby a/123, Clementi Rd, 1234665 d/500`
+* *Sort (in Ascending Order)* `sort ASC`
+* *Sort (in Descending Order)* `sort DESC`
 * *Central* `central`
 * *List* : `list`
 * *Help* : `help`
@@ -700,17 +689,18 @@ e.g.`select 2`
 |=======
 |Command | Alternatives |-|-|-|-
 |help |-|-|-|-|-
-|add |a |insert |-|-|-
-|photo |ph |-|-|-|-
+|add | a | insert |-|-|-
+|photo | ph |-|-|-|-
 |remark |-|-|-|-|-
-|list |l | showall | viewall |-|-
-|find |-|-|-|-|-
-|sort | s |sortall |arrange |-|-
+|list | l | showall | viewall |-|-
+|find | f | search |-|-|-
+|sort | s | sortall | arrange |-|-
 |edit | e | modify | change |-|-
 |delete | d | remove |-|-|-
 |select| s | choose |-|-|-
+|history| h | past |-|-|-
 |whenfree |-|-|-|-|-
-|gmaps | g | map | maps |-|-
+|gmaps | g | map | maps|-|-
 |nearby| n | nearme | closeby | neighbours | neighbors
 |central| ct | center | wheremeet |-|-
 |undo | u |-|-|-|-
@@ -737,5 +727,6 @@ e.g.`select 2`
 === Version 1.3
 * `gmaps` command
 * `delete` support for multiple persons
+* Auto-correct command suggested
 
 |=======

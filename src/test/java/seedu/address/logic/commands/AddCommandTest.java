@@ -152,7 +152,10 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
-
+        @Override
+        public void checkMasterTagListHasAllTagsUsed () {
+            fail("This method should not be called.");
+        }
 
         @Override
         public ObservableList<ReadOnlyPerson> getFilteredPersonList() {

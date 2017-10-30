@@ -76,6 +76,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
+    /** Checks if the master list of tags in the address book has every tag being used */
+    void checkMasterTagListHasAllTagsUsed ();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

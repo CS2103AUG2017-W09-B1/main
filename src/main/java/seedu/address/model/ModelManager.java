@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.MasterTagListHasAnUnusedTagEvent;
 import seedu.address.commons.events.model.PersonAddressDisplayDirectionsEvent;
 import seedu.address.commons.events.model.PersonAddressDisplayMapEvent;
 import seedu.address.model.person.Address;
@@ -57,6 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     @Override
@@ -67,6 +69,11 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(addressBook));
+    }
+
+    /** Raises an event to indicate a tag in the master list of tags is unused*/
+    private void indicateMasterTagListHasAnUnusedTag () {
+        raise(new MasterTagListHasAnUnusedTagEvent(addressBook.getUnusedTags()));
     }
 
     @Override
@@ -83,12 +90,21 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     @Override
     public synchronized void deletePersons(ArrayList<ReadOnlyPerson> targets) throws PersonNotFoundException {
         addressBook.removePersons(targets);
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
+    }
+
+    @Override
+    public void checkMasterTagListHasAllTagsUsed () {
+        if (!addressBook.hasAllTagsInUse()) {
+            indicateMasterTagListHasAnUnusedTag();
+        }
     }
 
 
@@ -107,6 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
             addressBook.updatePerson(oldPerson, newPerson);
         }
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     @Override
@@ -131,6 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     @Override
@@ -138,6 +156,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     @Override
@@ -147,6 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
+        checkMasterTagListHasAllTagsUsed();
     }
 
     //=========== Filtered Person List Accessors =============================================================

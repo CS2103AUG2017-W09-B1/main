@@ -12,6 +12,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.tag.Tag;
 
 /**
  * The main LogicManager of the app.
@@ -49,6 +50,16 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return model.getAddressBook().getTagList();
+    }
+
+    @Override
+    public void checkAllMasterListTagsAreBeingUsed () {
+        model.checkMasterTagListHasAllTagsUsed();
     }
 
     @Override

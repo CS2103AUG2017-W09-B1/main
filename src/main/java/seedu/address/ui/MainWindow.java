@@ -42,6 +42,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private InfoPanel infoPanel;
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -56,6 +57,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane tagListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -131,6 +135,10 @@ public class MainWindow extends UiPart<Region> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        tagListPanel = new TagListPanel(logic.getTagList());
+        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        logic.checkAllMasterListTagsAreBeingUsed();
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

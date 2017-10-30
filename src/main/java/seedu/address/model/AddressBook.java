@@ -147,6 +147,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks if the master list {@link #tags} has every tag being used.
+     *  @return true if all tags in the master list is being used by a person
+     */
+    public boolean hasAllTagsInUse () {
+        HashSet<Tag> masterSet = new HashSet<Tag>();
+        for (ReadOnlyPerson person: persons) {
+            masterSet.addAll(person.getTags());
+        }
+        return masterSet.containsAll(tags.toSet());
+    }
+
+    /**
+     *  Gets the tags in the master list {@link #tags} that is not being used
+     *  @return {@code Set<Tag>} of Tags not being used by any person
+     *  @see #hasAllTagsInUse()
+     */
+    public Set<Tag> getUnusedTags () {
+        HashSet<Tag> actualSet = new HashSet<Tag>();
+        for (ReadOnlyPerson person: persons) {
+            actualSet.addAll(person.getTags());
+        }
+        Set<Tag> masterSet = tags.toSet();
+
+        masterSet.removeAll(actualSet);
+        return masterSet;
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * @throws PersonNotFoundException if the {@code key} is not in this {@code AddressBook}.
      */
