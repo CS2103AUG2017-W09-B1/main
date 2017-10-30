@@ -9,38 +9,33 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class PhotoPath {
 
-    public static final String MESSAGE_PHOTOPATH_CONSTRAINTS =
-            "Photo Path should be the absolute path in your PC. It should be a string started with the name of " +
-                    "your disk, followed by several groups of backslash and string, like c:\\desktop\\happy.jpg";
-
-
-
-    public static final String PHOTOPATH_VALIDATION_REGEX = "([a-zA-Z]:)?(\\\\[a-zA-Z0-9_.-]+)+\\\\?";
+    public static final String MESSAGE_APP_PHOTOPATH_CONSTRAINTS =
+            "The app photo path should be a string starting with 'docs/images/contactPhotos/'," +
+                    "following by the file name, like'photo.jpg'.";
+    public static final String FILE_SAVED_PARENT_PATH = "docs/images/contactPhotos/";
 
     public final String value;  //photo path
 
     public PhotoPath(String photoPath) throws IllegalValueException {
         requireNonNull(photoPath);
-        String trimmedPhotoPath = photoPath.trim();
 
-        //copy the photo file in PC to the picture folders.
-        if (photoPath.equals("") || isValidPhotoPath(trimmedPhotoPath)) {
-            //not specified yet
-            this.value = trimmedPhotoPath;
-        } else {
-            throw new IllegalValueException(MESSAGE_PHOTOPATH_CONSTRAINTS);
+        if (!isValidPhotoPath(photoPath)) {
+            throw new IllegalValueException(MESSAGE_APP_PHOTOPATH_CONSTRAINTS);
         }
-
+        this.value = photoPath;
     }
-
 
     /**
      * Returns if a given string is a valid photo path.
      */
     public static boolean isValidPhotoPath(String test) {
-        return test.matches(PHOTOPATH_VALIDATION_REGEX);
+        if (test.equals("")) {
+            return true;
+        }
+        String[] parts = test.split("\\.");
+        Boolean isFileSpecified = (parts.length == 2);
+        return test.startsWith(FILE_SAVED_PARENT_PATH) && isFileSpecified;
     }
-
 
     @Override
     public String toString() {
