@@ -2,9 +2,10 @@ package seedu.address.commons.util;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
+
+import oracle.jrockit.jfr.StringConstantPool;
 
 /**
  * Writes and reads files
@@ -12,6 +13,47 @@ import java.nio.file.Files;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+
+    /**
+     * Get the extension of the file path by split the path string by regex "."
+     * @param filePath
+     * @return extension string
+     */
+    public static String getFileExtension(String filePath) {
+        return "." + filePath.split("\\.")[1];
+    }
+
+    /**
+     * Copy all the content from the file in original path to the one in destination path.
+     * @param oriPath
+     * @param destPath
+     * @return true if the file is successfully copied to the specified place.
+     */
+    public static boolean copyFile(String oriPath, String destPath) throws IOException {
+
+        //create a buffer to store content
+        byte[] buffer = new byte[1024];
+
+        //bufferedInputStream
+        FileInputStream fis = new FileInputStream(oriPath);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+
+        //bufferedOutputStream
+        FileOutputStream fos = new FileOutputStream(destPath);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+        int numBytes = bis.read(buffer);
+        while (numBytes > 0) {
+            bos.write(buffer, 0, numBytes);
+            numBytes = bis.read(buffer);
+        }
+
+        //close input,output stream
+        bis.close();
+        bos.close();
+
+        return true;
+    }
 
     public static boolean isFileExists(File file) {
         return file.exists() && file.isFile();
