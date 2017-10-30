@@ -7,8 +7,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHOTO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.testutil.TestUtil.createTempFile;
+import static seedu.address.testutil.TestUtil.removeFileAndItsParentsTillRoot;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +21,24 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PhotoCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -73,10 +89,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_photo() throws Exception {
-        final PhotoPath photoPath = new PhotoPath("D:\\family\\photo.jpg");
+        final String photoPath = createTempFile();
+
         PhotoCommand command = (PhotoCommand) parser.parseCommand(PhotoCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_PHOTO + " " + photoPath.value);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_PHOTO + " " + photoPath);
         assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, photoPath), command);
+
+        Path thisPhotoPath = Paths.get(photoPath);
+        removeFileAndItsParentsTillRoot(thisPhotoPath);
     }
 
     @Test

@@ -51,8 +51,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_COFFEE = "like to drink coffee";
     public static final String VALID_REMARK_CAP = "CAP 5.0";
-    public static final String VALID_PHOTOPATH_AMY = "F://Selfie//photo.jpg";
-    public static final String VALID_PHOTOPATH_BOB = "D://Family//selfie.jpg";
+    public static final String VALID_PHOTOPATH_AMY = "F:\\Selfie\\photo.jpg";
+    public static final String VALID_PHOTOPATH_BOB = "D:\\Family\\selfie.jpg";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
