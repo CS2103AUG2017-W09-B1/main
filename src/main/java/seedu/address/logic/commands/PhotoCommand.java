@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.FileUtil.copyFile;
 import static seedu.address.commons.util.FileUtil.getFileExtension;
+import static seedu.address.commons.util.FileUtil.haveSameContent;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHOTO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -35,7 +36,8 @@ public class PhotoCommand extends UndoableCommand {
             + "If the photo path field is empty, the old photo path is removed for the person.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PHOTO + "[PHOTO PATH] \n"
-            + "Example: (add photo path) " + COMMAND_WORD + " 1 " + PREFIX_PHOTO + "C:\\Users\\User\\Desktop\\photo.jpg\n"
+            + "Example: (add photo path) " + COMMAND_WORD + " 1 " + PREFIX_PHOTO
+            + "C:\\Users\\User\\Desktop\\photo.jpg\n"
             + "Example: (delete photo path) " + COMMAND_WORD
             + " 2 "
             + PREFIX_PHOTO + "\n";
@@ -47,9 +49,10 @@ public class PhotoCommand extends UndoableCommand {
 
     public static final String LOCAL_PHOTOPATH_VALIDATION_REGEX = "([a-zA-Z]:)?(\\\\[a-zA-Z0-9_.-]+)+\\\\?";
     public static final String MESSAGE_LOCAL_PHOTOPATH_CONSTRAINTS =
-            "Photo Path should be the absolute path in your PC. It should be a string started with the name of " +
-                    "your disk, followed by several groups of backslash and string, like c:\\desktop\\happy.jpg";
-    public static final String FILE_SAVED_PARENT_PATH = "docs/images/contactPhotos/";  //copy the photo in in project directory
+            "Photo Path should be the absolute path in your PC. It should be a string started with the name of "
+                    + "your disk, followed by several groups of backslash and string, like c:\\desktop\\happy.jpg";
+    public static final String FILE_SAVED_PARENT_PATH = "docs/images/contactPhotos/";
+    //copy the photo in in project directory
 
     private final Index targetIndex;
     private final String localPhotoPath;
@@ -192,7 +195,7 @@ public class PhotoCommand extends UndoableCommand {
         // state check
         PhotoCommand ph = (PhotoCommand) other;
         return targetIndex.equals(ph.targetIndex)
-                && photoPath.equals(ph.photoPath);
+                && haveSameContent(ph.photoPath.value, ((PhotoCommand) other).photoPath.value);
     }
 }
 
