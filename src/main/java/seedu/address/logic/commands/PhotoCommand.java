@@ -173,14 +173,6 @@ public class PhotoCommand extends UndoableCommand {
     }
 
     /**
-     * Get the photo path of the file stored in app.
-     * @return app photo path string
-     */
-    public String getAppPhotoPath() {
-        return this.photoPath.value;
-    }
-
-    /**
      * Get the index of the person
      * @return the target index of the person
      */
