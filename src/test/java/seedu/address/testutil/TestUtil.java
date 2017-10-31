@@ -80,17 +80,6 @@ public class TestUtil {
     }
 
     /**
-     * If the file in the specific path in the app directory exists, delete the path
-     * @param path
-     */
-    public static void removeAppFile(String path) {
-        File fileToDelete = new File(path);
-        if (fileToDelete.exists()) {
-            fileToDelete.delete();
-        }
-    }
-
-    /**
      * Creates a temporary folder and a photo file for parseCommand_photo() test, i.e.,
      * "C:\\family\\photo.jpg"
      * @return the path string of the temporary file

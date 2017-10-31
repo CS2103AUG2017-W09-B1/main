@@ -11,11 +11,11 @@ public class PhotoPathTest {
 
     @Test
     public void isValidPhotoPath() {
+        // blank email
+        assertFalse(PhotoPath.isValidPhotoPath("")); // empty string
+        assertFalse(PhotoPath.isValidPhotoPath(" ")); // spaces only
 
-        // spaces
-        assertFalse(PhotoPath.isValidPhotoPath(" "));
-
-        // / missing parts
+        // missing parts
         assertFalse(PhotoPath.isValidPhotoPath("photo.jpg")); // missing disk part
         assertFalse(PhotoPath.isValidPhotoPath("c:photo.jpg")); // missing backslash
         assertFalse(PhotoPath.isValidPhotoPath("d:photo.jpg")); // missing backslash
@@ -26,16 +26,15 @@ public class PhotoPathTest {
         assertFalse(PhotoPath.isValidPhotoPath("c:\\")); // no file name
 
         // valid photo path
-        assertTrue(PhotoPath.isValidPhotoPath("")); // accept empty string by default
-        assertTrue(PhotoPath.isValidPhotoPath("docs/images/contactPhotos/1234.jpg"));
-        assertTrue(PhotoPath.isValidPhotoPath("docs/images/contactPhotos/12345678.jpg"));  //
-        assertTrue(PhotoPath.isValidPhotoPath("docs/images/contactPhotos/1234_5678.jpg"));  // underscore
+        assertTrue(PhotoPath.isValidPhotoPath("c:\\desktop\\baby.jpg"));
+        assertTrue(PhotoPath.isValidPhotoPath("d:\\myself.jpg"));  //
+        assertTrue(PhotoPath.isValidPhotoPath("d:\\my_photo.jpg"));  // underscore
     }
 
     @Test
     public void equals() throws IllegalValueException {
-        PhotoPath validPhotoPath_1 = new PhotoPath("docs/images/contactPhotos/1234.jpg");
-        PhotoPath validPhotoPath_2 = new PhotoPath("docs/images/contactPhotos/5678.jpg");
+        PhotoPath validPhotoPath_1 = new PhotoPath("C:\\abc\\def\\ghi\\abc.jpg");
+        PhotoPath validPhotoPath_2 = new PhotoPath("C:\\Desktop\\def\\ghi\\abc.png");
 
         // same object -> returns true
         assertTrue(validPhotoPath_1.equals(validPhotoPath_1));
