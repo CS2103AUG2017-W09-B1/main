@@ -103,7 +103,7 @@ public class RemarkCommand extends UndoableCommand {
         Person remarkPerson = new Person(personToRemark.getName(), personToRemark.getGender(),
                 personToRemark.getMatricNo(), personToRemark.getPhone(),
                 personToRemark.getEmail(), personToRemark.getAddress(), personToRemark.getTimetable(),
-                remark, personToRemark.getTags(), personToRemark.getBirthday());
+                remark, personToRemark.getPhotoPath(), personToRemark.getTags(), personToRemark.getBirthday());
 
         return remarkPerson;
     }

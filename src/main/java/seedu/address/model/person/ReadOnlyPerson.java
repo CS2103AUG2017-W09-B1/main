@@ -29,6 +29,8 @@ public interface ReadOnlyPerson {
     Timetable getTimetable();
     ObjectProperty<Remark> remarkProperty();
     Remark getRemark();
+    ObjectProperty<PhotoPath> photoPathProperty();
+    PhotoPath getPhotoPath();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
     ObjectProperty<Birthday> birthdayProperty();
@@ -48,6 +50,7 @@ public interface ReadOnlyPerson {
                 && other.getAddress().equals(this.getAddress())
                 && other.getTimetable().equals(this.getTimetable())
                 && other.getRemark().equals(this.getRemark()))
+                && other.getPhotoPath().equals(this.getPhotoPath())
                 && other.getBirthday().equals(this.getBirthday());
     }
 
@@ -73,6 +76,8 @@ public interface ReadOnlyPerson {
                 .append(getTimetable())
                 .append(" Remark: ")
                 .append(getRemark())
+                .append(" Photo Path:")
+                .append(getPhotoPath())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

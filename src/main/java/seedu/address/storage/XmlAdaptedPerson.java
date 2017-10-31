@@ -16,6 +16,7 @@ import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.timetable.Timetable;
@@ -44,6 +45,8 @@ public class XmlAdaptedPerson {
     private String timetable;
     @XmlElement(required = true)
     private String remark;
+    @XmlElement(required = true)
+    private String photoPath;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -69,6 +72,7 @@ public class XmlAdaptedPerson {
         address = source.getAddress().value;
         timetable = source.getTimetable().value;
         remark = source.getRemark().value;
+        photoPath = source.getPhotoPath().value;
         tagged = new ArrayList<>();
         birthday = source.getBirthday().date;
         for (Tag tag : source.getTags()) {
@@ -94,8 +98,9 @@ public class XmlAdaptedPerson {
         final Address address = new Address(this.address);
         final Timetable timetable = new Timetable(this.timetable);
         final Remark remark = new Remark(this.remark);
+        final PhotoPath photoPath = new PhotoPath(this.photoPath);
         final Set<Tag> tags = new HashSet<>(personTags);
         final Birthday birthday = new Birthday(this.birthday);
-        return new Person(name, gender, matricNo, phone, email, address, timetable, remark, tags, birthday);
+        return new Person(name, gender, matricNo, phone, email, address, timetable, remark, photoPath, tags, birthday);
     }
 }

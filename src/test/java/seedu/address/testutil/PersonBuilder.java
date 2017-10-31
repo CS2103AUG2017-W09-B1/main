@@ -11,6 +11,7 @@ import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.timetable.Timetable;
@@ -31,6 +32,7 @@ public class PersonBuilder {
     public static final String DEFAULT_BIRTHDAY = "23051997";
     public static final String DEFAULT_TIMETABLE_URL = "http://modsn.us/HXDrJ";
     public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_PHOTOPATH = "";
     public static final String DEFAULT_TAGS = "friends";
 
     private Person person;
@@ -45,10 +47,12 @@ public class PersonBuilder {
             Address defaultAddress = new Address(DEFAULT_ADDRESS);
             Timetable defaultTimetable = new Timetable(DEFAULT_TIMETABLE_URL);
             Remark defaultRemark = new Remark(DEFAULT_REMARK);
+            PhotoPath defaultPhotoPath = new PhotoPath(DEFAULT_REMARK);
             Set<Tag> defaultTags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
             Birthday defaultBirthday = new Birthday(DEFAULT_BIRTHDAY);
             this.person = new Person(defaultName, defaultGender, defaultMatricNo, defaultPhone, defaultEmail,
-                    defaultAddress, defaultTimetable, defaultRemark, defaultTags, defaultBirthday);
+                    defaultAddress, defaultTimetable, defaultRemark, defaultPhotoPath,
+                    defaultTags, defaultBirthday);
         } catch (IllegalValueException ive) {
             throw new AssertionError("Default person's values are invalid.");
         }
@@ -102,6 +106,18 @@ public class PersonBuilder {
      */
     public PersonBuilder withRemark(String remark) {
         this.person.setRemark(new Remark(remark));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Photo Path} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPhotoPath(String photoPath) {
+        try {
+            this.person.setPhotoPath(new PhotoPath(photoPath));
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("photo path is expected to be unique.");
+        }
         return this;
     }
 
