@@ -15,13 +15,15 @@ public class PhotoPathTest {
         // spaces
         assertFalse(PhotoPath.isValidPhotoPath(" "));
 
-        // / missing parts： not start with 'docs/images/contactPhotos/'
-        assertFalse(PhotoPath.isValidPhotoPath("photo.jpg"));
-        assertFalse(PhotoPath.isValidPhotoPath("c:photo.jpg"));
-        assertFalse(PhotoPath.isValidPhotoPath("d:photo.jpg"));
-        assertFalse(PhotoPath.isValidPhotoPath("c:\\\\photo.jpg"));
-        assertFalse(PhotoPath.isValidPhotoPath("c:\\"));
-        assertFalse(PhotoPath.isValidPhotoPath("c:\\"));
+        // / missing parts
+        assertFalse(PhotoPath.isValidPhotoPath("photo.jpg")); // missing disk part
+        assertFalse(PhotoPath.isValidPhotoPath("c:photo.jpg")); // missing backslash
+        assertFalse(PhotoPath.isValidPhotoPath("d:photo.jpg")); // missing backslash
+
+        // invalid parts
+        assertFalse(PhotoPath.isValidPhotoPath("c:\\\\photo.jpg")); // too many backslashes
+        assertFalse(PhotoPath.isValidPhotoPath("c:\\")); // no file name
+        assertFalse(PhotoPath.isValidPhotoPath("c:\\")); // no file name
 
         // valid photo path
         assertTrue(PhotoPath.isValidPhotoPath("")); // accept empty string by default
