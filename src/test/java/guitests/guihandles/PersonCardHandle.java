@@ -19,6 +19,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TIMETABLE_FIELD_ID = "#timetable";
+    private static final String PHOTOPATH_FIELD_ID = "#photoPath";
     private static final String TAGS_FIELD_ID = "#tags";
     private static final String BIRTHDAY_FIELD_ID = "#birthday";
     private static final String REMARK_FIELD_ID = "#remark";
@@ -31,6 +32,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label timetableLabel;
+    private final Label photoPathLabel;
     private final Label remarkLabel;
     private final List<Label> tagLabels;
     private final Label birthdayLabel;
@@ -46,6 +48,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         this.phoneLabel = getChildNode(PHONE_FIELD_ID);
         this.emailLabel = getChildNode(EMAIL_FIELD_ID);
         this.timetableLabel = getChildNode(TIMETABLE_FIELD_ID);
+        this.photoPathLabel = getChildNode(PHOTOPATH_FIELD_ID);
         this.remarkLabel = getChildNode(REMARK_FIELD_ID);
         this.birthdayLabel = getChildNode(BIRTHDAY_FIELD_ID);
 
@@ -95,6 +98,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
 
     public String getRemark() {
         return remarkLabel.getText();
+    }
+
+    public String getPhotoPath() {
+        return photoPathLabel.getText();
     }
 
     public List<String> getTags() {

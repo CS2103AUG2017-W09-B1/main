@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC_NO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHOTO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
@@ -50,6 +51,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_COFFEE = "like to drink coffee";
     public static final String VALID_REMARK_CAP = "CAP 5.0";
+    public static final String VALID_PHOTOPATH_AMY = "F:\\Selfie\\photo.jpg";
+    public static final String VALID_PHOTOPATH_BOB = "D:\\Family\\selfie.jpg";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -79,6 +82,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // '/' not allowed in birthdays
     public static final String INVALID_BIRTHDAY_DESC = " " + PREFIX_BIRTHDAY + "23/05/1997";
+    public static final String INVALID_PHOTOPATH_DESC = " " + PREFIX_PHOTO + "haa.jpg";
     public static final String INVALID_TIMETABLE_DESC = " " + PREFIX_TIMETABLE + "https://www.google.com";
     public static final String INVALID_SHORT_URL_DESC = " " + PREFIX_TIMETABLE + "http://modsn.us/ABC";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags

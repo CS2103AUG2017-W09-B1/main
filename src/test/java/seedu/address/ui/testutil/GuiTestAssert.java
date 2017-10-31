@@ -27,6 +27,7 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
         assertEquals(expectedCard.getTimetable(), actualCard.getTimetable());
         assertEquals(expectedCard.getRemark(), actualCard.getRemark());
+        assertEquals(expectedCard.getPhotoPath(), actualCard.getPhotoPath());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
         assertEquals(expectedCard.getBirthday(), actualCard.getBirthday());
     }
@@ -44,6 +45,7 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getBirthday().date, actualCard.getBirthday());
         assertEquals(expectedPerson.getTimetable().value, actualCard.getTimetable());
         assertEquals(expectedPerson.getRemark().value, actualCard.getRemark());
+        assertEquals(expectedPerson.getPhotoPath().value, actualCard.getPhotoPath());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }

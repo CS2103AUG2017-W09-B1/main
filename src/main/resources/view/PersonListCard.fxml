@@ -36,6 +36,7 @@
       <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
       <Label fx:id="timetable" styleClass="cell_small_label" text="\$timetable" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      <Label fx:id="photoPath" styleClass="cell_small_label" text="\$photoPath" />
     </VBox>
   </GridPane>
 </HBox>

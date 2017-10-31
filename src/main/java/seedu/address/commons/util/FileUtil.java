@@ -2,9 +2,16 @@ package seedu.address.commons.util;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * Writes and reads files
@@ -12,6 +19,77 @@ import java.nio.file.Files;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+
+    /**
+     * Get the extension of the file path by split the path string by regex "."
+     *
+     * @param filePath
+     * @return extension string
+     */
+    public static String getFileExtension(String filePath) {
+        return "." + filePath.split("\\.")[1];
+    }
+
+    /**
+     * Copy all the content from the file in original path to the one in destination path.
+     *
+     * @param oriPath
+     * @param destPath
+     * @return true if the file is successfully copied to the specified place.
+     */
+    public static boolean copyFile(String oriPath, String destPath) throws IOException {
+
+        //create a buffer to store content
+        byte[] buffer = new byte[1024];
+
+        //bufferedInputStream
+        FileInputStream fis = new FileInputStream(oriPath);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+
+        //bufferedOutputStream
+        FileOutputStream fos = new FileOutputStream(destPath);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+        int numBytes = bis.read(buffer);
+        while (numBytes > 0) {
+            bos.write(buffer, 0, numBytes);
+            numBytes = bis.read(buffer);
+        }
+
+        //close input,output stream
+        bis.close();
+        bos.close();
+
+        return true;
+    }
+
+    /**
+     * Compares whether two files in the specified paths have the same content.
+     * @param firstPath
+     * @param secondPath
+     * @return true if they have the same content
+     * @throws IOException
+     */
+    public static boolean haveSameContent(String firstPath, String secondPath) {
+        Path p1 = Paths.get(firstPath);
+        Path p2 = Paths.get(secondPath);
+
+        byte[] firstFileBytes = new byte[0];
+
+        try {
+            firstFileBytes = Files.readAllBytes(p1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        byte[] secondFileBytes = new byte[0];
+        try {
+            secondFileBytes = Files.readAllBytes(p2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Arrays.equals(firstFileBytes, secondFileBytes);
+    }
 
     public static boolean isFileExists(File file) {
         return file.exists() && file.isFile();

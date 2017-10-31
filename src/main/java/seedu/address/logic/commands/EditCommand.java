@@ -30,6 +30,7 @@ import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -171,11 +172,12 @@ public class EditCommand extends UndoableCommand {
         Birthday updateBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Timetable updatedTimetable = editPersonDescriptor.getTimetable().orElse(personToEdit.getTimetable());
         Remark updatedRemark = personToEdit.getRemark();
+        PhotoPath updatedPhotoPath = personToEdit.getPhotoPath();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedGender, updatedMatricNo,
                 updatedPhone, updatedEmail, updatedAddress,
-                updatedTimetable, updatedRemark, updatedTags, updateBirthday);
+                updatedTimetable, updatedRemark, updatedPhotoPath, updatedTags, updateBirthday);
     }
 
     //@@author nbriannl
