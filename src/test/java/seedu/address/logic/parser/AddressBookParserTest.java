@@ -8,6 +8,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHOTO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TestUtil.createTempFile;
+import static seedu.address.testutil.TestUtil.removeAppFile;
 import static seedu.address.testutil.TestUtil.removeFileAndItsParentsTillRoot;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -93,10 +94,19 @@ public class AddressBookParserTest {
 
         PhotoCommand command = (PhotoCommand) parser.parseCommand(PhotoCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_PHOTO + " " + photoPath);
-        assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, photoPath), command);
+        String commandAppPath = command.getAppPhotoPath();
+
+        PhotoCommand newCommand = new PhotoCommand(INDEX_FIRST_PERSON, photoPath);
+        String newCommandAppPath = newCommand.getAppPhotoPath();
+
+        assertEquals(newCommand, command);
 
         Path thisPhotoPath = Paths.get(photoPath);
         removeFileAndItsParentsTillRoot(thisPhotoPath);
+
+        //remove the two temporary files saved in the app
+        removeAppFile(commandAppPath);
+        removeAppFile(newCommandAppPath);
     }
 
     @Test
