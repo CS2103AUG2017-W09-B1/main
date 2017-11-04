@@ -63,6 +63,11 @@ public class LogicManager extends ComponentManager implements Logic {
         model.checkMasterTagListHasAllTagsUsed();
     }
 
+    @Override
+    public void setCurrentTheme(String theme) {
+        model.setCurrentTheme(theme);
+    }
+
     //author@@
     @Override
     public ListElementPointer getHistorySnapshot() {

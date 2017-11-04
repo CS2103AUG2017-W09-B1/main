@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.AddressBook.isDefaultPhoto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -21,7 +21,6 @@ import seedu.address.commons.events.model.PersonAddressDisplayDirectionsEvent;
 import seedu.address.commons.events.model.PersonAddressDisplayMapEvent;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhotoPath;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -36,6 +35,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private static String currentTheme;
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
 
@@ -50,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        currentTheme = userPrefs.getCurrentTheme();
     }
 
     public ModelManager() {
@@ -177,6 +178,21 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
         checkMasterTagListHasAllTagsUsed();
+    }
+
+    @Override
+    public HashMap<String, String> getThemeMap () {
+        return this.addressBook.getThemeMap();
+    }
+
+    @Override
+    public void setCurrentTheme(String theme) {
+        currentTheme = theme;
+    }
+
+    @Override
+    public String getCurrentTheme() {
+        return currentTheme;
     }
 
     //=========== Filtered Person List Accessors =============================================================

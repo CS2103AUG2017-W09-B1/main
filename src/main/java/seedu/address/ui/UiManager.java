@@ -66,6 +66,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
+        prefs.updateLastSetTheme(mainWindow.getCurrentTheme());
         mainWindow.hide();
         mainWindow.releaseResources();
     }
@@ -108,6 +109,14 @@ public class UiManager extends ComponentManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    /**
+     * Sets the given theme as the main theme used in the main window
+     * @param theme eg. {@code "DarkTheme.css}
+     */
+    public void setTheme(String theme) {
+        mainWindow.getRoot().getStylesheets().add("/view/" + theme);
     }
 
     //==================== Event Handling Code ===============================================================

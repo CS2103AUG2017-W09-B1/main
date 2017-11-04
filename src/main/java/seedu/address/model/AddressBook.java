@@ -31,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final HashMap<String, String> themes;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -42,6 +43,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        themes = new HashMap<String, String>();
     }
 
     public AddressBook() {}
@@ -51,6 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
+        initialiseThemes();
         resetData(toBeCopied);
     }
 
@@ -223,7 +226,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
     //@@author
 
-    //// tag-level operations
+    //// Tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
@@ -240,6 +243,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         } else {
             throw new TagNotFoundException();
         }
+    }
+
+    //// Theme-level operations
+
+    //@@author nbriannl
+    /**
+     * Initialises the themes in the address book.
+     */
+    private void initialiseThemes() {
+        themes.put("dark", "DarkTheme.css");
+        themes.put("light", "LightTheme.css");
+    }
+
+    HashMap<String, String> getThemeMap () {
+        return themes;
     }
 
     //@@author

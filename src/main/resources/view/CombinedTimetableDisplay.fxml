@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author zacharytang -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -9,8 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-
-<!-- @@author zacharytang -->
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <SplitPane dividerPositions="0.2" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <AnchorPane styleClass="combined-timetable-label">
