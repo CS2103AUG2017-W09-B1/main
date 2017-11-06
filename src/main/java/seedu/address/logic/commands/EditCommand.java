@@ -100,7 +100,6 @@ public class EditCommand extends UndoableCommand {
 
     //@@author nbriannl
     /**
-     *
      * @param oldTag the old tag to be replaced by the new tag
      * @param newTag that will replace the old tag
      */
@@ -119,40 +118,57 @@ public class EditCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         if (isEditForPerson) {
-            List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
-            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-            try {
-                model.updatePerson(personToEdit, editedPerson);
-            } catch (DuplicatePersonException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            } catch (PersonNotFoundException pnfe) {
-                throw new AssertionError("The target person cannot be missing");
-            }
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            return executeCommandForPerson();
         } else {
 
-            try {
-                model.editTag(oldTag, newTag);
-            } catch (DuplicatePersonException dpe) {
-                throw new AssertionError("Updating the tags on one person cannot possibly make the person"
-                        + " identical to another person.");
-            } catch (PersonNotFoundException pnfe) {
-                throw new AssertionError("The target person cannot be missing");
-            } catch (TagNotFoundException tgne) {
-                throw new CommandException(MESSAGE_NONEXISTENT_TAG);
-            }
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_TAG_SUCCESS, oldTag));
+            return executeCommandForTag();
         }
     }
+
+    //@author
+    /**
+     * Command execution of EditCommand on a person.
+     */
+    private CommandResult executeCommandForPerson () throws CommandException {
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        try {
+            model.updatePerson(personToEdit, editedPerson);
+        } catch (DuplicatePersonException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target person cannot be missing");
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    //@@author nbriannl
+    /**
+     * Command execution of EditCommand for a tag
+     */
+    private CommandResult executeCommandForTag () throws CommandException {
+        try {
+            model.editTag(oldTag, newTag);
+        } catch (DuplicatePersonException dpe) {
+            throw new AssertionError("Updating the tags on one person cannot possibly make the person"
+                    + " identical to another person.");
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target person cannot be missing");
+        } catch (TagNotFoundException tgne) {
+            throw new CommandException(MESSAGE_NONEXISTENT_TAG);
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TAG_SUCCESS, oldTag));
+    }
+
 
     //@@author April0616
     /**
