@@ -66,15 +66,18 @@ public class DeleteCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         // this code block is command execution for delete [indexes]
         if (targetTags == null && targetIndexes != null) {
-            return getCommandResultForPerson();
+            return executeCommandForPerson();
 
         } else { // this code block is command execution for delete t/[tag...]
-            return getCommandResultForTag();
+            return executeCommandForTag();
         }
     }
 
-    //@@author nbriannl
-    private CommandResult getCommandResultForPerson () throws CommandException {
+    //@@author April0616
+    /**
+     * Command execution of Delete Command on a person or persons
+     */
+    private CommandResult executeCommandForPerson () throws CommandException {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
         ArrayList<ReadOnlyPerson> deletePersonList = new ArrayList<>();
 
@@ -96,8 +99,11 @@ public class DeleteCommand extends UndoableCommand {
         return new CommandResult(generateResultMsg(deletePersonList));
     }
 
-    //@@author April0616
-    private CommandResult getCommandResultForTag () throws CommandException {
+    //@@author nbriannl
+    /**
+     * Command execution of DeleteCommand on a tag or tags.
+     */
+    private CommandResult executeCommandForTag () throws CommandException {
         ArrayList<Tag> arrayTags = new ArrayList<Tag>(targetTags);
         List<Tag> listOfExistingTags = model.getAddressBook().getTagList();
 
