@@ -89,6 +89,7 @@ ____
 Views the User Guide for Help +
 Format: `help`
 
+
 // tag::birthday[]
 === Adding a person: `add`
 ____
@@ -102,7 +103,8 @@ module mates with appropriate tags too!_
 ____
 
 Adds a person to the address book +
-Format: `add n/NAME [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]... [tmpt/NUM_OF_MONTHS/TEMPORARY TAG]...` +
+
+Format: `add n/NAME g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]...` +
 Alternatives: `a` , `insert` +
  +
 
@@ -130,10 +132,6 @@ Here are the following information a person can have: +
 * *Tags*
 ** A person can have any number of tags (even no tags at all!)
 ** Tags are alphanumeric and without spaces.
-* *_Temporary_ Tags* _(Coming in v2.0)_
-** `NUM_OF_MONTHS` *must be a positive integer* eg: 1, 2, 3, ...
-** `NUM_OF_MONTHS` specifies the number of months the temporary tag will last, after which it will disappear.
-*** Example: `tmpt/6/ATAPcolleague` tags the person with `ATAPcolleague`. After 6 months, the tag will disappear.
 ****
 
 Examples:
@@ -144,6 +142,26 @@ Examples:
 * `add n/Betty g/F p/12345678 e/betty@example.com b/23051998`
 * `add n/Jasmine p/12345678`
 // end::birthday[]
+
+// end::add[]
+
+// tag::tempTag[]
+==== Adding a person with temporary tags _(Coming in v2.0)_
+____
+_Don't want to keep a tag forever? Let's set temporary tags!_
+____
+Adds a person to the address book +
+Format: `add n/NAME g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]... [tmpt/NUM_OF_MONTHS/TEMPORARY TAG]...` +
+Alternatives: `a` , `insert`
+
+Here is the temporary tag information a person can have: +
+
+** `NUM_OF_MONTHS` *must be a positive integer* eg: 1, 2, 3, ...
+** `NUM_OF_MONTHS` specifies the number of months the temporary tag will last, after which it will disappear.
+*** Example: `tmpt/6/ATAPcolleague` tags the person with `ATAPcolleague`. After 6 months, the tag will disappear.
+
+// end::tempTag[]
+
 
 ==== Adding a person using the information on social media _(Coming in v2.0)_
 ____
@@ -162,6 +180,7 @@ Examples:
 * `add s/facebook John Doe`
 * `add s/Instagram John Doe`
 
+// tag::photoCommand[]
 === Adding/Deleting a Photo for a person : `photo` _(Since v1.4)_
 ____
 _When you study too much, sometimes, you forget how someone looks like._
@@ -192,7 +211,9 @@ Removes the picture from the 2nd person in the last shown list.
 * `find n/Betsy` +
 `photo 1` +
 Removes the picture from the 1st person in the results of the `find` command.
+// end::photoCommand[]
 
+// tag::remarkCommand[]
 === Giving remarks to a person : `remark` _(Since v1.1)_
 ____
 _Sometimes you want to remind yourself how this person was like in a funny incident. Or you owe friends money for last night's supper. +
@@ -221,6 +242,8 @@ Removes the remark from the 1st person in the results of the `find` command.
 * `find n/Betsy` +
 `remark 1 r/` +
 Removes the remark from the 1st person in the results of the `find` command.
+
+// end::remarkCommand[]
 
 === Listing all people : `list`
 ____
@@ -264,6 +287,7 @@ Returns all persons in the address book containing *either* 'JCfriends' or 'comp
 * `find b/12` +
 Returns all persons in the address book having birthdays in `December`
 
+
 === Sorting all persons : `sort` _(Coming in v2.0)_
 ____
 _Sometimes, you just meet too many people in University. Don't worry, get all your contacts in order._
@@ -273,7 +297,7 @@ Format: +
 (Sort by name in ascending order) `sort ASC` +
 (Sort by name in descending order) `sort DESC`
 Alternatives: `s` , `sortall`, `arrange`
-
+// end::sortCommand[]
 
 === Editing a person or a tag: `edit`
 ==== Editing a person
@@ -356,7 +380,8 @@ Deletes the 2nd and 4th persons in the address book.
 `delete 1 5` +
 Deletes the 1st and 5th persons in the results of the `find` command.
 
-==== Deleting old contacts (Coming in v2.0)
+// tag::oldContact[]
+==== Deleting old contacts _(Coming in v2.0)_
 ____
 _Some people you do not talk for months. Maybe a group mate from a previous module you never see ever again.
 They drift away, and out of UniFy they go as well._
@@ -373,6 +398,7 @@ Examples:
 
 * `delete old/2` +
 Deletes all the contacts which you have not viewed/edited/listed for the past 2 months.
+// end::oldContact[]
 
 // tag::deletetag[]
 ==== Deleting a Tag (or multiple Tags) _(Since v1.1)_
@@ -424,6 +450,7 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+// tag::timetable[]
 === Viewing combined timetables : `whenfree` _(Since v1.5)_
 ____
 _"When are all of you free?" is an extremely common question in University. Let us solve that._
@@ -444,6 +471,7 @@ Displays a combined timetable for all listed users.
 * If no index is specified, displays the timetable representing all the persons currently listed.
 * All persons specified *must have timetables added*.
 ****
+// end::timetable[]
 
 === Opening a Google Maps view of an address : `gmaps` _(Since v1.3)_
 ____
@@ -540,8 +568,7 @@ Alternatives: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`). +
-Undoing a DeleteCommand to recover the persons you deleted does not recover their deleted contact photos, you should add those photos back manually.
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -637,9 +664,11 @@ _Here are some features in UniFy that are not in the form of commands, but good 
 To change the theme of the app, click on *Appearance* -> *Themes*, at the top of the window. +
 Several themes are available, such as *Day Mode* and *Night Mode*.
 
+// tag::fontsize[]
 === Font Size _(Coming in v2.0)_
 
 If you find the font too big or too small, the font size can be changed in *Appearance* -> *Themes*
+// end::fontsize[]
 
 === Command Suggestion _(Coming in v2.0)_
 

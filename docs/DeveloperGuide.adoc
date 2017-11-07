@@ -360,6 +360,7 @@ _Figure 4.1.4 : Activity diagram when a new command is executed_
 **Cons:** This would require dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things. +
 // end::undoredo[]
 
+// tag::timetable[]
 === Timetables Attribute
 
 Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.
@@ -402,6 +403,14 @@ The following UML diagram represents the implementation of the classes.
 image::TimetableClassDiagram.png[width="800"]
 _Figure 4.2.1 : Timetable class diagram (XYZComponent refers to all other components that `Person` is composed of, the class diagram is not complete)_
 
+==== Displaying of Timetables
+
+Displaying of timetables is facilitated using a single `TimetableDisplay` component, which resides above `BrowserPanel`. Both these
+components are contained within `InfoPanel`, which handles specific events to bring either panel to the front.
+
+Upon execution of a `select` or `whenfree` command, an arraylist of `Timetable` to display is passed to `TimetableDisplay`, which
+dynamically fills the JavaFX container `GridPane` with `Panes`, according to the timetables to be displayed.
+
 ==== Design Considerations
 
 **Aspect:** Representation of timetables +
@@ -424,6 +433,7 @@ _Figure 4.2.1 : Timetable class diagram (XYZComponent refers to all other compon
 **Alternative 2:** Both shortened and full-length NUSMods URLs are accepted. +
 **Pros:** This is more user friendly as any type of NUSMods URL is accepted. +
 **Cons:** This is much harder to detect malformed URL as parsing data does not detect errors in lesson tokens in URL. Shortened URL gives 403 response on bad URL.
+// end::timetable[]
 
 // tag::deletetag[]
 === Delete Tag Mechanism
@@ -566,6 +576,7 @@ _Figure 4.3.3 : How each tag is removed from the Address Book and each Person's 
 **Cons:** This does not maintain consistency of the API.
 // end::deletetag[]
 
+// tag::remarkCommand[]
 === Remark Command Mechanism
 
 The remark command allows user to modify the remark of a contact, and it supports adding, editing and deleting remarks.
@@ -683,6 +694,7 @@ public class Person implements ReadOnlyPerson {
 **Alternative 2:** AddCommand and EditCommand are used for adding and editing of the remark. +
 **Pros:** The command lines are more intuitive for the user. +
 **Cons:** The remark is perceived as a compulsory field of personal information for that contact, but this is not true.
+// end::remarkCommand[]
 
 // tag::birthday[]
 === Birthday Attribute
