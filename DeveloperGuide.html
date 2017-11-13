@@ -52,7 +52,10 @@
 <li><a href="#remark-command-mechanism">4.6. Remark Command Mechanism</a></li>
 <li><a href="#photo-command-mechanism">4.7. Photo Command Mechanism</a></li>
 <li><a href="#birthday-attribute">4.8. Birthday Attribute</a></li>
-<li><a href="#configuration">4.9. Configuration</a></li>
+<li><a href="#find-command-filter-mechanism">4.9. Find Command [Filter] Mechanism</a></li>
+<li><a href="#suggest-command-mechanism">4.10. Suggest Command Mechanism</a></li>
+<li><a href="#logging">4.11. Logging</a></li>
+<li><a href="#configuration">4.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1265,7 +1268,7 @@ The parameter type of the EditCommand is different.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>A `new EditCommand(Index, EditPersonDescriptor) from the method parseForPersonDetails(argsMultimap) is returned.</td>
+<td>A <code>new EditCommand(Index, EditPersonDescriptor)</code> from the method parseForPersonDetails(argsMultimap) is returned.</td>
 </tr>
 </table>
 </div>
@@ -1608,6 +1611,7 @@ The class inheritance diagram is shown below:</p>
 <strong>Pros:</strong> This would be able to better reminds the user of the added remark information. Also, the font-size is larger that is easier to read.<br>
 <strong>Cons:</strong> This does not have the consistent formatting with other fields in the person card. If the remark is too long, it will be poorly displayed as well.</p>
 </div>
+<hr>
 <div class="paragraph">
 <p><strong>Aspects:</strong> The command nature of Remark<br>
 <strong>Alternative 1(current choice):</strong> A RemarkCommand to add remarks to a contact is used.<br>
@@ -1922,9 +1926,12 @@ Range of day input will then be checked according to month.</p>
 <strong>Cons:</strong> It is difficult to recognise the date from the number displayed.<br>
 <strong>Alternative 2:</strong> The birthday is in the format of 25 Dec 1997.<br>
 <strong>Pros:</strong> It is simple and easy to understand.<br>
-<strong>Cons:</strong> It requires extra methods to change the format displayed.
-=== Find Command [Filter] Mechanism</p>
+<strong>Cons:</strong> It requires extra methods to change the format displayed.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-command-filter-mechanism"><a class="link" href="#find-command-filter-mechanism">4.9. Find Command [Filter] Mechanism</a></h3>
 <div class="paragraph">
 <p>Finding a person by filters means that users will be able to find a person using different fields of information. Currently, UniFy supports users to find a person by name, phone, email, address, tags and birthday month. This allows users to have more flexibility in the way they search for their contacts.<br>
 Only persons who match all keywords in all fields will be returned. You will be able to understand how the result of the find command is determined.</p>
@@ -1945,9 +1952,8 @@ Only persons who match all keywords in all fields will be returned. You will be 
 </li>
 </ul>
 </div>
-</div>
 <div class="sect3">
-<h4 id="parsing-of-user-input"><a class="link" href="#parsing-of-user-input">4.8.4. Parsing of user input</a></h4>
+<h4 id="parsing-of-user-input"><a class="link" href="#parsing-of-user-input">4.9.1. Parsing of user input</a></h4>
 <div class="paragraph">
 <p>The input will be tokenized against the <code>n/</code>, <code>p/</code>, <code>e/</code>, <code>a/</code>, <code>t/</code> and <code>b/</code> prefixes which are for name, phone, email, address, tags and birthday month respectively. This can be done by the <code>ArgumentTokenizer</code> class.<br>
 The user input will be parsed as an ArrayList with prefixes and keywords separated. If the index of <code>n/</code> is 1, the keywords for the name field will be at the index of 2 in the ArrayList.<br></p>
@@ -1987,7 +1993,7 @@ The user input will be parsed as an ArrayList with prefixes and keywords separat
 </div>
 </div>
 <div class="sect3">
-<h4 id="searching-of-persons-using-several-fields-of-information"><a class="link" href="#searching-of-persons-using-several-fields-of-information">4.8.5. Searching of Persons using several fields of information</a></h4>
+<h4 id="searching-of-persons-using-several-fields-of-information"><a class="link" href="#searching-of-persons-using-several-fields-of-information">4.9.2. Searching of Persons using several fields of information</a></h4>
 <div class="paragraph">
 <p>The search is done using the following steps.</p>
 </div>
@@ -2068,7 +2074,7 @@ The user input will be parsed as an ArrayList with prefixes and keywords separat
 </div>
 </div>
 <div class="sect3">
-<h4 id="command-logic-3"><a class="link" href="#command-logic-3">4.8.6. Command Logic</a></h4>
+<h4 id="command-logic-3"><a class="link" href="#command-logic-3">4.9.3. Command Logic</a></h4>
 <div class="paragraph">
 <p>The following is the logic component class diagram for <code>FindCommand</code></p>
 </div>
@@ -2082,7 +2088,7 @@ The user input will be parsed as an ArrayList with prefixes and keywords separat
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.8.7. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.9.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of find command<br>
 <strong>Alternative 1 (current choice):</strong> Only the persons matching all keywords are returned.<br>
@@ -2090,9 +2096,12 @@ The user input will be parsed as an ArrayList with prefixes and keywords separat
 <strong>Cons:</strong> It is harder to implement as we need to keep track of how many times a person is being matched.<br>
 <strong>Alternative 2:</strong> All persons matching one or more keywords are returned.<br>
 <strong>Pros:</strong> It is simple to implement.<br>
-<strong>Cons:</strong> By typing more keywords in different fields, more persons matching one of the keywords will be returned which defeats the purpose of having this enhancement.
-=== Suggest Command Mechanism</p>
+<strong>Cons:</strong> By typing more keywords in different fields, more persons matching one of the keywords will be returned which defeats the purpose of having this enhancement.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="suggest-command-mechanism"><a class="link" href="#suggest-command-mechanism">4.10. Suggest Command Mechanism</a></h3>
 <div class="paragraph">
 <p>This feature will conduct spelling check if the command input does not match any of the existing commands. It will prompt an error message suggesting the correct spelling of the command word. You will be able to understand how the code determines the correct spelling.<br>
 This is implemented because there is many commands to remember in UniFy and we suspect users might have typos during their usage.</p>
@@ -2100,9 +2109,8 @@ This is implemented because there is many commands to remember in UniFy and we s
 <div class="paragraph">
 <p>In general, the ability of this command was implemented by adding a SuggestCommand class.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="implementation-of-suggest-command"><a class="link" href="#implementation-of-suggest-command">4.8.8. Implementation of Suggest Command</a></h4>
+<h4 id="implementation-of-suggest-command"><a class="link" href="#implementation-of-suggest-command">4.10.1. Implementation of Suggest Command</a></h4>
 <div class="paragraph">
 <p><code>SuggestCommand</code> class calls the <code>UniqueCommandList</code> class to determine the possible correct spellings and to retrieve the list of command words existing in the address book.</p>
 </div>
@@ -2159,7 +2167,7 @@ This is implemented because there is many commands to remember in UniFy and we s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.8.9. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.10.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of suggest command<br>
 <strong>Alternative 1 (current choice):</strong> An error message suggesting the correct spelling for the command word is returned.<br>
@@ -2167,9 +2175,12 @@ This is implemented because there is many commands to remember in UniFy and we s
 <strong>Cons:</strong> This would still require the user to correct his spelling error by himself.<br>
 <strong>Alternative 2:</strong> The suggested command is conducted then prompt to ask if the user is intending to conduct such an action.<br>
 <strong>Pros:</strong> This does not require the user to retype to correct his spelling error.<br>
-<strong>Cons:</strong> This is harder to implement and if the user do not intent to conduct the suggested command action, the user has to do an extra step to undo the command, which might be inconvenient.
-=== Logging</p>
+<strong>Cons:</strong> This is harder to implement and if the user do not intent to conduct the suggested command action, the user has to do an extra step to undo the command, which might be inconvenient.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -2206,9 +2217,8 @@ This is implemented because there is many commands to remember in UniFy and we s
 </ul>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.9. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3072,7 +3082,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:24:06 +00:00
+Last updated 2017-11-13 14:27:07 +00:00
 </div>
 </div>
 </body>
