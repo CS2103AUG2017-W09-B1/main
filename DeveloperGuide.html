@@ -973,12 +973,14 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <div class="sect2">
 <h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.3. Delete Tag Mechanism</a></h3>
 <div class="paragraph">
-<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as delete the tag from the master list of tags in the Address Book.
+<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as deleting the tag from the master list of tags in the Address Book.
 This is significantly different from deleting a tag for a person via the <code>edit</code> command.
 There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated.
-To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.
-In this section, you will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code>
-to both delete person and delete tag.</p>
+To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will be able to understand how tags are deleted from all persons tagged with that tag, and how we use the same command word <code>delete</code>
+to both delete one or more persons or delete one or more tags.</p>
 </div>
 <div class="paragraph">
 <p>In general, the ability to delete a tag was implemented by modifying the existing <code>delete</code> command.</p>
@@ -989,13 +991,13 @@ to both delete person and delete tag.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>detection of the type of deletion in the DeleteCommandParser</p>
+<p>Detection of the type of deletion in the DeleteCommandParser</p>
 </li>
 <li>
-<p>overloading the DeleteCommand constructor</p>
+<p>Overloading the DeleteCommand constructor</p>
 </li>
 <li>
-<p>executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
+<p>Executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
 </li>
 </ul>
 </div>
@@ -1005,7 +1007,7 @@ to both delete person and delete tag.</p>
 <div class="sect3">
 <h4 id="detection-of-the-deletion-type"><a class="link" href="#detection-of-the-deletion-type">4.3.1. Detection of the Deletion Type</a></h4>
 <div class="paragraph">
-<p>For both types of delete commands, the same <code>delete</code> command is used but the parameters in the command line are different.</p>
+<p>For both types of <code>delete</code> commands, the same <code>delete</code> command word is used but the parameters provided in the command line are different.</p>
 </div>
 <div class="paragraph">
 <p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>/t</code> prefix for tags.</p>
@@ -1016,10 +1018,10 @@ to both delete person and delete tag.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (delete person(s)) : A digit String</p>
+<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (Delete Person(s)) : A <strong>digit</strong> String</p>
 </li>
 <li>
-<p><code>delete t/TAG [t/TAG]</code> (delete tag(s)) :  A <strong>blank</strong> String</p>
+<p><code>delete t/TAG [t/TAG]</code> (Delete Tag(s)) :  A <strong>blank</strong> String</p>
 </li>
 </ul>
 </div>
@@ -1052,18 +1054,18 @@ to both delete person and delete tag.</p>
 <div class="sect3">
 <h4 id="overloading-the-deletecommand-constructor"><a class="link" href="#overloading-the-deletecommand-constructor">4.3.2. Overloading the DeleteCommand constructor</a></h4>
 <div class="paragraph">
-<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.
-The parameter type of the DeleteCommand is different.</p>
+<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse is also different.
+They differ by the types of the parameters.</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
+<td>A <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>a <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting a person.</td>
+<td>A <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting one or more persons.</td>
 </tr>
 </table>
 </div>
@@ -1071,8 +1073,8 @@ The parameter type of the DeleteCommand is different.</p>
 <p>The following code shows the respective object construction of the different types of DeleteCommand.</p>
 </div>
 <div class="paragraph">
-<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
-Which will lead on to the next section about command execution.</p>
+<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null,
+which will lead on to the next section about command execution.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1106,11 +1108,11 @@ Which will lead on to the next section about command execution.</p>
 <div class="sect3">
 <h4 id="logic-execution-depending-on-which-attributes-are-present"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present">4.3.3. Logic Execution depending on which attributes are present.</a></h4>
 <div class="paragraph">
-<p><em>If</em> <code>targetIndexes</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
+<p><em>If</em> <code>targetIndexes</code> is present/non-null, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
 </div>
 <div class="paragraph">
 <p>This trivial implementation is show below. The distinct command execution of the deleting of tags and the
-delete of person(s) have been abstracted to increase SLAP.</p>
+delete of person(s) have been abstracted to apply SLAP (Single Level of Abstraction Per method).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1128,7 +1130,7 @@ delete of person(s) have been abstracted to increase SLAP.</p>
 <div class="sect3">
 <h4 id="command-logic"><a class="link" href="#command-logic">4.3.4. Command Logic</a></h4>
 <div class="paragraph">
-<p>The delete command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+<p>The delete command undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
@@ -1163,7 +1165,8 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
 <strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
 Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
-This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
+This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things.
+Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
 <strong>Alternative 2:</strong> A new command <code>deletetag</code> is created.<br>
 <strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of the existing parse and command logic.<br>
 <strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive in the command line interface especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
@@ -1172,14 +1175,15 @@ This Violates Single Responsibility Principle and Separation of Concerns as <cod
 <div class="paragraph">
 <p><strong>Aspect:</strong> Execution of delete command<br>
 <strong>Alternative 1 (current choice):</strong> On the <code>Logic</code> level, we iterate through an array of tags and invoke a Model method <code>deleteTag(Tag tag)</code> on each tag. <br>
-<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding)</em><br>
+<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding. See Note below.)</em><br>
 <strong>Cons:</strong> This requires a loop to delete the tags.<br>
 <strong>Alternative 2:</strong> On the <code>Logic</code> level, we invoke a method <code>deleteTags(tagSet)</code> on a Set&lt;Tag&gt;  and implement <code>deleteTags(Set&lt;Tag&gt; tagSet)</code> in the Model component.<br>
 <strong>Pros:</strong> The code will be easier for future contributors to understand.<br>
 <strong>Cons:</strong> This does not maintain consistency of the API.</p>
 </div>
 <div class="paragraph">
-<p>(Note: Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code>)</p>
+<p>(<strong>Note:</strong> Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code> implemented
+in the Model Component.)</p>
 </div>
 </div>
 </div>
@@ -1188,7 +1192,7 @@ This Violates Single Responsibility Principle and Separation of Concerns as <cod
 <div class="paragraph">
 <p>Editing a tag means editing a specified tag (the old tag) in all persons who contain that tag,
 as well as editing the tag from the master list of tags in the Address Book.
-This is significantly different from edit person&#8217;s tag via the <code>edit</code> command.
+This is significantly different from editing a person&#8217;s tag via the <code>edit</code> command.
 There is a need for this because a user would like to edit a tag for multiple people containing that tag.
 To edit a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
 </div>
@@ -1200,8 +1204,8 @@ To edit a particular tag across multiple contacts, by editing each contact, woul
 depending on the parameters provided.</p>
 </div>
 <div class="paragraph">
-<p>It differs from <code>delete</code> tag in terms of executing the respective logic.
-A boolean value, instead of checking which attributes of <code>EditCommand</code> are present/non-null, determine which command logic to execute</p>
+<p>It differs from <code>delete</code> tag in terms of executing the respective logic of person or tag.
+Instead of checking which attributes of <code>EditCommand</code> are present/non-null, a boolean variable determine which command logic to execute</p>
 </div>
 <div class="sect3">
 <h4 id="detection-of-the-edit-type"><a class="link" href="#detection-of-the-edit-type">4.4.1. Detection of the Edit Type</a></h4>
@@ -1214,15 +1218,16 @@ A boolean value, instead of checking which attributes of <code>EditCommand</code
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit INDEX &#8230;&#8203;</code> (edit person) : A digit String</p>
+<p><code>edit INDEX &#8230;&#8203;</code> (Edit Person) : A <strong>digit</strong> String</p>
 </li>
 <li>
-<p><code>edit old/TAG new/TAG</code> (edit tag) :  A <strong>blank</strong> String</p>
+<p><code>edit old/TAG new/TAG</code> (Edit Tag) :  A <strong>blank</strong> String</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The implementation of this parse is shown below:</p>
+<p>The implementation of this parse is shown below. Similarly, SLAP (Single Level of Abstraction Per method) is applied by
+abstracting the distinct parsing between edit a person and editing a tag:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1243,18 +1248,18 @@ A boolean value, instead of checking which attributes of <code>EditCommand</code
 <div class="sect3">
 <h4 id="overloading-the-editcommand-constructor"><a class="link" href="#overloading-the-editcommand-constructor">4.4.2. Overloading the EditCommand constructor</a></h4>
 <div class="paragraph">
-<p>With reference to the previous code snippet the type of <code>EditCommand</code> returned during the parse are also different.
-The parameter type of the DeleteCommand is different.</p>
+<p>With reference to the previous code snippet the type of <code>EditCommand</code> returned during the parse is also different.
+The parameter type of the EditCommand is different.</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>A <code>new EditCommand(Tag, Tag)</code> from the method parseForTags(argsMultimap) is returned</td>
+<td>A <code>new EditCommand(Tag, Tag)</code> from the method parseForTags(argsMultimap) is returned.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>a `new EditCommand(Index, EditPersonDescriptor) is returned when deleting a person.</td>
+<td>A `new EditCommand(Index, EditPersonDescriptor) from the method parseForPersonDetails(argsMultimap) is returned.</td>
 </tr>
 </table>
 </div>
@@ -1263,11 +1268,11 @@ The parameter type of the DeleteCommand is different.</p>
 </div>
 <div class="paragraph">
 <p>Depending on the constructor method called, the irrelevant attributes will be made null.
-The boolean variable <code>isEditForPerson</code> is true when the edit command is to edit a person, and false if editing a tag.</p>
+The boolean variable <code>isEditForPerson</code> is assigned the value <code>true</code> when the edit command is for editing a person, and <code>false</code> if it is for editing a tag.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">EditCommand</span> <span class="directive">extends</span> UndoableCommand {
     <span class="comment">// ...</span>
     <span class="directive">private</span> <span class="directive">final</span> <span class="type">boolean</span> isEditForPerson;
     <span class="directive">private</span> <span class="directive">final</span> Index index;
@@ -1309,7 +1314,7 @@ The boolean variable <code>isEditForPerson</code> is true when the edit command 
 </div>
 <div class="paragraph">
 <p>This trivial implementation is show below. The distinct command execution of the editing of tags and the
-editing of person(s) have been abstracted to increase SLAP.</p>
+editing of person(s) have been abstracted to apply SLAP (Single Level of Abstraction Per method).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1326,7 +1331,7 @@ editing of person(s) have been abstracted to increase SLAP.</p>
 <div class="sect3">
 <h4 id="command-logic-2"><a class="link" href="#command-logic-2">4.4.4. Command Logic</a></h4>
 <div class="paragraph">
-<p>The edit command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+<p>The edit command undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
@@ -1337,7 +1342,7 @@ editing of person(s) have been abstracted to increase SLAP.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.4 : How each tag is edit from the Address Book and each Person&#8217;s list of tags</em></p>
+<p><em>Figure 4.4.1 : How each tag is edited from the Address Book and each Person&#8217;s list of tags</em></p>
 </div>
 </div>
 <div class="sect3">
@@ -1358,13 +1363,13 @@ editing of person(s) have been abstracted to increase SLAP.</p>
 <h3 id="tag-colouring-mechanism"><a class="link" href="#tag-colouring-mechanism">4.5. Tag Colouring Mechanism</a></h3>
 <div class="paragraph">
 <p>Tag labels appear in various <code>UI</code> components: <code>PersonCard</code>, <code>TagListPanel</code> and <code>PersonInfoPanel</code>.<br>
-In order to have the same color across all components, there was a need for the <code>UI</code> Components
-to keep track of what colors have been used and which tag was tied to what color.<br>
+In order for a tag to have the same color across all components, there was a need for the <code>UI</code> Components
+to keep track of what colors have been used and which color was a tag tied to.<br>
 Thus a Singleton class <code>TagColorMap</code> was implemented.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ClassDiagramTagColorMap.png" alt="ClassDiagramTagColorMap" width="800">
+<img src="images/ClassDiagramTagColorMap.png" alt="ClassDiagramTagColorMap" width="300">
 </div>
 </div>
 <div class="paragraph">
@@ -1372,12 +1377,12 @@ Thus a Singleton class <code>TagColorMap</code> was implemented.</p>
 </div>
 <div class="paragraph">
 <p>As a result of this singleton class, coloring tags on initialisation is made extremely easy,
-since the TagColorMap provided UI components an easy way to access the color mapping of tags and
+since <code>TagColorMap</code> provided <code>UI</code> components an easy way to access the color mapping of tags and
 color the tags accordingly in the application, from anywhere in the code base.</p>
 </div>
 <div class="paragraph">
 <p>The following code is common in <code>PersonCard.java</code>, <code>TagListPanel.java</code>, <code>PersonInfoPanel.java</code>
-as all the these components require rendering tags.</p>
+as all the these components require rendering tags, especially in the <code>initTags</code> method shown below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1397,10 +1402,10 @@ as all the these components require rendering tags.</p>
 <p><strong>Aspects:</strong> Implementation Coloring of Tag<br>
 <strong>Alternative 1(current choice):</strong> Use a singleton class TagColorMap to provide colors, and mapping of tags to colors.<br>
 <strong>Pros:</strong> Easy to implement. Easy to access from any UI Component.<br>
-<strong>Cons:</strong> Increases coupling across the code base. Difficult to replace TagColorMap with a stub.<br>
-<strong>Alternative 2:</strong> TagColorMap as a class attribute of MainWindow and pass TagColorMap as a parameter to the constructors of relevant UI components. <br>
-<strong>Pros:</strong> Naive method and straightforward to implement<br>
-<strong>Cons:</strong> Requires a large amount of modification of existing code base.</p>
+<strong>Cons:</strong> Increases coupling across the code base. Difficult to replace TagColorMap with a stub when doing tests.<br>
+<strong>Alternative 2:</strong> Make TagColorMap a class attribute of MainWindow and pass TagColorMap as a parameter to the constructors of relevant UI components. <br>
+<strong>Pros:</strong> Naive solution and straightforward to implement<br>
+<strong>Cons:</strong> Requires a large amount of modification of existing code base of the <code>UI</code> component.</p>
 </div>
 <hr>
 </div>
@@ -2817,7 +2822,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:14:50 +00:00
+Last updated 2017-11-13 14:15:16 +00:00
 </div>
 </div>
 </body>

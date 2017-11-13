@@ -6,36 +6,380 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
 <title>Fan Yuting - Project Portfolio</title>
-<link rel="stylesheet" href="./gh-pages.css">
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
 <h1>Fan Yuting - Project Portfolio</h1>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<hr>
-</div>
-</div>
 <div class="sect1">
 <h2 id="project-unify"><a class="link" href="#project-unify">Project: UniFy</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="introduction-to-unify"><a class="link" href="#introduction-to-unify">Introduction to UniFy</a></h3>
 <div class="paragraph">
 <p>UniFy is a command-line application which provides a convenient way to store students' contact information.
 It is customised for NUS students, allowing them to efficiently manage their contact lists.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 It is written in Java, and has about 10 kLoC.</p>
 </div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui.png" alt="Ui" width="600">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiDark.png" alt="UiDark" width="600">
+</div>
+</div>
+<hr>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/main/April0616.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/test/April0616.md">Test code</a>] {give links to collated code files}</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-photocommand"><a class="link" href="#enhancement-added-photocommand">Enhancement Added: PhotoCommand</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-deleting-a-photo-for-a-person-code-photo-code-em-for-windows-system-since-v1-4-em"><a class="link" href="#adding-deleting-a-photo-for-a-person-code-photo-code-em-for-windows-system-since-v1-4-em">Adding/Deleting a Photo for a person : <code>photo</code> <em>(For WINDOWS System Since v1.4)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>When you study too much, sometimes, you forget how someone looks like.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can add or remove a photo to an existing person in the address book.<br>
+Format:<br>
+<em>(Add photo)</em> <code>photo INDEX ph/PHOTO PATH</code><br>
+<em>(Delete photo)</em> <code>photo INDEX</code> or <code>photo INDEX ph/</code><br>
+Alternatives: <code>ph</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/photo_command.png" alt="photo command" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.3 : Add your favourite photo of someone to their contact!</em></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>For now, this command only works under WINDOWS Operating System.</p>
+</li>
+<li>
+<p>Edits the photo of the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The photo path of the person will be updated.</p>
+</li>
+<li>
+<p>When adding a photo to the person, the photo will be saved to the default folder.</p>
+</li>
+<li>
+<p>When removing the photo, only the path of the photo will be removed from the person.</p>
+</li>
+<li>
+<p>All the unused photo will be deleted from the app the next time you start the application.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Ensure that format of the path to the photo is correct and the photo exists in the specified place.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>photo 1 ph/ C:\Users\User\Files\Amy_selfie.jpg</code><br>
+Add the picture 'Amy_selfie.jpg' in the specified location to the 1st person in the address book.<br></p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>photo 2</code><br>
+Removes the photo path from the 2nd person in the last shown list.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>ph 1</code><br>
+Removes the photo path from the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>PhotoCommand is useful as it can remind the user of what his contacts look like.
+Users can easily assign photos to their contacts by specifying the unique photo path in their computers.
+Also, the display picture of a contact can be easily changed or deleted by the PhotoCommand.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/96">#96</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/150">#150</a>)</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="photo-command-mechanism"><a class="link" href="#photo-command-mechanism">Photo Command Mechanism</a></h3>
+<div class="paragraph">
+<p>The photo command allows users to assign photos to their contacts, and it also supports adding, editing and deleting photos as the remark command.
+It accepts the absolute path in the user&#8217;s computer, copying the original photo to the default folder of the file.
+We are implementing this <code>PhotoCommand</code> as NUS students may forget what their classmates look like.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>These classes are added to implement this enhancement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PhotoPath</code></p>
+</li>
+<li>
+<p><code>PhotoCommand</code></p>
+</li>
+<li>
+<p><code>PhotoCommandParser</code></p>
+</li>
+<li>
+<p><code>PhotoPathNotFoundException</code></p>
+</li>
+<li>
+<p><code>DuplicationPhotoPathException</code></p>
+</li>
+<li>
+<p><code>UniquePhotoPathList</code></p>
+</li>
+<li>
+<p><code>XmlAdaptedPhotoPath</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These classes are edited to implement this enhancement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddressBook</code></p>
+</li>
+<li>
+<p><code>FileUtil</code></p>
+</li>
+<li>
+<p><code>AddCommand</code></p>
+</li>
+<li>
+<p><code>EditCommand</code></p>
+</li>
+<li>
+<p><code>PersonInfoPanel</code></p>
+</li>
+<li>
+<p><code>XmlAdaptedPerson</code></p>
+</li>
+<li>
+<p><code>Person</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Instead of typing the command <code>photo</code>, an alternative would be <code>ph</code>.<br>
+The alias is added to the <code>PhotoCommand</code> Class.<br>
+The added photo will be displayed on the <code>PersonInfoPanel</code>.<br>
+If a <code>photoPath</code> is newly added to the photoList by <code>PhotoCommand</code>, it will be saved to the default folder and linked to the specified contact.<br>
+If a <code>photoPath</code> is removed from one contact, the link between the photo and the contact will be removed, but the photo file
+are still kept inside the folder until the next time the user starts the application in case the user wants to undo the command.<br>
+Up to now, the photo command hasn&#8217;t supported the <code>RedoCommand</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-photo-command"><a class="link" href="#implementation-of-photo-command">Implementation of Photo Command</a></h4>
+<div class="paragraph">
+<p><strong>[Step 1]</strong> <em>Logic:</em> Create the <code>photoCommandParser</code> class to parse the input.</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept <code>photoPath</code> arguments</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 3]</strong> <em>Ui:</em> Add a Shape <code>Circle</code> for displaying the photo in <code>personInfoPanel</code></p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 4]</strong> <em>Model:</em> Add <code>PhotoPath</code> class</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 5]</strong> <em>Model:</em> Modify <code>ReadOnlyPerson</code> to support a <code>photoPath</code> field</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 6]</strong> <em>Storage:</em> Add the <code>photoPath</code> field to <code>XmlAdaptedPerson</code> class</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 7]</strong> <em>Ui:</em> Connect the <code>photoPath</code> field to <code>PersonInfoPanel</code> class, display the contact photo</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 8]</strong> <em>Logic:</em> Implement <code>PhotoCommand#execute()</code> logic</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 9]</strong> <em>Commons:</em> Implement related methods in <code>FileUtil</code></p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 10]</strong> <em>Models:</em> Implement how to initialize the <code>UniquePhotoPathList</code> and delete unused photo in <code>AddressBook</code> class</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="codes-and-diagrams"><a class="link" href="#codes-and-diagrams">Codes and Diagrams</a></h4>
+<div class="paragraph">
+<p>The interactions between multiple objects are complicated, so the following diagram shows the simplified high-level sequence diagram for you:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PhotoCommand_highLevelSequenceDiagrams.png" alt="PhotoCommand highLevelSequenceDiagrams" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.1 : High-level Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>For the logic component part, the <code>PhotoCommandParser</code> is created by the <code>AddressBookParser</code>, and the <code>PhotoCommand</code> is created by the <code>PhotoCommandParser</code>.
+The logic component class diagram is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PhotoCommand_logicComponentClassDiagram.png" alt="PhotoCommand logicComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.2 : Logic Component Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>Also, the <code>PhotoCommand</code> class inherits from the <code>UndoableCommand</code> class.
+The implementation is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Edits the photo path of the specified person.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PhotoCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in Figure 4.7.3, the <code>AddressBook</code> consists of one <code>UniqueTagList</code>, one <code>UniquePersonList</code>, and one <code>UniquePhotoPathList</code>.
+The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</code> objects.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PhotoCommand_modelComponentClassDiagram.png" alt="PhotoCommand modelComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.3 : Model Component Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>We create a new <code>PhotoPath</code> attribute, and the <code>Person</code> class is linked to it.</p>
+</div>
+<div class="paragraph">
+<p>The implementation is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Represents the path of a person's photo in the address book.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PhotoPath</span> {
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> FILE_SAVED_PARENT_PATH = <span class="string"><span class="delimiter">&quot;</span><span class="content">src/main/resources/images/contactPhotos/</span><span class="delimiter">&quot;</span></span>;
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> MESSAGE_APP_PHOTOPATH_CONSTRAINTS =
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">The app photo path should be a string starting with '</span><span class="delimiter">&quot;</span></span>
+                    + FILE_SAVED_PARENT_PATH
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">', following by the file name with a valid extension, like'photo.jpg'.</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">The valid extensions are 'jpg', 'jpeg', 'png', 'gif' or 'bmp'.</span><span class="delimiter">&quot;</span></span>;
+
+    <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> value;
+
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspects:</strong> How to fetch the contact photo saved in users' computers<br>
+<strong>Alternative 1(current choice):</strong> Let users specify the absolute path of the photo<br>
+<strong>Pros:</strong> This might be inconvenient as users need additional steps to get the absolute file of the photo.<br>
+<strong>Cons:</strong> The image file is specified accurately by using the command line.<br>
+<strong>Alternative 2:</strong> Provide a pop-up window for the user to choose the photo<br>
+<strong>Pros:</strong> It is more convenient for the user to choose the file.<br>
+<strong>Cons:</strong> This becomes no more a command-line input in this command-line application.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-remarkcommand"><a class="link" href="#enhancement-added-remarkcommand">Enhancement Added: RemarkCommand</a></h3>
 <div class="sect3">
-<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
@@ -101,7 +445,7 @@ Removes the remark from the 1st person in the results of the <code>find</code> c
 </div>
 <hr>
 <div class="sect3">
-<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
 <p>Existing tags are too short for the user to put down the noteworthy thing of a contact,
 and the remark for a person are more descriptive and unique so that you can always look back on.
@@ -111,7 +455,7 @@ if the user key in the select command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
 <div class="paragraph">
 <p>(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/50">#50</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/131">#131</a>)</p>
 </div>
@@ -226,7 +570,7 @@ In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="codes-and-diagrams"><a class="link" href="#codes-and-diagrams">Codes and Diagrams</a></h4>
+<h4 id="codes-and-diagrams-2"><a class="link" href="#codes-and-diagrams-2">Codes and Diagrams</a></h4>
 <div class="paragraph">
 <p>The following diagram shows the high-level sequence diagram of the <code>RemarkCommand</code> for you:</p>
 </div>
@@ -302,7 +646,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspects:</strong> UI Display of Remark<br>
 <strong>Alternative 1(current choice):</strong> The remark of the specified contact at the end of the personCard is displayed.<br>
@@ -325,6 +669,268 @@ The class inheritance diagram is shown below:</p>
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-gender-matricno-attributes"><a class="link" href="#enhancement-added-gender-matricno-attributes">Enhancement Added: Gender &amp; MatricNo attributes</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>First thing to do with UniFy is to start adding the various people you&#8217;ve met in University, as well as important people like your family.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="sect3">
+<h4 id="adding-a-person-manually"><a class="link" href="#adding-a-person-manually">Adding a person manually</a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add contact information you want to remember! Your group mate&#8217;s timetable, your friend&#8217;s birthday. Tag your
+module mates with appropriate tags too!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Use this to add a person to <strong>UniFy</strong><br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add n/NAME [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>a</code> , <code>insert</code><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PersonCard.png" alt="PersonCard">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.2.1 : A person with various contact information</em></p>
+</div>
+<div class="paragraph">
+<p>You can view the contacts you have added in UniFy in the form of <em>cards</em>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Here are the following information a person can have:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Name</code> field is compulsory while others are not.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Gender</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GENDER</code> is either Male/Female or M/F <em>(case insensitive)</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Phone number</strong></p>
+</li>
+<li>
+<p><strong>Email</strong></p>
+</li>
+<li>
+<p><strong>Address</strong></p>
+</li>
+<li>
+<p><strong>Matriculation number</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MATRIC_NUMBER</code> should be a 9-character string starting with 'A or a', followed by 7 digits, and ending with a letter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Birthday</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The format for <code>BIRTHDAY</code> is DDMMYYYY.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Timetable</strong> via an NUSMods shortlink <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The full link is not allowed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example of a shortlink: <a href="http://modsn.us/AC71u" class="bare">http://modsn.us/AC71u</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Tags</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A person can have any number of tags.</p>
+</li>
+<li>
+<p>Tags are alphanumeric and without spaces.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/A0134232H tt/http://modsn.us/etYEX</code></p>
+</li>
+<li>
+<p><code>add n/Betsy Crowe g/Female p/1234567 e/betsycrowe@example.com a/Newgate Prison t/friend t/criminal</code></p>
+</li>
+<li>
+<p><code>add n/Amy Tan g/F p/82974823 e/amy_tan@example.com a/PGP m/a0142323T</code></p>
+</li>
+<li>
+<p><code>add n/Betty g/F p/12345678 e/betty@example.com b/23051998</code></p>
+</li>
+<li>
+<p><code>add n/Jasmine p/12345678</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<div class="paragraph">
+<p>(Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/68">#68</a>)</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-delete-multiple-persons"><a class="link" href="#enhancement-added-delete-multiple-persons">Enhancement Added: Delete multiple persons</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-multiple-persons-em-since-v1-3-em"><a class="link" href="#deleting-multiple-persons-em-since-v1-3-em">Deleting multiple persons <em>(since v1.3)</em></a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Some people just have to go away in your life. Sometimes they leave you. Delete these people out of UniFy as well.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>By specifying an index or multiple indexes, you can delete specified people in the most recent listing from the address book.<br>
+Format:<br>
+<code>delete INDEX1, INDEX2, INDEX3&#8230;&#8203;</code>(separated by commas)<br>
+<code>delete INDEX1 INDEX2 INDEX3&#8230;&#8203;</code> (separated by whitespaces)<br>
+Alternatives: <code>d</code> , <code>remove</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>UniFy accepts duplicated indexes. If you type <code>delete 3, 3, 4</code>, the 3rd and 4th persons will be deleted.</p>
+</li>
+<li>
+<p>When you delete your contacts, their contact photos will also be deleted.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>delete 2, 3, 4</code><br>
+Deletes the 2nd, 3rd, 4th persons in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>delete 1 5</code><br>
+Deletes the 1st and 5th persons in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<div class="paragraph">
+<p>(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/79">#79</a>)</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-improve-user-interface-restructure-mainwindow-and-create-personinfopanel"><a class="link" href="#enhancement-added-improve-user-interface-restructure-mainwindow-and-create-personinfopanel">Enhancement Added: Improve User Interface (Restructure MainWindow and create PersonInfoPanel)</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Yuting_UI.png" alt="Yuting UI" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">Implementation</a></h4>
+<div class="paragraph">
+<p>(Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/133">#133</a>)</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -425,25 +1031,16 @@ Deletes all the contacts which you have not viewed/edited/listed for the past 2 
 <div class="ulist">
 <ul>
 <li>
-<p>Add gender &amp; matric No. attribute to addCommand (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/68">#68</a>)</p>
-</li>
-<li>
-<p>Delete multiple persons (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/79">#79</a>)</p>
-</li>
-<li>
-<p>PhotoCommand: add display pictures of contacts (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/96">#96</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/150">#150</a>)</p>
-</li>
-<li>
-<p>Improve UI (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/133">#133</a>)</p>
-</li>
-<li>
-<p>Fix some bugs (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/108/files">#108</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/64">#64</a>)</p>
-</li>
-<li>
 <p>Improve styles (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/140/files">#140</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/107">#107</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/131">#131</a>)</p>
 </li>
 <li>
-<p>help form team in Github and setup the team repository</p>
+<p>Form team in Github and setup the team repository</p>
+</li>
+<li>
+<p>Do manual testing for UniFy and raised 15 issues (<a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/171">#171</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/187">#187</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/188">#188</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/190">#190</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/193">#193</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/194">#194</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/196">#196</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/197">#197</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/198">#198</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/199">#199</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/200">#200</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/202">#202</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/203">#203</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/204">#204</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/251">#251</a>)</p>
+</li>
+<li>
+<p>Do acceptance testing for another group (<a href="https://github.com/CS2103AUG2017-W11-B3/main">W11-b3</a>), find bugs (Issues <a href="https://github.com/CS2103AUG2017-W11-B3/main/issues/53">#53</a>, <a href="https://github.com/CS2103AUG2017-W11-B3/main/issues/56">#56</a>), and give suggestions(<a href="https://github.com/CS2103AUG2017-W11-B3/main/issues/57">#57</a>, <a href="https://github.com/CS2103AUG2017-W11-B3/main/issues/62">#62</a>)</p>
 </li>
 </ul>
 </div>
@@ -462,7 +1059,8 @@ This application allows students to participate in a fisheries management game t
 co-operation, and the tragedy of the commons.</p>
 </div>
 <div class="paragraph">
-<p><strong>Github Link</strong>: [<a href="https://github.com/April0616/fishery-app">FisheryApp for LSM4255</a>]</p>
+<p><strong>Github Link</strong>: [<a href="https://github.com/April0616/fishery-app">FisheryApp for LSM4255</a>]<br>
+<strong>Blog Post Link</strong> : [<a href="https://ryanchisholm.wordpress.com/2017/11/11/students-develop-fishery-management-game-for-teaching-the-tragedy-of-the-commons/">Professor Chisholm&#8217;s Blog Post</a>]</p>
 </div>
 </div>
 <div class="sect2">
@@ -478,7 +1076,7 @@ best strategy in the competition. Write the basic source code for this mathemati
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:14:50 +00:00
+Last updated 2017-11-13 14:15:16 +00:00
 </div>
 </div>
 </body>

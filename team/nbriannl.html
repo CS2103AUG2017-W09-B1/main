@@ -16,6 +16,20 @@
 </div>
 <div id="content">
 <div class="sect1">
+<h2 id="purpose"><a class="link" href="#purpose">Purpose</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This project portfolio documents the software experience I have in the module
+CS2103/T (Software Engineering).</p>
+</div>
+<div class="paragraph">
+<p>A section titled 'Documentation Contributions (For CS2101 Use)' contains <strong>additional</strong>
+documentation contribution I would like the evaluators in CS2101 (Effective Communication for Computing Professionals) to take note of.
+It is <strong>not</strong> for CS2103/T.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="project-unify"><a class="link" href="#project-unify">Project: UniFy</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -23,8 +37,8 @@
 </div>
 <div class="paragraph">
 <p>The user is able to manage the many people he meets in University, keep track of his friends' Birthdays, view his friend’s timetables, and much more.
-Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
-about 6kLoC.</p>
+Most of the user interactions are via Command Line Interface, while there exists a Graphical User Interface created with JavaFX. It is written in Java and has
+about 8kLoC.</p>
 </div>
 <div class="paragraph">
 <p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
@@ -100,8 +114,15 @@ Deletes the tags 'module1' and 'module2' from all people containing one of the t
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
-<p>Deleting a common tag present in multiple contact is tedious so being able to delete a common tag is seen
+<p>Deleting a common tag present in multiple contact is tedious, therefore being able to delete a common tag is seen
 as an essential feature by a busy University student seeking efficiency.</p>
+</div>
+<div class="paragraph">
+<p>For example, a University Student, who wants to delete an irrelevant tag (such as 'ProjectGroupMate', when a project is completed),
+would
+want to delete the tag from every contact containing that tag. It would be very inefficient for him
+to find all his contacts with that tag, and edit each and every contact with a new set of tags, which excludes the
+tag to be deleted.</p>
 </div>
 </div>
 <div class="sect3">
@@ -115,12 +136,14 @@ as an essential feature by a busy University student seeking efficiency.</p>
 <div class="sect2">
 <h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">Delete Tag Mechanism</a></h3>
 <div class="paragraph">
-<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as delete the tag from the master list of tags in the Address Book.
+<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as deleting the tag from the master list of tags in the Address Book.
 This is significantly different from deleting a tag for a person via the <code>edit</code> command.
 There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated.
-To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.
-In this section, you will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code>
-to both delete person and delete tag.</p>
+To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will be able to understand how tags are deleted from all persons tagged with that tag, and how we use the same command word <code>delete</code>
+to both delete one or more persons or delete one or more tags.</p>
 </div>
 <div class="paragraph">
 <p>In general, the ability to delete a tag was implemented by modifying the existing <code>delete</code> command.</p>
@@ -131,13 +154,13 @@ to both delete person and delete tag.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>detection of the type of deletion in the DeleteCommandParser</p>
+<p>Detection of the type of deletion in the DeleteCommandParser</p>
 </li>
 <li>
-<p>overloading the DeleteCommand constructor</p>
+<p>Overloading the DeleteCommand constructor</p>
 </li>
 <li>
-<p>executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
+<p>Executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
 </li>
 </ul>
 </div>
@@ -147,7 +170,7 @@ to both delete person and delete tag.</p>
 <div class="sect3">
 <h4 id="detection-of-the-deletion-type"><a class="link" href="#detection-of-the-deletion-type">Detection of the Deletion Type</a></h4>
 <div class="paragraph">
-<p>For both types of delete commands, the same <code>delete</code> command is used but the parameters in the command line are different.</p>
+<p>For both types of <code>delete</code> commands, the same <code>delete</code> command word is used but the parameters provided in the command line are different.</p>
 </div>
 <div class="paragraph">
 <p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>/t</code> prefix for tags.</p>
@@ -158,10 +181,10 @@ to both delete person and delete tag.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (delete person(s)) : A digit String</p>
+<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (Delete Person(s)) : A <strong>digit</strong> String</p>
 </li>
 <li>
-<p><code>delete t/TAG [t/TAG]</code> (delete tag(s)) :  A <strong>blank</strong> String</p>
+<p><code>delete t/TAG [t/TAG]</code> (Delete Tag(s)) :  A <strong>blank</strong> String</p>
 </li>
 </ul>
 </div>
@@ -194,18 +217,18 @@ to both delete person and delete tag.</p>
 <div class="sect3">
 <h4 id="overloading-the-deletecommand-constructor"><a class="link" href="#overloading-the-deletecommand-constructor">Overloading the DeleteCommand constructor</a></h4>
 <div class="paragraph">
-<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.
-The parameter type of the DeleteCommand is different.</p>
+<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse is also different.
+They differ by the types of the parameters.</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
+<td>A <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>a <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting a person.</td>
+<td>A <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting one or more persons.</td>
 </tr>
 </table>
 </div>
@@ -213,8 +236,8 @@ The parameter type of the DeleteCommand is different.</p>
 <p>The following code shows the respective object construction of the different types of DeleteCommand.</p>
 </div>
 <div class="paragraph">
-<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
-Which will lead on to the next section about command execution.</p>
+<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null,
+which will lead on to the next section about command execution.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -248,11 +271,11 @@ Which will lead on to the next section about command execution.</p>
 <div class="sect3">
 <h4 id="logic-execution-depending-on-which-attributes-are-present"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present">Logic Execution depending on which attributes are present.</a></h4>
 <div class="paragraph">
-<p><em>If</em> <code>targetIndexes</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
+<p><em>If</em> <code>targetIndexes</code> is present/non-null, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
 </div>
 <div class="paragraph">
 <p>This trivial implementation is show below. The distinct command execution of the deleting of tags and the
-delete of person(s) have been abstracted to increase SLAP.</p>
+delete of person(s) have been abstracted to apply SLAP (Single Level of Abstraction Per method).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -270,7 +293,7 @@ delete of person(s) have been abstracted to increase SLAP.</p>
 <div class="sect3">
 <h4 id="command-logic"><a class="link" href="#command-logic">Command Logic</a></h4>
 <div class="paragraph">
-<p>The delete command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+<p>The delete command undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
@@ -305,7 +328,8 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
 <strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
 Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
-This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
+This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things.
+Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
 <strong>Alternative 2:</strong> A new command <code>deletetag</code> is created.<br>
 <strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of the existing parse and command logic.<br>
 <strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive in the command line interface especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
@@ -314,19 +338,457 @@ This Violates Single Responsibility Principle and Separation of Concerns as <cod
 <div class="paragraph">
 <p><strong>Aspect:</strong> Execution of delete command<br>
 <strong>Alternative 1 (current choice):</strong> On the <code>Logic</code> level, we iterate through an array of tags and invoke a Model method <code>deleteTag(Tag tag)</code> on each tag. <br>
-<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding)</em><br>
+<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding. See Note below.)</em><br>
 <strong>Cons:</strong> This requires a loop to delete the tags.<br>
 <strong>Alternative 2:</strong> On the <code>Logic</code> level, we invoke a method <code>deleteTags(tagSet)</code> on a Set&lt;Tag&gt;  and implement <code>deleteTags(Set&lt;Tag&gt; tagSet)</code> in the Model component.<br>
 <strong>Pros:</strong> The code will be easier for future contributors to understand.<br>
 <strong>Cons:</strong> This does not maintain consistency of the API.</p>
 </div>
 <div class="paragraph">
-<p>(Note: Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code>)</p>
+<p>(<strong>Note:</strong> Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code> implemented
+in the Model Component.)</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-edit-tag"><a class="link" href="#enhancement-added-edit-tag">Enhancement Added: Edit Tag</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-tag-em-since-v1-2-em"><a class="link" href="#editing-a-tag-em-since-v1-2-em">Editing a tag <em>(Since v1.2)</em></a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>When you need to edit module tags of classmates when advancing from a prerequisite module (e.g. CS1010 &#8594; CS1020),
+changing each of their tag to an updated one is too tedious! UniFy lets you simply edit a particular tag for all contacts in one command.</em><br></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can replace a tag to a new word for all people that have the specified tag<br>
+Format: <code>edit old/OLDTAG new/NEWTAG</code><br>
+Alternatives: <code>e</code> , <code>modify</code>, <code>change</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The tag that you want to replace has to be an existing tag.</p>
+</li>
+<li>
+<p>Tags are case-sensitive.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit old/bestfriends new/enemies</code><br></p>
+</li>
+<li>
+<p><code>edit old/CS1010 new/CS1020</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Editing a person&#8217;s tag only edits the tag(s) for a <strong>single</strong> person. This command edits one tag name for <strong>all</strong> people.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>Editing a tag would be a common task a University Student would face.</p>
+</div>
+<div class="paragraph">
+<p>For example, he may have a clique of friends tagged as a particular module (e.g. CS2010). When all
+his friends follow him to another module (e.g. CS3230), he would like to edit all his contacts' 'CS2010'
+tag to 'CS3230'. He could edit each and every contact with a new set of tags, including the renamed tag, but it
+would be extremely inefficient. Hence, this feature would be convenient and essential for the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-tag-mechanism"><a class="link" href="#edit-tag-mechanism">Edit Tag Mechanism</a></h3>
+<div class="paragraph">
+<p>Editing a tag means editing a specified tag (the old tag) in all persons who contain that tag,
+as well as editing the tag from the master list of tags in the Address Book.
+This is significantly different from editing a person&#8217;s tag via the <code>edit</code> command.
+There is a need for this because a user would like to edit a tag for multiple people containing that tag.
+To edit a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will see that the implementation of editing a tag is very similar to deleting a tag.</p>
+</div>
+<div class="paragraph">
+<p>The existing <code>edit</code> command was also modified, to allow <code>edit</code> to execute a edit on tags, or a edit on persons,
+depending on the parameters provided.</p>
+</div>
+<div class="paragraph">
+<p>It differs from <code>delete</code> tag in terms of executing the respective logic of person or tag.
+Instead of checking which attributes of <code>EditCommand</code> are present/non-null, a boolean variable determine which command logic to execute</p>
+</div>
+<div class="sect3">
+<h4 id="detection-of-the-edit-type"><a class="link" href="#detection-of-the-edit-type">Detection of the Edit Type</a></h4>
+<div class="paragraph">
+<p>The concept of using the preamble, as seen in <code>DeleteCommandParser</code>, is also used in <code>EditCommandParser</code>.</p>
+</div>
+<div class="paragraph">
+<p>Preamble for</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit INDEX &#8230;&#8203;</code> (Edit Person) : A <strong>digit</strong> String</p>
+</li>
+<li>
+<p><code>edit old/TAG new/TAG</code> (Edit Tag) :  A <strong>blank</strong> String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The implementation of this parse is shown below. Similarly, SLAP (Single Level of Abstraction Per method) is applied by
+abstracting the distinct parsing between edit a person and editing a tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> EditCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="comment">//...</span>
+
+    <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="keyword">return</span> parseForTags(argsMultimap); <i class="conum" data-value="1"></i><b>(1)</b>
+    } <span class="keyword">else</span> <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d+</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="keyword">return</span> parseForPersonDetails(argsMultimap); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="overloading-the-editcommand-constructor"><a class="link" href="#overloading-the-editcommand-constructor">Overloading the EditCommand constructor</a></h4>
+<div class="paragraph">
+<p>With reference to the previous code snippet the type of <code>EditCommand</code> returned during the parse is also different.
+The parameter type of the EditCommand is different.</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A <code>new EditCommand(Tag, Tag)</code> from the method parseForTags(argsMultimap) is returned.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A `new EditCommand(Index, EditPersonDescriptor) from the method parseForPersonDetails(argsMultimap) is returned.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following code shows the respective object construction of the different types of EditCommand.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the constructor method called, the irrelevant attributes will be made null.
+The boolean variable <code>isEditForPerson</code> is assigned the value <code>true</code> when the edit command is for editing a person, and <code>false</code> if it is for editing a tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">EditCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="comment">// ...</span>
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">boolean</span> isEditForPerson;
+    <span class="directive">private</span> <span class="directive">final</span> Index index;
+    <span class="directive">private</span> <span class="directive">final</span> EditPersonDescriptor editPersonDescriptor;
+    <span class="directive">private</span> <span class="directive">final</span> Tag oldTag;
+    <span class="directive">private</span> <span class="directive">final</span> Tag newTag;
+
+    <span class="directive">public</span> EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        <span class="local-variable">this</span>.isEditForPerson = <span class="predefined-constant">true</span>;
+        <span class="local-variable">this</span>.index = index;
+        <span class="local-variable">this</span>.editPersonDescriptor = <span class="keyword">new</span> EditPersonDescriptor(editPersonDescriptor);
+        <span class="local-variable">this</span>.oldTag = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.newTag = <span class="predefined-constant">null</span>;
+    }
+
+    <span class="directive">public</span> EditCommand(Tag oldTag, Tag newTag) {
+        requireNonNull(oldTag);
+        requireNonNull(newTag);
+
+        <span class="local-variable">this</span>.isEditForPerson = <span class="predefined-constant">false</span>;
+        <span class="local-variable">this</span>.index = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.editPersonDescriptor = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.oldTag = oldTag;
+        <span class="local-variable">this</span>.newTag = newTag;
+    }
+
+    <span class="comment">// ...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logic-execution-depending-on-which-attributes-are-present-2"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present-2">Logic Execution depending on which attributes are present.</a></h4>
+<div class="paragraph">
+<p><em>If</em> <code>isEditForPerson</code> is present, execute the logic for editing a person, <em>else</em> execute the logic for editing a tag.</p>
+</div>
+<div class="paragraph">
+<p>This trivial implementation is show below. The distinct command execution of the editing of tags and the
+editing of person(s) have been abstracted to apply SLAP (Single Level of Abstraction Per method).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+    <span class="keyword">if</span> (isEditForPerson) {
+        <span class="keyword">return</span> executeCommandForPerson();
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> executeCommandForTag();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="command-logic-2"><a class="link" href="#command-logic-2">Command Logic</a></h4>
+<div class="paragraph">
+<p>The edit command undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditCommandForTagSequenceDiagram.png" alt="EditCommandForTagSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.4.1 : How each tag is edited from the Address Book and each Person&#8217;s list of tags</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Edit Tags.</p>
+</div>
+<div class="paragraph">
+<p>The design considerations are similar to the to Implementation of Delete Tags.<br></p>
+</div>
+<div class="paragraph">
+<p>Modifying the existing <code>edit</code> command was picked over creating a new command <code>edittag</code></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-gmaps-command-to-find-location-and-show-directions"><a class="link" href="#enhancement-added-gmaps-command-to-find-location-and-show-directions">Enhancement Added: GMaps Command To Find Location and Show Directions</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opening-a-google-maps-view-of-an-address-code-gmaps-code-em-since-v1-3-em"><a class="link" href="#opening-a-google-maps-view-of-an-address-code-gmaps-code-em-since-v1-3-em">Opening a Google Maps view of an address : <code>gmaps</code> <em>(Since v1.3)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You are meeting your group mate at his house. But where is his house on the map?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>For a person specified by an index, opens a Google Maps view of the person&#8217;s address.<br>
+If you specify an address, gives the Google Maps directions from the given address to the person&#8217;s location.<br>
+Format: <code>gmaps INDEX [a/ADDRESS]</code><br>
+Alternatives: <code>g</code>, <code>map</code>, <code>maps</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>gmaps 2</code><br>
+Opens the Google Maps view for the address of the 2nd person listed in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>gmaps 1</code><br>
+Opens the Google Maps view for the address of the 1st person in the results of the <code>find</code> command.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>gmaps 2 a/Blk 632 Yishun St 61</code><br>
+Opens the Google Maps directions from Blk 632 Yishun St 61 to the address of the 2nd person listed in the address book.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>The target user, the NUS university student, would find himself wanting to meet his friends, either for leisure
+or for group projects. If the meet up location is at the house of one of his friends, he would be able to use the application
+to easily search for the location since he may have stored the friend&#8217;s address in the application.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, if he is at some location, for example, at school, and would like to find the directions to his friend&#8217;s house.
+He is able to quickly type a command to get direction to his friend&#8217;s house from his location.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-tag-bar"><a class="link" href="#enhancement-added-tag-bar">Enhancement Added: Tag Bar</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tag-bar-em-since-v1-5-em"><a class="link" href="#tag-bar-em-since-v1-5-em">Tag Bar <em>(Since v1.5)</em></a></h3>
+<div class="paragraph">
+<p>You can easily view all existing tags as icons, displayed above the person card</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/tag_bar.png" alt="tag bar" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.2 : The tag bar is right above the information of the person displayed</em></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For tags that are not in use for any people, they will be in grey and after all the other tags
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><em>(Coming in v2.0)</em> You can click a tag and all people with that tag will be displayed!</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Being able to see all tags that exist in the address book has many benefits to the User Experience.<br></p>
+</div>
+<div class="paragraph">
+<p>It is a useful overview of all the distinct groups of people he may know in University, be it friends,
+classmates or teaching staff.<br></p>
+</div>
+<div class="paragraph">
+<p>Moreover, users would be able to refer to the bar of tags to easily type in other commands in the application
+(for example, finding contacts by tag, deleting and tag or editing a tag).
+It is a quick overview to all the tags that are present in UniFy, as well as which tags
+are present in the address book, but unused by any contact.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-themes-in-unify-and-theme-command-in-unify"><a class="link" href="#enhancement-added-themes-in-unify-and-theme-command-in-unify">Enhancement Added: Themes In UniFy and Theme Command in UniFy</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-theme-of-unify-code-theme-code"><a class="link" href="#changing-the-theme-of-unify-code-theme-code">Changing the theme of UniFy : <code>theme</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Don&#8217;t like how UniFy looks? Why not change it?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can change the theme of <strong>UniFy</strong> to any theme that you have installed.<br>
+Format: <code>theme THEME_NAME</code><br>
+Alternatives: <code>th</code>, <code>changetheme</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>UniFy</strong> comes with two themes pre-installed, <code>dark</code> and <code>light</code>. More themes will be made available in the near future!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
+<div class="paragraph">
+<p>Theming adds on to the User Experience by providing variety to the user interface.</p>
+</div>
+<div class="paragraph">
+<p>This enhancement lays on the groundwork for future CSS stylesheets to be added in the application.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -462,27 +924,179 @@ person being viewed is deleted, modified (via edit or delete tag) or on address 
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="documentation-contributions-for-cs2101-use"><a class="link" href="#documentation-contributions-for-cs2101-use">Documentation Contributions (For CS2101 Use)</a></h3>
+<div class="sect3">
+<h4 id="added-short-blurb-before-most-features-in-user-guide"><a class="link" href="#added-short-blurb-before-most-features-in-user-guide">Added short blurb before most features in User Guide</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add contact information you want to remember! Your group mate&#8217;s timetable, your friend&#8217;s birthday. Tag your
+module mates with appropriate tags too!</em></p>
 </div>
-<div class="sect1">
-<h2 id="project"><a class="link" href="#project">Project:</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Worked CP2106 Independent Software Development Project (Orbital)</p>
-</li>
-<li>
-<p>Participated in Gamecraft 2016 hosted by NUS Game Development Group.</p>
-</li>
-</ul>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>When you study too much, sometimes, you forget how someone looks like.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Sometimes you want to remind yourself how this person was like in a funny incident. Or you owe friends money for last night&#8217;s supper.<br>
+Tags are too short, and your remarks for a person are more descriptive and unique. UniFy lets you add a remark to a person you can always look back on.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Want to list all contacts for an overview?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Made a mistake? Someone changed their contact details? Edit it.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>When you need to edit module tags of classmates when advancing from a prerequisite module (e.g. CS1010 &#8594; CS1020),
+changing each of their tag to an updated one is too tedious! UniFy lets you simply edit a particular tag for all contacts in one command.</em><br></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Some people just have to go away in your life. Sometimes they leave you. Delete these people out of UniFy as well.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You have just finished a project in a module. Having the 'groupmate' tag to your project mates seems rude for you since
+the project is already over.
+Instead of going through each member one by one, delete that particular 'groupmate' tag in one go!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>"When are all of you free?" is an extremely common question in University. Let us solve that.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You are meeting your group mate at his house. But where is his house on the map?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Don&#8217;t like how UniFy looks? Why not change it?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>What have you been doing? Check the past.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You made a mistake, deleted some one by accident. Do not fret. UniFy is forgiving, undo your mistakes.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>It is OK. You wanted to delete that person anyways.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You are done with what you need to do. Thank you for using UniFy.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add someone from a module via Facebook? Add him seamlessly into UniFy!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Some people you do not talk for months. Maybe a group mate from a previous module you never see ever again.
+They drift away, and out of UniFy they go as well.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>It is Summer break. Who is there to call for late night supper near your home?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>"Where is a good place for us to meet?" UniFy everyone&#8217;s location to find a central one.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Sometimes, you just meet too many people in University. Don&#8217;t worry, get all your contacts in order.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Your privacy is important. Prevent others from viewing the contact details you possess.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:14:50 +00:00
+Last updated 2017-11-13 14:15:16 +00:00
 </div>
 </div>
 </body>
