@@ -115,18 +115,17 @@ as an essential feature by a busy University student seeking efficiency.</p>
 <div class="sect2">
 <h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">Delete Tag Mechanism</a></h3>
 <div class="paragraph">
-<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as delete the tag from the master list of tags in the Address Book.
+<p>To delete a tag means to delete a specified tag in all persons who contain that tag, as well as in the master list of tags in the Address Book.
 This is significantly different from deleting a tag for a person via the <code>edit</code> command.
-There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated.
-To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.
-In this section, you will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code>
-to both delete person and delete tag.</p>
+There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated, instead of going editing those with the same tags one by one.
+To delete a particular tag across multiple contacts would be a tedious process, hence, the addition of this feature.
+You will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code> to both delete person and delete tag.</p>
 </div>
 <div class="paragraph">
-<p>In general, the ability to delete a tag was implemented by modifying the existing <code>delete</code> command.</p>
+<p>In general, the ability to delete a tag was implemented via an <em>augmentation</em> of the existing <code>delete</code> command.</p>
 </div>
 <div class="paragraph">
-<p>This modification involves:</p>
+<p>This augmentation is achieved via</p>
 </div>
 <div class="ulist">
 <ul>
@@ -137,55 +136,38 @@ to both delete person and delete tag.</p>
 <p>overloading the DeleteCommand constructor</p>
 </li>
 <li>
-<p>executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
+<p>executing the respective logic based on which attributes are present/non-null.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>As a result of this modification, <code>delete</code> can execute a delete on tags, or a delete on persons, depending on the parameters provided.</p>
 </div>
 <div class="sect3">
 <h4 id="detection-of-the-deletion-type"><a class="link" href="#detection-of-the-deletion-type">Detection of the Deletion Type</a></h4>
 <div class="paragraph">
-<p>For both types of delete commands, the same <code>delete</code> command is used but the parameters in the command line are different.</p>
+<p>The current <code>delete</code> command (for a person) is in the format <code>delete INDEX</code>. Deleting a tag is in the format <code>delete t/TAG</code>.
+The same <code>delete</code> command is used but the parameters in the command line are different.</p>
 </div>
 <div class="paragraph">
 <p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>/t</code> prefix for tags.</p>
 </div>
 <div class="paragraph">
-<p>Preamble for</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (delete person(s)) : A digit String</p>
-</li>
-<li>
-<p><code>delete t/TAG [t/TAG]</code> (delete tag(s)) :  A <strong>blank</strong> String</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The implementation of this parse is shown below:</p>
+<p>The preamble for <code>delete "INDEX"</code> is a <strong>digit</strong> while the preamble for <code>delete" "t/TAG</code> is a <strong>space</strong>.
+The implementation of this parse is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> DeleteCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
     <span class="predefined-type">String</span> preamble = argMultimap.getPreamble();
-    <span class="keyword">if</span> (preamble.equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
-        <span class="comment">// there exists 't/'</span>
-        DeleteCommand deleteCommandForTag = parseForTags(argMultimap);
-        <span class="keyword">if</span> (deleteCommandForTag != <span class="predefined-constant">null</span>) {
-            <span class="keyword">return</span> deleteCommandForTag; <i class="conum" data-value="1"></i><b>(1)</b>
-        }
-    } <span class="keyword">else</span> {
-        DeleteCommand deleteCommandForPerson = parseForPersonIndexes(args, preamble);
-        <span class="keyword">if</span> (deleteCommandForPerson != <span class="predefined-constant">null</span>) {
-            <span class="keyword">return</span> deleteCommandForPerson; <i class="conum" data-value="2"></i><b>(2)</b>
-        }
-    }
 
+    <span class="keyword">if</span> (preamble.equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="comment">// parsing of tags into a Set&lt;Tag&gt; tagList</span>
+        <span class="keyword">return</span> <span class="keyword">new</span> DeleteCommand(tagList); <i class="conum" data-value="1"></i><b>(1)</b>
+
+    } <span class="keyword">else</span> <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="content">-?</span><span class="char">\\</span><span class="content">d+</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="comment">// parsing of the index</span>
+        <span class="keyword">return</span> <span class="keyword">new</span> DeleteCommand(index); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
     <span class="comment">// ...</span>
 }</code></pre>
 </div>
@@ -194,52 +176,44 @@ to both delete person and delete tag.</p>
 <div class="sect3">
 <h4 id="overloading-the-deletecommand-constructor"><a class="link" href="#overloading-the-deletecommand-constructor">Overloading the DeleteCommand constructor</a></h4>
 <div class="paragraph">
-<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.
-The parameter type of the DeleteCommand is different.</p>
+<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
+<td>a <code>new DeleteCommand(tagList)</code> is returned when deleting one or more tags.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>a <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting a person.</td>
+<td>a <code>new DeleteCommand(index)</code> is returned when deleting a person.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The following code shows the respective object construction of the different types of DeleteCommand.</p>
+<p>The following code shows the respective object construction of both types of DeleteCommand.</p>
 </div>
 <div class="paragraph">
-<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
+<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndex</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
 Which will lead on to the next section about command execution.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
     <span class="comment">// ...</span>
-    <span class="directive">private</span> <span class="directive">final</span> Index targetIndexes;
+    <span class="directive">private</span> <span class="directive">final</span> Index targetIndex;
 
     <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;Tag&gt; targetTags;
 
-    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">Set</span>&lt;Tag&gt; targetTags) {
-        <span class="local-variable">this</span>.targetIndexes = <span class="predefined-constant">null</span>;
-        <span class="local-variable">this</span>.targetTags = targetTags;
-    }
-
     <span class="directive">public</span> DeleteCommand(Index targetIndex) {
-        <span class="local-variable">this</span>.targetIndexes = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
-        targetIndexes.add(targetIndex);
+        <span class="local-variable">this</span>.targetIndex = targetIndex;
         <span class="local-variable">this</span>.targetTags = <span class="predefined-constant">null</span>;
     }
 
-    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">ArrayList</span>&lt;Index&gt; targetIndexes) {
-        <span class="local-variable">this</span>.targetIndexes = targetIndexes;
-        <span class="local-variable">this</span>.targetTags = <span class="predefined-constant">null</span>;
+    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">Set</span>&lt;Tag&gt; targetTags) {
+        <span class="local-variable">this</span>.targetTags = targetTags;
+        <span class="local-variable">this</span>.targetIndex = <span class="predefined-constant">null</span>;
     }
-
     <span class="comment">// ...</span>
 }</code></pre>
 </div>
@@ -248,21 +222,21 @@ Which will lead on to the next section about command execution.</p>
 <div class="sect3">
 <h4 id="logic-execution-depending-on-which-attributes-are-present"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present">Logic Execution depending on which attributes are present.</a></h4>
 <div class="paragraph">
-<p><em>If</em> <code>targetIndexes</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
+<p><em>If</em> <code>targetIndex</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
 </div>
 <div class="paragraph">
-<p>This trivial implementation is show below. The distinct command execution of the deleting of tags and the
-delete of person(s) have been abstracted to increase SLAP.</p>
+<p>This trivial implementation is show below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
-    <span class="keyword">if</span> (targetTags == <span class="predefined-constant">null</span> &amp;&amp; targetIndexes != <span class="predefined-constant">null</span>) {
-        <span class="keyword">return</span> executeCommandForPersons();
 
+    <span class="keyword">if</span> (targetTags == <span class="predefined-constant">null</span> &amp;&amp; targetIndex != <span class="predefined-constant">null</span>) {
+        <span class="comment">// command logic for deletion for a person</span>
     } <span class="keyword">else</span> {
-        <span class="keyword">return</span> executeCommandForTag();
+        <span class="comment">// command logic for deletion for a tag</span>
     }
+    <span class="comment">// ...</span>
 }</code></pre>
 </div>
 </div>
@@ -270,23 +244,20 @@ delete of person(s) have been abstracted to increase SLAP.</p>
 <div class="sect3">
 <h4 id="command-logic"><a class="link" href="#command-logic">Command Logic</a></h4>
 <div class="paragraph">
-<p>The delete command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+<p>The following sequence diagrams show how the delete operation for tags work.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
-</div>
-<div class="paragraph">
-<p>Not shown in Figure 4.3.1, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
+<p>Not shown in Figure 4.3.2, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
 to be deleted are checked whether each of them already exist in the address book. If this check fails, an exception is thrown.
 The sequence diagram demonstrates a <strong>successful</strong> deletion, hence this aspect of the logic is omitted for clarity.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/DeleteCommandForTagSequenceDiagram1.png" alt="DeleteCommandForTagSequenceDiagram1" width="800">
+<img src="../images/DeleteCommandForTagSequenceDiagram.png" alt="DeleteCommandForTagSequenceDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.1 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
+<p><em>Figure 4.3.1 : Typical command execution</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -294,34 +265,37 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.2 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
+<p><em>Figure 4.3.2 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeleteCommandForTagSequenceDiagram3.png" alt="DeleteCommandForTagSequenceDiagram3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.3.3 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Delete Tags<br>
-<strong>Alternative 1 (current choice):</strong> Modify the existing <code>delete</code> command.<br>
+<strong>Alternative 1 (current choice):</strong> The existing delete command is augmented.<br>
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
-<strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
-Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
-This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
+<strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well. Augmenting the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution. This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Users who are used to the previous version of the command may not appreciate the new change also.<br>
 <strong>Alternative 2:</strong> A new command <code>deletetag</code> is created.<br>
-<strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of the existing parse and command logic.<br>
-<strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive in the command line interface especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
+<strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of existing parse and command logic.<br>
+<strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive a command line especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
 </div>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Execution of delete command<br>
 <strong>Alternative 1 (current choice):</strong> On the <code>Logic</code> level, we iterate through an array of tags and invoke a Model method <code>deleteTag(Tag tag)</code> on each tag. <br>
-<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding)</em><br>
+<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts.<br>
 <strong>Cons:</strong> This requires a loop to delete the tags.<br>
 <strong>Alternative 2:</strong> On the <code>Logic</code> level, we invoke a method <code>deleteTags(tagSet)</code> on a Set&lt;Tag&gt;  and implement <code>deleteTags(Set&lt;Tag&gt; tagSet)</code> in the Model component.<br>
 <strong>Pros:</strong> The code will be easier for future contributors to understand.<br>
 <strong>Cons:</strong> This does not maintain consistency of the API.</p>
-</div>
-<div class="paragraph">
-<p>(Note: Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code>)</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -482,7 +456,7 @@ person being viewed is deleted, modified (via edit or delete tag) or on address 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:20:41 +00:00
+Last updated 2017-11-13 10:20:28 +00:00
 </div>
 </div>
 </body>
