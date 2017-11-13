@@ -124,8 +124,8 @@ if the user key in the select command.</p>
 <div class="sect2">
 <h3 id="remark-command-mechanism"><a class="link" href="#remark-command-mechanism">Remark Command Mechanism</a></h3>
 <div class="paragraph">
-<p>The remark command allows user to modify the remark of a contact, and it supports adding, editing and deleting remarks.
-It is different from adding the tags using <code>AddCommand</code> as you should notice that it is used to store the unique information of the contact.
+<p>The remark command allows user to modify the remark of a contact, and it supports adding, editing and deleting remarks.<br>
+It is different from adding the tags using <code>AddCommand</code> as you should notice that it is used to store the unique information of the contact.<br>
 We are implementing this <code>Remark Command</code> because NUS students see a need to add additional information to their contacts as a reminder to themselves, such as <code>owesMoney</code> to someone.</p>
 </div>
 <div class="paragraph">
@@ -138,39 +138,47 @@ We are implementing this <code>Remark Command</code> because NUS students see a 
 <div class="ulist">
 <ul>
 <li>
-<p>Remark</p>
+<p><code>Remark</code></p>
 </li>
 <li>
-<p>RemarkCommand</p>
+<p><code>RemarkCommand</code></p>
 </li>
 <li>
-<p>RemarkCommandParser</p>
+<p><code>RemarkCommandParser</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
-<hr>
 <div class="paragraph">
 <p>These main classes are significantly edited to implement this enhancement:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>AddressBookParser</p>
+<p><code>AddressBookParser</code></p>
 </li>
 <li>
-<p>PersonListCard, PersonCardHandle</p>
+<p><code>PersonListCard</code></p>
 </li>
 <li>
-<p>XmlAdaptedPerson</p>
+<p><code>PersonCardHandle</code></p>
 </li>
 <li>
-<p>Person</p>
+<p><code>XmlAdaptedPerson</code></p>
 </li>
 <li>
-<p>EditCommand</p>
+<p><code>Person</code></p>
 </li>
 <li>
-<p>AddCommand</p>
+<p><code>EditCommand</code></p>
+</li>
+<li>
+<p><code>AddCommand</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -181,10 +189,10 @@ We are implementing this <code>Remark Command</code> because NUS students see a 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Instead of typing the command <code>remark</code>, an alternative would be <code>rm</code>.
-The alias is added to the <code>RemarkCommand Class</code>.
-The added remark will be displayed on the last line of the person card.
-If a person is newly added to the personList by <code>AddCommand</code>, its remark field will be an empty string.
+Instead of typing the command <code>remark</code>, an alternative would be <code>rm</code>.<br>
+The alias is added to the <code>RemarkCommand Class</code>.<br>
+The added remark will be displayed on the last line of the person card.<br>
+If a person is newly added to the personList by <code>AddCommand</code>, its remark field will be an empty string.<br>
 In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code> is added to the person, and it is independent from <code>editPersonDescriptor</code>.
 </td>
 </tr>
@@ -193,34 +201,34 @@ In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code
 <div class="sect3">
 <h4 id="implementation-of-remark-command"><a class="link" href="#implementation-of-remark-command">Implementation of Remark Command</a></h4>
 <div class="paragraph">
-<p><strong>[Step 1]</strong> <em>Logic:</em> Teach the app to accept 'remark' which does nothing</p>
+<p><strong>[Step 1]</strong> <em>Logic:</em> Teach the app to accept <code>remark</code> which does nothing</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept 'remark' arguments</p>
+<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept <code>remark</code> arguments</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 3]</strong> <em>Ui:</em> Add a placeholder for remark in PersonCard</p>
+<p><strong>[Step 3]</strong> <em>Ui:</em> Add a placeholder for <code>remark</code> in <code>PersonCard</code></p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 4]</strong> <em>Model:</em> Add Remark class</p>
+<p><strong>[Step 4]</strong> <em>Model:</em> Add <code>Remark</code> class</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 5]</strong> <em>Model:</em> Modify ReadOnlyPerson to support a Remark field</p>
+<p><strong>[Step 5]</strong> <em>Model:</em> Modify <code>ReadOnlyPerson</code> to support a <code>Remark</code> field</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 6]</strong> <em>Storage:</em> Add Remark field to XmlAdaptedPerson class</p>
+<p><strong>[Step 6]</strong> <em>Storage:</em> Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 7]</strong> <em>Ui:</em> Connect Remark field to PersonCard</p>
+<p><strong>[Step 7]</strong> <em>Ui:</em> Connect <code>Remark</code> field to <code>PersonCard</code></p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 8]</strong> <em>Logic:</em> Implement RemarkCommand#execute() logic</p>
+<p><strong>[Step 8]</strong> <em>Logic:</em> Implement <code>RemarkCommand#execute()</code> logic</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="codes-and-diagrams"><a class="link" href="#codes-and-diagrams">Codes and Diagrams</a></h4>
 <div class="paragraph">
-<p>The following diagram shows the high-level sequence diagram of the remark command for you:</p>
+<p>The following diagram shows the high-level sequence diagram of the <code>RemarkCommand</code> for you:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -228,10 +236,10 @@ In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.1 : High-level sequence diagram</em></p>
+<p><em>Figure 4.6.1 : High-level sequence diagram</em></p>
 </div>
 <div class="paragraph">
-<p>The RemarkCommand extends Undoable Command, which is an abstract subclass of abstract class Command, so the user can also undo the added remark.
+<p><code>RemarkCommand</code> extends <code>UndoableCommand</code>, which is an abstract subclass of abstract class command, so the user can also undo the added remark.
 The class inheritance diagram is shown below:</p>
 </div>
 <div class="imageblock">
@@ -240,7 +248,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.2 : Class Inheritance Diagram</em></p>
+<p><em>Figure 4.6.2 : Class Inheritance Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -256,7 +264,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>After the remark command is executed, the new data will be saved to the AddressBook. The logic component sequence diagram is shown below:</p>
+<p>After <code>RemarkCommand</code> is executed, the new data will be saved to the AddressBook. The logic component sequence diagram is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -264,10 +272,10 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.3 : Logic Component Sequence Diagram</em></p>
+<p><em>Figure 4.6.3 : Logic Component Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
-<p>We create a new Remark attribute, and the person class is linked to it. Its model component class diagram is shown below:</p>
+<p>We create a new <code>Remark</code> attribute, and the <code>Person</code> class is linked to it. Its model component class diagram is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -275,7 +283,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.4 : Component Class Diagram</em></p>
+<p><em>Figure 4.6.4 : Component Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -287,7 +295,9 @@ The class inheritance diagram is shown below:</p>
     <span class="directive">private</span> ObjectProperty&lt;Address&gt; address;
     <span class="directive">private</span> ObjectProperty&lt;Timetable&gt; timetable;
     <span class="directive">private</span> ObjectProperty&lt;Remark&gt; remark;
-    <span class="comment">// ...</span></code></pre>
+
+    <span class="comment">// ...</span>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -468,7 +478,7 @@ best strategy in the competition. Write the basic source code for this mathemati
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:20:28 +00:00
+Last updated 2017-11-13 10:28:53 +00:00
 </div>
 </div>
 </body>

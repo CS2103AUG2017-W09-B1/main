@@ -47,10 +47,13 @@
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
 <li><a href="#timetables-attribute">4.2. Timetables Attribute</a></li>
 <li><a href="#delete-tag-mechanism">4.3. Delete Tag Mechanism</a></li>
-<li><a href="#remark-command-mechanism">4.4. Remark Command Mechanism</a></li>
-<li><a href="#birthday-attribute">4.5. Birthday Attribute</a></li>
-<li><a href="#logging">4.6. Logging</a></li>
-<li><a href="#configuration">4.7. Configuration</a></li>
+<li><a href="#edit-tag-mechanism">4.4. Edit Tag Mechanism</a></li>
+<li><a href="#tag-colouring-mechanism">4.5. Tag Colouring Mechanism</a></li>
+<li><a href="#remark-command-mechanism">4.6. Remark Command Mechanism</a></li>
+<li><a href="#photo-command-mechanism">4.7. Photo Command Mechanism</a></li>
+<li><a href="#birthday-attribute">4.8. Birthday Attribute</a></li>
+<li><a href="#logging">4.9. Logging</a></li>
+<li><a href="#configuration">4.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -970,17 +973,18 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <div class="sect2">
 <h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.3. Delete Tag Mechanism</a></h3>
 <div class="paragraph">
-<p>To delete a tag means to delete a specified tag in all persons who contain that tag, as well as in the master list of tags in the Address Book.
+<p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as delete the tag from the master list of tags in the Address Book.
 This is significantly different from deleting a tag for a person via the <code>edit</code> command.
-There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated, instead of going editing those with the same tags one by one.
-To delete a particular tag across multiple contacts would be a tedious process, hence, the addition of this feature.
-You will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code> to both delete person and delete tag.</p>
+There is a need for this because a user would like to delete a tag that is no longer relevant or is outdated.
+To delete a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.
+In this section, you will be able to understand how tags are deleted from all persons tagged and how we use the same command word <code>delete</code>
+to both delete person and delete tag.</p>
 </div>
 <div class="paragraph">
-<p>In general, the ability to delete a tag was implemented via an <em>augmentation</em> of the existing <code>delete</code> command.</p>
+<p>In general, the ability to delete a tag was implemented by modifying the existing <code>delete</code> command.</p>
 </div>
 <div class="paragraph">
-<p>This augmentation is achieved via</p>
+<p>This modification involves:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -991,38 +995,55 @@ You will be able to understand how tags are deleted from all persons tagged and 
 <p>overloading the DeleteCommand constructor</p>
 </li>
 <li>
-<p>executing the respective logic based on which attributes are present/non-null.</p>
+<p>executing the respective logic based on which attributes in <code>DeleteCommand</code> are present/non-null.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>As a result of this modification, <code>delete</code> can execute a delete on tags, or a delete on persons, depending on the parameters provided.</p>
 </div>
 <div class="sect3">
 <h4 id="detection-of-the-deletion-type"><a class="link" href="#detection-of-the-deletion-type">4.3.1. Detection of the Deletion Type</a></h4>
 <div class="paragraph">
-<p>The current <code>delete</code> command (for a person) is in the format <code>delete INDEX</code>. Deleting a tag is in the format <code>delete t/TAG</code>.
-The same <code>delete</code> command is used but the parameters in the command line are different.</p>
+<p>For both types of delete commands, the same <code>delete</code> command is used but the parameters in the command line are different.</p>
 </div>
 <div class="paragraph">
 <p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>/t</code> prefix for tags.</p>
 </div>
 <div class="paragraph">
-<p>The preamble for <code>delete "INDEX"</code> is a <strong>digit</strong> while the preamble for <code>delete" "t/TAG</code> is a <strong>space</strong>.
-The implementation of this parse is shown below:</p>
+<p>Preamble for</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete INDEX [MORE INDEXES]&#8230;&#8203;</code> (delete person(s)) : A digit String</p>
+</li>
+<li>
+<p><code>delete t/TAG [t/TAG]</code> (delete tag(s)) :  A <strong>blank</strong> String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The implementation of this parse is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> DeleteCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
     <span class="predefined-type">String</span> preamble = argMultimap.getPreamble();
-
     <span class="keyword">if</span> (preamble.equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
-        <span class="comment">// parsing of tags into a Set&lt;Tag&gt; tagList</span>
-        <span class="keyword">return</span> <span class="keyword">new</span> DeleteCommand(tagList); <i class="conum" data-value="1"></i><b>(1)</b>
-
-    } <span class="keyword">else</span> <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="content">-?</span><span class="char">\\</span><span class="content">d+</span><span class="delimiter">&quot;</span></span>)) {
-        <span class="comment">// parsing of the index</span>
-        <span class="keyword">return</span> <span class="keyword">new</span> DeleteCommand(index); <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="comment">// there exists 't/'</span>
+        DeleteCommand deleteCommandForTag = parseForTags(argMultimap);
+        <span class="keyword">if</span> (deleteCommandForTag != <span class="predefined-constant">null</span>) {
+            <span class="keyword">return</span> deleteCommandForTag; <i class="conum" data-value="1"></i><b>(1)</b>
+        }
+    } <span class="keyword">else</span> {
+        DeleteCommand deleteCommandForPerson = parseForPersonIndexes(args, preamble);
+        <span class="keyword">if</span> (deleteCommandForPerson != <span class="predefined-constant">null</span>) {
+            <span class="keyword">return</span> deleteCommandForPerson; <i class="conum" data-value="2"></i><b>(2)</b>
+        }
     }
+
     <span class="comment">// ...</span>
 }</code></pre>
 </div>
@@ -1031,44 +1052,52 @@ The implementation of this parse is shown below:</p>
 <div class="sect3">
 <h4 id="overloading-the-deletecommand-constructor"><a class="link" href="#overloading-the-deletecommand-constructor">4.3.2. Overloading the DeleteCommand constructor</a></h4>
 <div class="paragraph">
-<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.</p>
+<p>With reference to the previous code snippet the type of <code>DeleteCommand</code> returned during the parse are also different.
+The parameter type of the DeleteCommand is different.</p>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a <code>new DeleteCommand(tagList)</code> is returned when deleting one or more tags.</td>
+<td>a <code>deleteCommandForTag</code> which is a <code>new DeleteCommand(Set&lt;Tag&gt;)</code> is returned when deleting one or more tags.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>a <code>new DeleteCommand(index)</code> is returned when deleting a person.</td>
+<td>a <code>deleteCommandForPerson</code> which is a <code>new DeleteCommand(Index)</code> or a <code>new DeleteCommand(ArrayList&lt;Index&gt;)</code> is returned when deleting a person.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The following code shows the respective object construction of both types of DeleteCommand.</p>
+<p>The following code shows the respective object construction of the different types of DeleteCommand.</p>
 </div>
 <div class="paragraph">
-<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndex</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
+<p>Depending on the constructor method called, <strong>either</strong> the <code>targetIndexes</code> attribute <strong>or</strong> the <code>targetTags</code> will be made null.
 Which will lead on to the next section about command execution.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
     <span class="comment">// ...</span>
-    <span class="directive">private</span> <span class="directive">final</span> Index targetIndex;
+    <span class="directive">private</span> <span class="directive">final</span> Index targetIndexes;
 
     <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;Tag&gt; targetTags;
 
+    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">Set</span>&lt;Tag&gt; targetTags) {
+        <span class="local-variable">this</span>.targetIndexes = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.targetTags = targetTags;
+    }
+
     <span class="directive">public</span> DeleteCommand(Index targetIndex) {
-        <span class="local-variable">this</span>.targetIndex = targetIndex;
+        <span class="local-variable">this</span>.targetIndexes = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        targetIndexes.add(targetIndex);
         <span class="local-variable">this</span>.targetTags = <span class="predefined-constant">null</span>;
     }
 
-    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">Set</span>&lt;Tag&gt; targetTags) {
-        <span class="local-variable">this</span>.targetTags = targetTags;
-        <span class="local-variable">this</span>.targetIndex = <span class="predefined-constant">null</span>;
+    <span class="directive">public</span> DeleteCommand(<span class="predefined-type">ArrayList</span>&lt;Index&gt; targetIndexes) {
+        <span class="local-variable">this</span>.targetIndexes = targetIndexes;
+        <span class="local-variable">this</span>.targetTags = <span class="predefined-constant">null</span>;
     }
+
     <span class="comment">// ...</span>
 }</code></pre>
 </div>
@@ -1077,21 +1106,21 @@ Which will lead on to the next section about command execution.</p>
 <div class="sect3">
 <h4 id="logic-execution-depending-on-which-attributes-are-present"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present">4.3.3. Logic Execution depending on which attributes are present.</a></h4>
 <div class="paragraph">
-<p><em>If</em> <code>targetIndex</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
+<p><em>If</em> <code>targetIndexes</code> is present, execute the logic for deleting a person, <em>else</em> execute the logic for deleting a tag.</p>
 </div>
 <div class="paragraph">
-<p>This trivial implementation is show below.</p>
+<p>This trivial implementation is show below. The distinct command execution of the deleting of tags and the
+delete of person(s) have been abstracted to increase SLAP.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+    <span class="keyword">if</span> (targetTags == <span class="predefined-constant">null</span> &amp;&amp; targetIndexes != <span class="predefined-constant">null</span>) {
+        <span class="keyword">return</span> executeCommandForPersons();
 
-    <span class="keyword">if</span> (targetTags == <span class="predefined-constant">null</span> &amp;&amp; targetIndex != <span class="predefined-constant">null</span>) {
-        <span class="comment">// command logic for deletion for a person</span>
     } <span class="keyword">else</span> {
-        <span class="comment">// command logic for deletion for a tag</span>
+        <span class="keyword">return</span> executeCommandForTag();
     }
-    <span class="comment">// ...</span>
 }</code></pre>
 </div>
 </div>
@@ -1099,20 +1128,23 @@ Which will lead on to the next section about command execution.</p>
 <div class="sect3">
 <h4 id="command-logic"><a class="link" href="#command-logic">4.3.4. Command Logic</a></h4>
 <div class="paragraph">
-<p>The following sequence diagrams show how the delete operation for tags work.</p>
+<p>The delete command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
 </div>
 <div class="paragraph">
-<p>Not shown in Figure 4.3.2, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
+<p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
+</div>
+<div class="paragraph">
+<p>Not shown in Figure 4.3.1, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
 to be deleted are checked whether each of them already exist in the address book. If this check fails, an exception is thrown.
 The sequence diagram demonstrates a <strong>successful</strong> deletion, hence this aspect of the logic is omitted for clarity.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/DeleteCommandForTagSequenceDiagram.png" alt="DeleteCommandForTagSequenceDiagram" width="800">
+<img src="images/DeleteCommandForTagSequenceDiagram1.png" alt="DeleteCommandForTagSequenceDiagram1" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.1 : Typical command execution</em></p>
+<p><em>Figure 4.3.1 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1120,45 +1152,264 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.2 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/DeleteCommandForTagSequenceDiagram3.png" alt="DeleteCommandForTagSequenceDiagram3" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 4.3.3 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
+<p><em>Figure 4.3.2 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.5. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Delete Tags<br>
-<strong>Alternative 1 (current choice):</strong> The existing delete command is augmented.<br>
+<strong>Alternative 1 (current choice):</strong> Modify the existing <code>delete</code> command.<br>
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
-<strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well. Augmenting the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution. This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Users who are used to the previous version of the command may not appreciate the new change also.<br>
+<strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
+Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
+This Violates Single Responsibility Principle and Separation of Concerns as <code>DeleteCommand</code> now needs to do two different things. Also, users who are used to the previous version of the command may not appreciate the new change, especially if it causes new bugs.<br>
 <strong>Alternative 2:</strong> A new command <code>deletetag</code> is created.<br>
-<strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of existing parse and command logic.<br>
-<strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive a command line especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
+<strong>Pros:</strong> The implementation of a new command is simple. This does not involve any major modification of the existing parse and command logic.<br>
+<strong>Cons:</strong> <code>deletetag t/tag</code> is not as intuitive in the command line interface especially to new or casual users. Users may try <code>delete t/tag</code> out of instinct and we would need to inform or prompt users of the <code>deletetag</code> command.</p>
 </div>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Execution of delete command<br>
 <strong>Alternative 1 (current choice):</strong> On the <code>Logic</code> level, we iterate through an array of tags and invoke a Model method <code>deleteTag(Tag tag)</code> on each tag. <br>
-<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts.<br>
+<strong>Pros:</strong> This maintains consistency with the Model API that deals with objects in singular amounts. <em>(At the time of coding)</em><br>
 <strong>Cons:</strong> This requires a loop to delete the tags.<br>
 <strong>Alternative 2:</strong> On the <code>Logic</code> level, we invoke a method <code>deleteTags(tagSet)</code> on a Set&lt;Tag&gt;  and implement <code>deleteTags(Set&lt;Tag&gt; tagSet)</code> in the Model component.<br>
 <strong>Pros:</strong> The code will be easier for future contributors to understand.<br>
 <strong>Cons:</strong> This does not maintain consistency of the API.</p>
 </div>
+<div class="paragraph">
+<p>(Note: Pull Request #79 Delete multiple persons, chooses Alternative 2 as its design consideration with <code>deletePersons(ArrayList&lt;ReadOnlyPerson&gt; targets)</code>)</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="remark-command-mechanism"><a class="link" href="#remark-command-mechanism">4.4. Remark Command Mechanism</a></h3>
+<h3 id="edit-tag-mechanism"><a class="link" href="#edit-tag-mechanism">4.4. Edit Tag Mechanism</a></h3>
 <div class="paragraph">
-<p>The remark command allows user to modify the remark of a contact, and it supports adding, editing and deleting remarks.
-It is different from adding the tags using <code>AddCommand</code> as you should notice that it is used to store the unique information of the contact.
+<p>Editing a tag means editing a specified tag (the old tag) in all persons who contain that tag,
+as well as editing the tag from the master list of tags in the Address Book.
+This is significantly different from edit person&#8217;s tag via the <code>edit</code> command.
+There is a need for this because a user would like to edit a tag for multiple people containing that tag.
+To edit a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will see that the implementation of editing a tag is very similar to deleting a tag.</p>
+</div>
+<div class="paragraph">
+<p>The existing <code>edit</code> command was also modified, to allow <code>edit</code> to execute a edit on tags, or a edit on persons,
+depending on the parameters provided.</p>
+</div>
+<div class="paragraph">
+<p>It differs from <code>delete</code> tag in terms of executing the respective logic.
+A boolean value, instead of checking which attributes of <code>EditCommand</code> are present/non-null, determine which command logic to execute</p>
+</div>
+<div class="sect3">
+<h4 id="detection-of-the-edit-type"><a class="link" href="#detection-of-the-edit-type">4.4.1. Detection of the Edit Type</a></h4>
+<div class="paragraph">
+<p>The concept of using the preamble, as seen in <code>DeleteCommandParser</code>, is also used in <code>EditCommandParser</code>.</p>
+</div>
+<div class="paragraph">
+<p>Preamble for</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit INDEX &#8230;&#8203;</code> (edit person) : A digit String</p>
+</li>
+<li>
+<p><code>edit old/TAG new/TAG</code> (edit tag) :  A <strong>blank</strong> String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The implementation of this parse is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> EditCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="comment">//...</span>
+
+    <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="keyword">return</span> parseForTags(argsMultimap); <i class="conum" data-value="1"></i><b>(1)</b>
+    } <span class="keyword">else</span> <span class="keyword">if</span> (preamble.matches(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d+</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="keyword">return</span> parseForPersonDetails(argsMultimap); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="overloading-the-editcommand-constructor"><a class="link" href="#overloading-the-editcommand-constructor">4.4.2. Overloading the EditCommand constructor</a></h4>
+<div class="paragraph">
+<p>With reference to the previous code snippet the type of <code>EditCommand</code> returned during the parse are also different.
+The parameter type of the DeleteCommand is different.</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A <code>new EditCommand(Tag, Tag)</code> from the method parseForTags(argsMultimap) is returned</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>a `new EditCommand(Index, EditPersonDescriptor) is returned when deleting a person.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following code shows the respective object construction of the different types of EditCommand.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the constructor method called, the irrelevant attributes will be made null.
+The boolean variable <code>isEditForPerson</code> is true when the edit command is to edit a person, and false if editing a tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="comment">// ...</span>
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">boolean</span> isEditForPerson;
+    <span class="directive">private</span> <span class="directive">final</span> Index index;
+    <span class="directive">private</span> <span class="directive">final</span> EditPersonDescriptor editPersonDescriptor;
+    <span class="directive">private</span> <span class="directive">final</span> Tag oldTag;
+    <span class="directive">private</span> <span class="directive">final</span> Tag newTag;
+
+    <span class="directive">public</span> EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        <span class="local-variable">this</span>.isEditForPerson = <span class="predefined-constant">true</span>;
+        <span class="local-variable">this</span>.index = index;
+        <span class="local-variable">this</span>.editPersonDescriptor = <span class="keyword">new</span> EditPersonDescriptor(editPersonDescriptor);
+        <span class="local-variable">this</span>.oldTag = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.newTag = <span class="predefined-constant">null</span>;
+    }
+
+    <span class="directive">public</span> EditCommand(Tag oldTag, Tag newTag) {
+        requireNonNull(oldTag);
+        requireNonNull(newTag);
+
+        <span class="local-variable">this</span>.isEditForPerson = <span class="predefined-constant">false</span>;
+        <span class="local-variable">this</span>.index = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.editPersonDescriptor = <span class="predefined-constant">null</span>;
+        <span class="local-variable">this</span>.oldTag = oldTag;
+        <span class="local-variable">this</span>.newTag = newTag;
+    }
+
+    <span class="comment">// ...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logic-execution-depending-on-which-attributes-are-present-2"><a class="link" href="#logic-execution-depending-on-which-attributes-are-present-2">4.4.3. Logic Execution depending on which attributes are present.</a></h4>
+<div class="paragraph">
+<p><em>If</em> <code>isEditForPerson</code> is present, execute the logic for editing a person, <em>else</em> execute the logic for editing a tag.</p>
+</div>
+<div class="paragraph">
+<p>This trivial implementation is show below. The distinct command execution of the editing of tags and the
+editing of person(s) have been abstracted to increase SLAP.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+    <span class="keyword">if</span> (isEditForPerson) {
+        <span class="keyword">return</span> executeCommandForPerson();
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> executeCommandForTag();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="command-logic-2"><a class="link" href="#command-logic-2">4.4.4. Command Logic</a></h4>
+<div class="paragraph">
+<p>The edit command is undergoes a typical command execution in the <code>Logic</code> Component. Refer to Figure 3.3.3.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditCommandForTagSequenceDiagram.png" alt="EditCommandForTagSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.3.4 : How each tag is edit from the Address Book and each Person&#8217;s list of tags</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.5. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Edit Tags.</p>
+</div>
+<div class="paragraph">
+<p>The design considerations are similar to the to Implementation of Delete Tags.<br></p>
+</div>
+<div class="paragraph">
+<p>Modifying the existing <code>edit</code> command was picked over creating a new command <code>edittag</code></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tag-colouring-mechanism"><a class="link" href="#tag-colouring-mechanism">4.5. Tag Colouring Mechanism</a></h3>
+<div class="paragraph">
+<p>Tag labels appear in various <code>UI</code> components: <code>PersonCard</code>, <code>TagListPanel</code> and <code>PersonInfoPanel</code>.<br>
+In order to have the same color across all components, there was a need for the <code>UI</code> Components
+to keep track of what colors have been used and which tag was tied to what color.<br>
+Thus a Singleton class <code>TagColorMap</code> was implemented.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ClassDiagramTagColorMap.png" alt="ClassDiagramTagColorMap" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.5 : The class diagram for TagColorMap</em></p>
+</div>
+<div class="paragraph">
+<p>As a result of this singleton class, coloring tags on initialisation is made extremely easy,
+since the TagColorMap provided UI components an easy way to access the color mapping of tags and
+color the tags accordingly in the application, from anywhere in the code base.</p>
+</div>
+<div class="paragraph">
+<p>The following code is common in <code>PersonCard.java</code>, <code>TagListPanel.java</code>, <code>PersonInfoPanel.java</code>
+as all the these components require rendering tags.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> initTags(ReadOnlyPerson person) {
+    person.getTags().forEach(tag -&gt; {
+            <span class="predefined-type">Label</span> tagLabel = <span class="keyword">new</span> <span class="predefined-type">Label</span>(tag.tagName);
+            tagLabel.setStyle(<span class="string"><span class="delimiter">&quot;</span><span class="content">-fx-background-color: </span><span class="delimiter">&quot;</span></span> + TagColorMap.getInstance().getTagColor(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        }
+    );
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspects:</strong> Implementation Coloring of Tag<br>
+<strong>Alternative 1(current choice):</strong> Use a singleton class TagColorMap to provide colors, and mapping of tags to colors.<br>
+<strong>Pros:</strong> Easy to implement. Easy to access from any UI Component.<br>
+<strong>Cons:</strong> Increases coupling across the code base. Difficult to replace TagColorMap with a stub.<br>
+<strong>Alternative 2:</strong> TagColorMap as a class attribute of MainWindow and pass TagColorMap as a parameter to the constructors of relevant UI components. <br>
+<strong>Pros:</strong> Naive method and straightforward to implement<br>
+<strong>Cons:</strong> Requires a large amount of modification of existing code base.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remark-command-mechanism"><a class="link" href="#remark-command-mechanism">4.6. Remark Command Mechanism</a></h3>
+<div class="paragraph">
+<p>The remark command allows user to modify the remark of a contact, and it supports adding, editing and deleting remarks.<br>
+It is different from adding the tags using <code>AddCommand</code> as you should notice that it is used to store the unique information of the contact.<br>
 We are implementing this <code>Remark Command</code> because NUS students see a need to add additional information to their contacts as a reminder to themselves, such as <code>owesMoney</code> to someone.</p>
 </div>
 <div class="paragraph">
@@ -1171,39 +1422,47 @@ We are implementing this <code>Remark Command</code> because NUS students see a 
 <div class="ulist">
 <ul>
 <li>
-<p>Remark</p>
+<p><code>Remark</code></p>
 </li>
 <li>
-<p>RemarkCommand</p>
+<p><code>RemarkCommand</code></p>
 </li>
 <li>
-<p>RemarkCommandParser</p>
+<p><code>RemarkCommandParser</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
-<hr>
 <div class="paragraph">
 <p>These main classes are significantly edited to implement this enhancement:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>AddressBookParser</p>
+<p><code>AddressBookParser</code></p>
 </li>
 <li>
-<p>PersonListCard, PersonCardHandle</p>
+<p><code>PersonListCard</code></p>
 </li>
 <li>
-<p>XmlAdaptedPerson</p>
+<p><code>PersonCardHandle</code></p>
 </li>
 <li>
-<p>Person</p>
+<p><code>XmlAdaptedPerson</code></p>
 </li>
 <li>
-<p>EditCommand</p>
+<p><code>Person</code></p>
 </li>
 <li>
-<p>AddCommand</p>
+<p><code>EditCommand</code></p>
+</li>
+<li>
+<p><code>AddCommand</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -1214,46 +1473,46 @@ We are implementing this <code>Remark Command</code> because NUS students see a 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Instead of typing the command <code>remark</code>, an alternative would be <code>rm</code>.
-The alias is added to the <code>RemarkCommand Class</code>.
-The added remark will be displayed on the last line of the person card.
-If a person is newly added to the personList by <code>AddCommand</code>, its remark field will be an empty string.
+Instead of typing the command <code>remark</code>, an alternative would be <code>rm</code>.<br>
+The alias is added to the <code>RemarkCommand Class</code>.<br>
+The added remark will be displayed on the last line of the person card.<br>
+If a person is newly added to the personList by <code>AddCommand</code>, its remark field will be an empty string.<br>
 In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code> is added to the person, and it is independent from <code>editPersonDescriptor</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-of-remark-command"><a class="link" href="#implementation-of-remark-command">4.4.1. Implementation of Remark Command</a></h4>
+<h4 id="implementation-of-remark-command"><a class="link" href="#implementation-of-remark-command">4.6.1. Implementation of Remark Command</a></h4>
 <div class="paragraph">
-<p><strong>[Step 1]</strong> <em>Logic:</em> Teach the app to accept 'remark' which does nothing</p>
+<p><strong>[Step 1]</strong> <em>Logic:</em> Teach the app to accept <code>remark</code> which does nothing</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept 'remark' arguments</p>
+<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept <code>remark</code> arguments</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 3]</strong> <em>Ui:</em> Add a placeholder for remark in PersonCard</p>
+<p><strong>[Step 3]</strong> <em>Ui:</em> Add a placeholder for <code>remark</code> in <code>PersonCard</code></p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 4]</strong> <em>Model:</em> Add Remark class</p>
+<p><strong>[Step 4]</strong> <em>Model:</em> Add <code>Remark</code> class</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 5]</strong> <em>Model:</em> Modify ReadOnlyPerson to support a Remark field</p>
+<p><strong>[Step 5]</strong> <em>Model:</em> Modify <code>ReadOnlyPerson</code> to support a <code>Remark</code> field</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 6]</strong> <em>Storage:</em> Add Remark field to XmlAdaptedPerson class</p>
+<p><strong>[Step 6]</strong> <em>Storage:</em> Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 7]</strong> <em>Ui:</em> Connect Remark field to PersonCard</p>
+<p><strong>[Step 7]</strong> <em>Ui:</em> Connect <code>Remark</code> field to <code>PersonCard</code></p>
 </div>
 <div class="paragraph">
-<p><strong>[Step 8]</strong> <em>Logic:</em> Implement RemarkCommand#execute() logic</p>
+<p><strong>[Step 8]</strong> <em>Logic:</em> Implement <code>RemarkCommand#execute()</code> logic</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codes-and-diagrams"><a class="link" href="#codes-and-diagrams">4.4.2. Codes and Diagrams</a></h4>
+<h4 id="codes-and-diagrams"><a class="link" href="#codes-and-diagrams">4.6.2. Codes and Diagrams</a></h4>
 <div class="paragraph">
-<p>The following diagram shows the high-level sequence diagram of the remark command for you:</p>
+<p>The following diagram shows the high-level sequence diagram of the <code>RemarkCommand</code> for you:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1261,10 +1520,10 @@ In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.1 : High-level sequence diagram</em></p>
+<p><em>Figure 4.6.1 : High-level sequence diagram</em></p>
 </div>
 <div class="paragraph">
-<p>The RemarkCommand extends Undoable Command, which is an abstract subclass of abstract class Command, so the user can also undo the added remark.
+<p><code>RemarkCommand</code> extends <code>UndoableCommand</code>, which is an abstract subclass of abstract class command, so the user can also undo the added remark.
 The class inheritance diagram is shown below:</p>
 </div>
 <div class="imageblock">
@@ -1273,7 +1532,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.2 : Class Inheritance Diagram</em></p>
+<p><em>Figure 4.6.2 : Class Inheritance Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -1289,7 +1548,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>After the remark command is executed, the new data will be saved to the AddressBook. The logic component sequence diagram is shown below:</p>
+<p>After <code>RemarkCommand</code> is executed, the new data will be saved to the AddressBook. The logic component sequence diagram is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1297,10 +1556,10 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.3 : Logic Component Sequence Diagram</em></p>
+<p><em>Figure 4.6.3 : Logic Component Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
-<p>We create a new Remark attribute, and the person class is linked to it. Its model component class diagram is shown below:</p>
+<p>We create a new <code>Remark</code> attribute, and the <code>Person</code> class is linked to it. Its model component class diagram is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1308,7 +1567,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.4 : Component Class Diagram</em></p>
+<p><em>Figure 4.6.4 : Component Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -1320,12 +1579,14 @@ The class inheritance diagram is shown below:</p>
     <span class="directive">private</span> ObjectProperty&lt;Address&gt; address;
     <span class="directive">private</span> ObjectProperty&lt;Timetable&gt; timetable;
     <span class="directive">private</span> ObjectProperty&lt;Remark&gt; remark;
-    <span class="comment">// ...</span></code></pre>
+
+    <span class="comment">// ...</span>
+}</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.3. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspects:</strong> UI Display of Remark<br>
 <strong>Alternative 1(current choice):</strong> The remark of the specified contact at the end of the personCard is displayed.<br>
@@ -1347,7 +1608,220 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">4.5. Birthday Attribute</a></h3>
+<h3 id="photo-command-mechanism"><a class="link" href="#photo-command-mechanism">4.7. Photo Command Mechanism</a></h3>
+<div class="paragraph">
+<p>The photo command allows users to assign photos to their contacts, and it also supports adding, editing and deleting photos as the remark command.
+It accepts the absolute path in the user&#8217;s computer, copying the original photo to the default folder of the file.
+We are implementing this <code>PhotoCommand</code> as NUS students may forget what their classmates look like.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>These classes are added to implement this enhancement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PhotoPath</code></p>
+</li>
+<li>
+<p><code>PhotoCommand</code></p>
+</li>
+<li>
+<p><code>PhotoCommandParser</code></p>
+</li>
+<li>
+<p><code>PhotoPathNotFoundException</code></p>
+</li>
+<li>
+<p><code>DuplicationPhotoPathException</code></p>
+</li>
+<li>
+<p><code>UniquePhotoPathList</code></p>
+</li>
+<li>
+<p><code>XmlAdaptedPhotoPath</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These classes are edited to implement this enhancement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddressBook</code></p>
+</li>
+<li>
+<p><code>FileUtil</code></p>
+</li>
+<li>
+<p><code>AddCommand</code></p>
+</li>
+<li>
+<p><code>EditCommand</code></p>
+</li>
+<li>
+<p><code>PersonInfoPanel</code></p>
+</li>
+<li>
+<p><code>XmlAdaptedPerson</code></p>
+</li>
+<li>
+<p><code>Person</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Instead of typing the command <code>photo</code>, an alternative would be <code>ph</code>.<br>
+The alias is added to the <code>PhotoCommand</code> Class.<br>
+The added photo will be displayed on the <code>PersonInfoPanel</code>.<br>
+If a <code>photoPath</code> is newly added to the photoList by <code>PhotoCommand</code>, it will be saved to the default folder and linked to the specified contact.<br>
+If a <code>photoPath</code> is removed from one contact, the link between the photo and the contact will be removed, but the photo file
+are still kept inside the folder until the next time the user starts the application in case the user wants to undo the command.<br>
+Up to now, the photo command hasn&#8217;t supported the <code>RedoCommand</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-photo-command"><a class="link" href="#implementation-of-photo-command">4.7.1. Implementation of Photo Command</a></h4>
+<div class="paragraph">
+<p><strong>[Step 1]</strong> <em>Logic:</em> Create the <code>photoCommandParser</code> class to parse the input.</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 2]</strong> <em>Logic:</em> Teach the app to accept <code>photoPath</code> arguments</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 3]</strong> <em>Ui:</em> Add a Shape <code>Circle</code> for displaying the photo in <code>personInfoPanel</code></p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 4]</strong> <em>Model:</em> Add <code>PhotoPath</code> class</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 5]</strong> <em>Model:</em> Modify <code>ReadOnlyPerson</code> to support a <code>photoPath</code> field</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 6]</strong> <em>Storage:</em> Add the <code>photoPath</code> field to <code>XmlAdaptedPerson</code> class</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 7]</strong> <em>Ui:</em> Connect the <code>photoPath</code> field to <code>PersonInfoPanel</code> class, display the contact photo</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 8]</strong> <em>Logic:</em> Implement <code>PhotoCommand#execute()</code> logic</p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 9]</strong> <em>Commons:</em> Implement related methods in <code>FileUtil</code></p>
+</div>
+<div class="paragraph">
+<p><strong>[Step 10]</strong> <em>Models:</em> Implement how to initialize the <code>UniquePhotoPathList</code> and delete unused photo in <code>AddressBook</code> class</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="codes-and-diagrams-2"><a class="link" href="#codes-and-diagrams-2">4.7.2. Codes and Diagrams</a></h4>
+<div class="paragraph">
+<p>The interactions between multiple objects are complicated, so the following diagram shows the simplified high-level sequence diagram for you:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PhotoCommand_highLevelSequenceDiagrams.png" alt="PhotoCommand highLevelSequenceDiagrams" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.1 : High-level Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>For the logic component part, the <code>PhotoCommandParser</code> is created by the <code>AddressBookParser</code>, and the <code>PhotoCommand</code> is created by the <code>PhotoCommandParser</code>.
+The logic component class diagram is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PhotoCommand_logicComponentClassDiagram.png" alt="PhotoCommand logicComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.2 : Logic Component Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>Also, the <code>PhotoCommand</code> class inherits from the <code>UndoableCommand</code> class.
+The implementation is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Edits the photo path of the specified person.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PhotoCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in Figure 4.7.3, the <code>AddressBook</code> consists of one <code>UniqueTagList</code>, one <code>UniquePersonList</code>, and one <code>UniquePhotoPathList</code>.
+The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</code> objects.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PhotoCommand_modelComponentClassDiagram.png" alt="PhotoCommand modelComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.3 : Model Component Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>We create a new <code>PhotoPath</code> attribute, and the <code>Person</code> class is linked to it.</p>
+</div>
+<div class="paragraph">
+<p>The implementation is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Represents the path of a person's photo in the address book.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PhotoPath</span> {
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> FILE_SAVED_PARENT_PATH = <span class="string"><span class="delimiter">&quot;</span><span class="content">src/main/resources/images/contactPhotos/</span><span class="delimiter">&quot;</span></span>;
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> MESSAGE_APP_PHOTOPATH_CONSTRAINTS =
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">The app photo path should be a string starting with '</span><span class="delimiter">&quot;</span></span>
+                    + FILE_SAVED_PARENT_PATH
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">', following by the file name with a valid extension, like'photo.jpg'.</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">The valid extensions are 'jpg', 'jpeg', 'png', 'gif' or 'bmp'.</span><span class="delimiter">&quot;</span></span>;
+
+    <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> value;
+
+    <span class="comment">//...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspects:</strong> How to fetch the contact photo saved in users' computers<br>
+<strong>Alternative 1(current choice):</strong> Let users specify the absolute path of the photo<br>
+<strong>Pros:</strong> This might be inconvenient as users need additional steps to get the absolute file of the photo.<br>
+<strong>Cons:</strong> The image file is specified accurately by using the command line.<br>
+<strong>Alternative 2:</strong> Provide a pop-up window for the user to choose the photo<br>
+<strong>Pros:</strong> It is more convenient for the user to choose the file.<br>
+<strong>Cons:</strong> This becomes no more a command-line input in this command-line application.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">4.8. Birthday Attribute</a></h3>
 <div class="paragraph">
 <p>Users are able to store birthdays by inputting in the format of DDMMYYYY when adding a person. You will be able to understand how Birthday is being stored and parsed over.
 This allows the user to get a list of people having the same birthday month.</p>
@@ -1356,7 +1830,7 @@ This allows the user to get a list of people having the same birthday month.</p>
 <p>In general, the ability to store a person&#8217;s birthday was implemented via an <em>augmentation</em> of the component of <code>Person</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="representation-of-birthdays"><a class="link" href="#representation-of-birthdays">4.5.1. Representation of Birthdays</a></h4>
+<h4 id="representation-of-birthdays"><a class="link" href="#representation-of-birthdays">4.8.1. Representation of Birthdays</a></h4>
 <div class="paragraph">
 <p>Storing of birthdays is facilitated by an immutable <code>Birthday</code> object, which is a component of <code>Person</code>.</p>
 </div>
@@ -1397,11 +1871,11 @@ This allows the user to get a list of people having the same birthday month.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.5.1 : UML diagram for updated Model with Birthday</em></p>
+<p><em>Figure 4.8.1 : UML diagram for updated Model with Birthday</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="validation-of-birthdays"><a class="link" href="#validation-of-birthdays">4.5.2. Validation of Birthdays</a></h4>
+<h4 id="validation-of-birthdays"><a class="link" href="#validation-of-birthdays">4.8.2. Validation of Birthdays</a></h4>
 <div class="paragraph">
 <p>After the birthday is input, it will be checked if the date is valid.
 The number of digits input will be checked first.
@@ -1428,7 +1902,7 @@ Range of day input will then be checked according to month.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.3. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.8.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Representation of birthdays<br>
 <strong>Alternative 1 (current choice):</strong> The birthday of the specified contact is displayed as string of numbers.<br>
@@ -1441,7 +1915,7 @@ Range of day input will then be checked according to month.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1479,7 +1953,7 @@ Range of day input will then be checked according to month.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.7. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2343,7 +2817,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:20:29 +00:00
+Last updated 2017-11-13 10:28:53 +00:00
 </div>
 </div>
 </body>
