@@ -5,55 +5,111 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - User Guide</title>
+<title>UniFy - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>UniFy - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>CS2103AUG2017-W09-B1</code>      Since: <code>AUG 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#quick-start">1. Quick Start</a></li>
-<li><a href="#features">2. Features</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#quick-start">2. Quick Start</a></li>
+<li><a href="#commands">3. Commands</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">2.3. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">2.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">2.13. Saving the data</a></li>
+<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
+<li><a href="#adding-deleting-a-photo-for-a-person-code-photo-code-em-since-v1-4-em">3.3. Adding/Deleting a Photo for a person : <code>photo</code> <em>(Since v1.4)</em></a></li>
+<li><a href="#giving-remarks-to-a-person-code-remark-code-em-since-v1-1-em">3.4. Giving remarks to a person : <code>remark</code> <em>(Since v1.1)</em></a></li>
+<li><a href="#listing-all-people-code-list-code">3.5. Listing all people : <code>list</code></a></li>
+<li><a href="#locating-persons-by-filters-code-find-code-em-since-v1-4-em">3.6. Locating persons by filters : <code>find</code> <em>(Since v1.4)</em></a></li>
+<li><a href="#editing-a-person-or-a-tag-code-edit-code">3.7. Editing a person or a tag: <code>edit</code></a></li>
+<li><a href="#deleting-multiple-persons-or-tags-code-delete-code">3.8. Deleting multiple persons or tags: <code>delete</code></a></li>
+<li><a href="#selecting-a-person-code-select-code">3.9. Selecting a person : <code>select</code></a></li>
+<li><a href="#viewing-combined-timetables-code-whenfree-code-em-since-v1-5-em">3.10. Viewing combined timetables : <code>whenfree</code> <em>(Since v1.5)</em></a></li>
+<li><a href="#opening-a-google-maps-view-of-an-address-code-gmaps-code-em-since-v1-3-em">3.11. Opening a Google Maps view of an address : <code>gmaps</code> <em>(Since v1.3)</em></a></li>
+<li><a href="#changing-the-theme-of-unify-code-theme-code">3.12. Changing the theme of UniFy : <code>theme</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.18. Saving the data</a></li>
 </ul>
 </li>
-<li><a href="#faq">3. FAQ</a></li>
-<li><a href="#command-summary">4. Command Summary</a></li>
+<li><a href="#upcoming-commands">4. Upcoming Commands</a>
+<ul class="sectlevel2">
+<li><a href="#adding-a-person-with-temporary-tags-em-coming-in-v2-0-em">4.1. Adding a person with temporary tags <em>(Coming in v2.0)</em></a></li>
+<li><a href="#adding-a-person-using-the-information-on-social-media-em-coming-in-v2-0-em">4.2. Adding a person using the information on social media <em>(Coming in v2.0)</em></a></li>
+<li><a href="#deleting-old-contacts-em-coming-in-v2-0-em">4.3. Deleting old contacts <em>(Coming in v2.0)</em></a></li>
+<li><a href="#listing-persons-who-live-nearby-code-nearby-code-em-coming-in-v2-0-em">4.4. Listing persons who live nearby : <code>nearby</code> <em>(Coming in v2.0)</em></a></li>
+<li><a href="#finding-a-central-location-among-a-group-of-persons-code-central-code-em-coming-in-v2-0-em">4.5. Finding a central location among a group of persons : <code>central</code> <em>(Coming in v2.0)</em></a></li>
+<li><a href="#sorting-all-persons-code-sort-code-em-coming-in-v2-0-em">4.6. Sorting all persons : <code>sort</code> <em>(Coming in v2.0)</em></a></li>
+<li><a href="#setting-a-password-for-your-address-book-code-password-code-em-coming-in-v2-0-em">4.7. Setting a password for your address book : <code>password</code> <em>(Coming in v2.0)</em></a></li>
+</ul>
+</li>
+<li><a href="#other-features">5. Other features</a>
+<ul class="sectlevel2">
+<li><a href="#command-suggestion-em-since-v1-5-em">5.1. Command Suggestion <em>(Since v1.5)</em></a></li>
+<li><a href="#tag-bar-em-since-v1-5-em">5.2. Tag Bar <em>(Since v1.5)</em></a></li>
+<li><a href="#font-size-em-coming-in-v2-0-em">5.3. Font Size <em>(Coming in v2.0)</em></a></li>
+<li><a href="#footer-bar-em-coming-in-v2-0-em">5.4. Footer Bar <em>(Coming in v2.0)</em></a></li>
+<li><a href="#google-maps-integration-with-address-em-coming-in-v2-0-em">5.5. Google Maps Integration with Address <em>(Coming in v2.0)</em></a></li>
+</ul>
+</li>
+<li><a href="#faq">6. FAQ</a></li>
+<li><a href="#command-summary-v1-5">7. Command Summary (v1.5)</a></li>
+<li><a href="#command-alternatives-reference-table">8. Command Alternatives Reference Table</a></li>
+<li><a href="#version-notes">9. Version Notes</a>
+<ul class="sectlevel2">
+<li><a href="#version-1-1">9.1. Version 1.1</a></li>
+<li><a href="#version-1-2">9.2. Version 1.2</a></li>
+<li><a href="#version-1-3">9.3. Version 1.3</a></li>
+<li><a href="#version-1-4">9.4. Version 1.4</a></li>
+<li><a href="#version-1-5">9.5. Version 1.5</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">1. Quick Start</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Thank you for downloading <strong>UniFy</strong>! We&#8217;re glad that you&#8217;ve chosen us to help you manage your hectic university life.</p>
+</div>
+<div class="paragraph">
+<p><strong>UniFy</strong> is a personal assistant to your everyday life in NUS. It helps you maintain your numerous groups,
+tells you when your friends are free for lunch, and finds common time for project meetings. It even helps you find directions to
+wherever your friends might be!</p>
+</div>
+<div class="paragraph">
+<p>We know that time is precious for university students, so we made <strong>UniFy</strong> as simple to use as possible. You only need commands
+to use <strong>UniFy</strong>, no more searching for hidden buttons or navigating unfamiliar pages!</p>
+</div>
+<div class="paragraph">
+<p>Excited? Let&#8217;s get started!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure you have Java version <code>1.8.0_60</code> or later installed in your Computer.</p>
+<p>Make sure you have Java version <code>1.8.0_60</code> or later installed in your Computer.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -61,7 +117,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Having any Java 8 version is not enough.<br>
+Having any Java version is not enough.<br>
 This app will not work with earlier versions of Java 8.
 </td>
 </tr>
@@ -69,10 +125,10 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level4/releases">here</a>.</p>
+<p>Download the latest <code>UniFy.jar</code> <a href="https://github.com/CS2103AUG2017-W09-B1/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for UniFy.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -80,6 +136,17 @@ This app will not work with earlier versions of Java 8.
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 2.1 : UniFy&#8217;s Interface Light Theme</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UiDark.png" alt="UiDark" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 2.2 : UniFy&#8217;s Interface Dark Theme</em></p>
 </div>
 </li>
 <li>
@@ -94,10 +161,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong><code>n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/A0134232H tt/http://modsn.us/etYEX</code> : adds a contact named <code>John Doe</code> to the Address Book</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
+</li>
+<li>
+<p><strong><code>undo</code></strong> : undo the previous command</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -106,58 +176,336 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Refer to the <a href="#features">Features</a> section below for details of each command.</p>
+<p>Now you can explore the rest of UniFy! Refer to the <a href="#commands">Commands</a> section below for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="features"><a class="link" href="#features">2. Features</a></h2>
+<h2 id="commands"><a class="link" href="#commands">3. Commands</a></h2>
 <div class="sectionbody">
-<div class="exampleblock">
-<div class="content">
 <div class="paragraph">
 <p><strong>Command Format</strong></p>
+</div>
+<div class="paragraph">
+<p>In this User Guide and in the message box in UniFy, you can see how to type a command by
+referring to the Command Format provided for you.<br></p>
+</div>
+<div class="paragraph">
+<p>Understanding the Command Format is easy! Let us explain:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+<p>Commands always start with a command word.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>add</code>, <code>delete</code>, <code>clear</code>, <code>edit</code></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+<p><code>INDEX</code> refers to the index number shown in the last generated listing of people.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>INDEX</code> <strong>must be a positive integer</strong> e.g.: 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+<p>Words in <code>UPPER_CASE</code> are <strong>parameters</strong> you have to give to the command. Each <strong>parameter</strong> is assigned and preceded by a <strong>prefix</strong>: a letter followed by a <code>/</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>add n/<strong>NAME</strong></code><br>
+<code>NAME</code> is a <strong>parameter</strong> you have to give to the <code>add</code> command, assigned to the <code>n/</code> <strong>prefix</strong><br>
+If the <strong>parameter</strong> you want to provide is John Doe, the command will be <code>add n/<strong>John Doe</strong></code>.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+<p>Items in square brackets are optional</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>add n/NAME <strong>[t/TAG]</strong></code><br>
+You can use the <code>add</code> command as <code>add n/John Doe t/friend</code> or as <code>add n/John Doe</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Items can be in any order</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the Command Format specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Commands have alternative keywords than can be used in place of them.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: You can type <code>wipe</code> or <code>c</code> instead of <code>clear</code> to execute the same command.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can view a summary of all commands <a href="#command-summary-v1-5">here</a>,
+and a table of all alternative keywords for commands <a href="#command-alternatives-reference-table">here</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Unsure what to do inside UniFy? Call for help with this simple command.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>To view the user guide, you can use this command at any time. The user guide will be opened in a new windo<br>
+Format: <code>help</code><br>
+Alternatives: <kbd>F1</kbd></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>First thing to do with UniFy is to start adding the various people you&#8217;ve met in University, as well as important people like your family.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="sect3">
+<h4 id="adding-a-person-manually"><a class="link" href="#adding-a-person-manually">3.2.1. Adding a person manually</a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add contact information you want to remember! Your group mate&#8217;s timetable, your friend&#8217;s birthday. Tag your
+module mates with appropriate tags too!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Use this to add a person to <strong>UniFy</strong><br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add n/NAME [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>a</code> , <code>insert</code><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PersonCard.png" alt="PersonCard">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.2.1 : A person with various contact information</em></p>
+</div>
+<div class="paragraph">
+<p>You can view the contacts you have added in UniFy in the form of <em>cards</em>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Here are the following information a person can have:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Name</code> field is compulsory while others are not.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Gender</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GENDER</code> is either Male/Female or M/F <em>(case insensitive)</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Phone number</strong></p>
+</li>
+<li>
+<p><strong>Email</strong></p>
+</li>
+<li>
+<p><strong>Address</strong></p>
+</li>
+<li>
+<p><strong>Matriculation number</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MATRIC_NUMBER</code> should be a 9-character string starting with 'A or a', followed by 7 digits, and ending with a letter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Birthday</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The format for <code>BIRTHDAY</code> is DDMMYYYY.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Timetable</strong> via an NUSMods shortlink <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The full link is not allowed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example of a shortlink: <a href="http://modsn.us/AC71u" class="bare">http://modsn.us/AC71u</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Tags</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A person can have any number of tags.</p>
+</li>
+<li>
+<p>Tags are alphanumeric and without spaces.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/A0134232H tt/http://modsn.us/etYEX</code></p>
+</li>
+<li>
+<p><code>add n/Betsy Crowe g/Female p/1234567 e/betsycrowe@example.com a/Newgate Prison t/friend t/criminal</code></p>
+</li>
+<li>
+<p><code>add n/Amy Tan g/F p/82974823 e/amy_tan@example.com a/PGP m/a0142323T</code></p>
+</li>
+<li>
+<p><code>add n/Betty g/F p/12345678 e/betty@example.com b/23051998</code></p>
+</li>
+<li>
+<p><code>add n/Jasmine p/12345678</code></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></h3>
+<h3 id="adding-deleting-a-photo-for-a-person-code-photo-code-em-since-v1-4-em"><a class="link" href="#adding-deleting-a-photo-for-a-person-code-photo-code-em-since-v1-4-em">3.3. Adding/Deleting a Photo for a person : <code>photo</code> <em>(Since v1.4)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p><em>When you study too much, sometimes, you forget how someone looks like.</em></p>
 </div>
+</blockquote>
 </div>
-<div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>You can add or remove a photo to an existing person in the address book.<br>
+Format:<br>
+<em>(Add photo)</em> <code>photo INDEX ph/PHOTO PATH</code><br>
+<em>(Delete photo)</em> <code>photo INDEX</code> or <code>photo INDEX ph/</code><br>
+Alternatives: <code>ph</code></p>
 </div>
-<div class="admonitionblock tip">
+<div class="imageblock">
+<div class="content">
+<img src="images/photo_command.png" alt="photo command" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.3 : Add your favourite photo of someone to their contact!</em></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the photo of the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The photo path of the person will be updated.</p>
+</li>
+<li>
+<p>When adding a photo to the person, the photo will be saved to the default folder.</p>
+</li>
+<li>
+<p>When removing the photo, only the path of the photo will be removed from the person.</p>
+</li>
+<li>
+<p>All the unused photo will be deleted from the app the next time you start the application.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-A person can have any number of tags (including 0)
+Ensure that format of the path to the photo is correct and the photo exists in the specified place.
 </td>
 </tr>
 </table>
@@ -168,45 +516,45 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>list</code><br>
+<code>photo 1 ph/ C:\Users\User\Files\Amy_selfie.jpg</code><br>
+Add the picture 'Amy_selfie.jpg' in the specified location to the 1st person in the address book.<br></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>list</code><br>
+<code>photo 2</code><br>
+Removes the photo path from the 2nd person in the last shown list.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>ph 1</code><br>
+Removes the photo path from the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.3. Listing all persons : <code>list</code></a></h3>
+<h3 id="giving-remarks-to-a-person-code-remark-code-em-since-v1-1-em"><a class="link" href="#giving-remarks-to-a-person-code-remark-code-em-since-v1-1-em">3.4. Giving remarks to a person : <code>remark</code> <em>(Since v1.1)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
-Format: <code>list</code></p>
+<p><em>Sometimes you want to remind yourself how this person was like in a funny incident. Or you owe friends money for last night&#8217;s supper.<br>
+Tags are too short, and your remarks for a person are more descriptive and unique. UniFy lets you add a remark to a person you can always look back on.</em></p>
 </div>
+</blockquote>
 </div>
-<div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+<p>You can add remarks to any person in UniFy, keeping any special information you might want to remember.<br>
+Format:<br>
+(Add remark) <code>remark INDEX r/REMARK1 [r/REMARK2]&#8230;&#8203;</code><br>
+(Delete remark): <code>remark INDEX</code> or <code>remark INDEX r/</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+<p>Edits the remark of the person at the specified <code>INDEX</code>.</p>
 </li>
 </ul>
 </div>
@@ -218,40 +566,97 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+<p><code>list</code><br>
+<code>remark 2 r/Likes to drink coffee.</code><br>
+Adds 'Likes to drink coffee' remark to the 2nd person in the address book.</p>
 </li>
 <li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+<p><code>list</code><br>
+<code>remark 2 r/Likes to drink coffee. r/CAP 5.0</code><br>
+Adds 'Likes to drink coffee' and 'CAP5.0' remarks to the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>remark 1 `<br>
+Removes the remark from the 1st person in the results of the `find</code> command.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>remark 1 r/</code><br>
+Removes the remark from the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">2.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="listing-all-people-code-list-code"><a class="link" href="#listing-all-people-code-list-code">3.5. Listing all people : <code>list</code></a></h3>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p><em>Want to list all contacts for an overview?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Use this command to show a list of all persons stored.<br>
+Format: <code>list</code><br>
+Alternatives: <code>l</code> , <code>showall</code>, <code>viewall</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-filters-code-find-code-em-since-v1-4-em"><a class="link" href="#locating-persons-by-filters-code-find-code-em-since-v1-4-em">3.6. Locating persons by filters : <code>find</code> <em>(Since v1.4)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Display your contacts how you like it. All of them? Just your classmates for a particular module?<br>
+Want to know who&#8217;s birthday is in this month? Unify every common contact together and list them as one.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can find people whose information contains all given keywords (inclusive) from each category.<br>
+Format: <code>find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY MONTH] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>f</code> , <code>search</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
+<li>
+<p>At least one field should be specified.</p>
+</li>
+<li>
+<p>You can specify multiple keywords related to one field by using whitespace to split them.</p>
+</li>
+<li>
+<p>Persons matching at least one of the keywords will be returned.</p>
+</li>
 <li>
 <p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+<p>The order of the categories does not matter. e.g. <code>p/</code> can come before <code>t/</code></p>
 </li>
 <li>
-<p>Only the name is searched.</p>
+<p>Mentioned attributes are searched.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+<p>Partial words will be matched. e.g. <code>Han</code> will match <code>Hans</code></p>
 </li>
 <li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>MONTH should be inputted by numbers. e.g <code>12</code> searches for December babies</p>
+</li>
+<li>
+<p>Only one birthday month is to be input.</p>
+</li>
+<li>
+<p>Single digit months needs to be preceded by a 0 in front. e.g. <code>02</code> searches for those born in February</p>
+</li>
+<li>
+<p>Only the birthday month is searched.</p>
+</li>
+<li>
+<p>Typing with one of the prefix keyword empty will be considered as not searching for that prefix. e.g. <code>find n/an p/</code> will only return the persons containing <code>an</code> in their names</p>
 </li>
 </ul>
 </div>
@@ -263,34 +668,167 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
+<p><code>find n/ian zach</code><br>
+Returns any person with name including 'ian' and 'zach'</p>
 </li>
 <li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+<p><code>find n/Joe t/friends</code><br>
+Returns any person with name including <code>Joe</code> and tagged by <code>friends</code></p>
+</li>
+<li>
+<p><code>find t/friends p/1234</code><br>
+Returns any person tagged by <code>friends</code>, and having phone numbers containing <code>1234</code></p>
+</li>
+<li>
+<p><code>find t/jcfriends computing</code><br>
+Returns all persons in UniFy containing <strong>both</strong> 'JCfriends' and 'computing'</p>
+</li>
+<li>
+<p><code>find b/12</code><br>
+Returns all persons in UniFy having birthdays in <code>December</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="editing-a-person-or-a-tag-code-edit-code"><a class="link" href="#editing-a-person-or-a-tag-code-edit-code">3.7. Editing a person or a tag: <code>edit</code></a></h3>
+<div class="sect3">
+<h4 id="editing-a-person"><a class="link" href="#editing-a-person">3.7.1. Editing a person</a></h4>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
-Format: <code>delete INDEX</code></p>
+<p><em>Made a mistake? Someone changed their contact details? Edit it.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can edit the details of an existing person in your address book, specified by their index<br>
+Format: <code>edit INDEX [n/NAME] [g/GENDER] [m/MATRIC_NO] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>e</code> , <code>modify</code>, <code>change</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Edits the person at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the most recent listing.</p>
+<p>You must provide at least one of the optional fields.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Editing tags is not cumulative! When editing tags, the person&#8217;s existing tags will be replaced by the new ones you put in.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This also means you can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 g/Male e/johndoe@example.com</code><br>
+Edits the phone number, gender and email address of the 1st person to be <code>91234567</code>, <code>Male</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>edit 2 n/Betsy Crower m/A0162522j b/14081998 t/</code><br>
+Edits the name, matriculation number and birthday of the 2nd person to be <code>Betsy Crower</code>, <code>A0162522j</code>, <code>14081998</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-tag-em-since-v1-2-em"><a class="link" href="#editing-a-tag-em-since-v1-2-em">3.7.2. Editing a tag <em>(Since v1.2)</em></a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>When you need to edit module tags of classmates when advancing from a prerequisite module (e.g. CS1010 &#8594; CS1020),
+changing each of their tag to an updated one is too tedious! UniFy lets you simply edit a particular tag for all contacts in one command.</em><br></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can replace a tag to a new word for all people that have the specified tag<br>
+Format: <code>edit old/OLDTAG new/NEWTAG</code><br>
+Alternatives: <code>e</code> , <code>modify</code>, <code>change</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The tag that you want to replace has to be an existing tag.</p>
+</li>
+<li>
+<p>Tags are case-sensitive.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit old/bestfriends new/enemies</code><br></p>
+</li>
+<li>
+<p><code>edit old/CS1010 new/CS1020</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Editing a person&#8217;s tag only edits the tag(s) for a <strong>single</strong> person. This command edits one tag name for <strong>all</strong> people.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-multiple-persons-or-tags-code-delete-code"><a class="link" href="#deleting-multiple-persons-or-tags-code-delete-code">3.8. Deleting multiple persons or tags: <code>delete</code></a></h3>
+<div class="sect3">
+<h4 id="deleting-multiple-persons-em-since-v1-3-em"><a class="link" href="#deleting-multiple-persons-em-since-v1-3-em">3.8.1. Deleting multiple persons <em>(since v1.3)</em></a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Some people just have to go away in your life. Sometimes they leave you. Delete these people out of UniFy as well.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>By specifying an index or multiple indexes, you can delete specified people in the most recent listing from the address book.<br>
+Format:<br>
+<code>delete INDEX1, INDEX2, INDEX3&#8230;&#8203;</code>(separated by commas)<br>
+<code>delete INDEX1 INDEX2 INDEX3&#8230;&#8203;</code> (separated by whitespaces)<br>
+Alternatives: <code>d</code> , <code>remove</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>UniFy accepts duplicated indexes. If you type <code>delete 3, 3, 4</code>, the 3rd and 4th persons will be deleted.</p>
+</li>
+<li>
+<p>When you delete your contacts, their contact photos will also be deleted.</p>
 </li>
 </ul>
 </div>
@@ -307,31 +845,83 @@ Format: <code>delete INDEX</code></p>
 Deletes the 2nd person in the address book.</p>
 </li>
 <li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
+<p><code>list</code><br>
+<code>delete 2, 3, 4</code><br>
+Deletes the 2nd, 3rd, 4th persons in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>delete 1 5</code><br>
+Deletes the 1st and 5th persons in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></h3>
+<div class="sect3">
+<h4 id="deleting-a-tag-or-multiple-tags-em-since-v1-1-em"><a class="link" href="#deleting-a-tag-or-multiple-tags-em-since-v1-1-em">3.8.2. Deleting a Tag (or multiple Tags) <em>(Since v1.1)</em></a></h4>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code></p>
+<p><em>You have just finished a project in a module. Having the 'groupmate' tag to your project mates seems rude for you since
+the project is already over.
+Instead of going through each member one by one, delete that particular 'groupmate' tag in one go!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You specify a tag and it will be deleted from all people who originally had that tag<br>
+Format: <code>delete t/TAG&#8230;&#8203;</code><br>
+Alternatives: <code>d</code> , <code>remove</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+<p>The tag specified is case-sensitive.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the most recent listing.</p>
+<p>You can delete multiple tags with one delete command.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+<p>The tag (or all the tags) specified must already exist in the address book.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete t/friends</code><br>
+Deletes the tag 'friends' from all people containing the tag 'friends' in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>delete t/module1 t/module2</code><br>
+Deletes the tags 'module1' and 'module2' from all people containing one of the tag, or both of the tags in the address book.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.9. Selecting a person : <code>select</code></a></h3>
+<div class="paragraph">
+<p>You can select a person, identified by the number used in the last person listing.<br>
+Format: <code>select INDEX</code><br>
+Alternatives: <code>s</code>, <code>choose</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the person and displays the information for the person at the specified <code>INDEX</code>.</p>
 </li>
 </ul>
 </div>
@@ -348,18 +938,146 @@ Format: <code>select INDEX</code></p>
 Selects the 2nd person in the address book.</p>
 </li>
 <li>
-<p><code>find Betsy</code><br>
-<code>select 1</code><br>
+<p><code>find n/Betsy</code><br>
+<code>s 1</code><br>
 Selects the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="viewing-combined-timetables-code-whenfree-code-em-since-v1-5-em"><a class="link" href="#viewing-combined-timetables-code-whenfree-code-em-since-v1-5-em">3.10. Viewing combined timetables : <code>whenfree</code> <em>(Since v1.5)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>"When are all of you free?" is an extremely common question in University. Let us solve that.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can view the combined timetables of a group of people, selected by indexes.<br>
+Format: <code>whenfree [INDEX]&#8230;&#8203;</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/whenfree.png" alt="whenfree" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.10 : View the combined timetables of your contacts easily</em></p>
+</div>
+<div class="paragraph">
+<p>The cells that are filled with another colour are the times when somebody has a lesson<br>
+<em>(Coming in v2.0)</em>: View who has lessons at each timeslot, and what lessons they have!</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>whenfree 1 2</code><br>
+Displays a combined timetable for the 1st and 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>whenfree</code><br>
+Displays a combined timetable for all listed users.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Creates a combined timetable representing all the persons chosen.</p>
+</li>
+<li>
+<p>If no index is specified, displays the timetable representing all the persons currently listed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opening-a-google-maps-view-of-an-address-code-gmaps-code-em-since-v1-3-em"><a class="link" href="#opening-a-google-maps-view-of-an-address-code-gmaps-code-em-since-v1-3-em">3.11. Opening a Google Maps view of an address : <code>gmaps</code> <em>(Since v1.3)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You are meeting your group mate at his house. But where is his house on the map?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>For a person specified by an index, opens a Google Maps view of the person&#8217;s address.<br>
+If you specify an address, gives the Google Maps directions from the given address to the person&#8217;s location.<br>
+Format: <code>gmaps INDEX [a/ADDRESS]</code><br>
+Alternatives: <code>g</code>, <code>map</code>, <code>maps</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>gmaps 2</code><br>
+Opens the Google Maps view for the address of the 2nd person listed in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>gmaps 1</code><br>
+Opens the Google Maps view for the address of the 1st person in the results of the <code>find</code> command.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>gmaps 2 a/Blk 632 Yishun St 61</code><br>
+Opens the Google Maps directions from Blk 632 Yishun St 61 to the address of the 2nd person listed in the address book.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-theme-of-unify-code-theme-code"><a class="link" href="#changing-the-theme-of-unify-code-theme-code">3.12. Changing the theme of UniFy : <code>theme</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Don&#8217;t like how UniFy looks? Why not change it?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can change the theme of <strong>UniFy</strong> to any theme that you have installed.<br>
+Format: <code>theme THEME_NAME</code><br>
+Alternatives: <code>th</code>, <code>changetheme</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>UniFy</strong> comes with two themes pre-installed, <code>dark</code> and <code>light</code>. More themes will be made available in the near future!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>What have you been doing? Check the past.</em></p>
+</div>
+</blockquote>
+</div>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+Format: <code>history</code><br>
+Alternatives: <code>h</code> , <code>past</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -377,24 +1095,29 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You made a mistake, deleted some one by accident. Do not fret. UniFy is forgiving, undo your mistakes.</em></p>
+</div>
+</blockquote>
+</div>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+Format: <code>undo</code><br>
+Alternatives: <code>u</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>photo</code> and <code>clear</code>).</p>
+</li>
+</ul>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -402,9 +1125,9 @@ Format: <code>undo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
+<p><code>delete 1 2</code><br>
 <code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>delete 1 2</code> command, but will not recover their contact photos)<br></p>
 </li>
 <li>
 <p><code>select 1</code><br>
@@ -422,10 +1145,29 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>It is OK. You wanted to delete that person anyways.</em></p>
+</div>
+</blockquote>
+</div>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+Format: <code>redo</code><br>
+Alternatives: <code>r</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>PhotoCommand can only support <code>undo</code> command but not <code>redo</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -433,9 +1175,9 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>delete 1, 2</code><br>
+<code>undo</code> (reverses the <code>delete 1, 2</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1, 2</code> command)<br></p>
 </li>
 <li>
 <p><code>delete 1</code><br>
@@ -454,21 +1196,30 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+Format: <code>clear</code><br>
+Alternatives: <code>c</code>, <code>wipe</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>You are done with what you need to do. Thank you for using UniFy.</em></p>
+</div>
+</blockquote>
+</div>
 <div class="paragraph">
 <p>Exits the program.<br>
-Format: <code>exit</code></p>
+Format: <code>exit</code><br>
+Alternatives: <code>x</code> , <code>quit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.18. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -477,37 +1228,473 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">3. FAQ</a></h2>
+<h2 id="upcoming-commands"><a class="link" href="#upcoming-commands">4. Upcoming Commands</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<p>We have exciting new features in the works to be excited for!</p>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-with-temporary-tags-em-coming-in-v2-0-em"><a class="link" href="#adding-a-person-with-temporary-tags-em-coming-in-v2-0-em">4.1. Adding a person with temporary tags <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Don&#8217;t want to keep a tag forever? Let&#8217;s set temporary tags!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Adds a person to the address book<br>
+Format: <code>add n/NAME [g/GENDER p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203; [tmpt/NUM_OF_MONTHS/TEMPORARY TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>a</code> , <code>insert</code></p>
+</div>
+<div class="paragraph">
+<p>Here is the temporary tag information a person can have:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NUM_OF_MONTHS</code> <strong>must be a positive integer</strong> eg: 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p><code>NUM_OF_MONTHS</code> specifies the number of months the temporary tag will last, after which it will disappear.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>tmpt/6/ATAPcolleague</code> tags the person with <code>ATAPcolleague</code>. After 6 months, the tag will disappear.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-using-the-information-on-social-media-em-coming-in-v2-0-em"><a class="link" href="#adding-a-person-using-the-information-on-social-media-em-coming-in-v2-0-em">4.2. Adding a person using the information on social media <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add someone from a module via Facebook? Add him seamlessly into UniFy!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Adds a person to address book from the social media accounts<br>
+Format: <code>add s/SOCIAL_MEDIA_TYPE SOCIAL_MEDIA_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The name of social media type is case insensitive.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add s/facebook John Doe</code></p>
+</li>
+<li>
+<p><code>add s/Instagram John Doe</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-old-contacts-em-coming-in-v2-0-em"><a class="link" href="#deleting-old-contacts-em-coming-in-v2-0-em">4.3. Deleting old contacts <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Some people you do not talk for months. Maybe a group mate from a previous module you never see ever again.
+They drift away, and out of UniFy they go as well.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Deletes the contacts which you have not viewed/edited/listed for a certain number of months.<br>
+Format: <code>delete old/NUM_OF_MONTH</code><br>
+Alternatives: <code>d</code> , <code>remove</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The NUM_OF_MONTH <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete old/2</code><br>
+Deletes all the contacts which you have not viewed/edited/listed for the past 2 months.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-persons-who-live-nearby-code-nearby-code-em-coming-in-v2-0-em"><a class="link" href="#listing-persons-who-live-nearby-code-nearby-code-em-coming-in-v2-0-em">4.4. Listing persons who live nearby : <code>nearby</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>It is Summer break. Who is there to call for late night supper near your home?</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Shows a list of persons whose addresses are nearby a specified <strong>address</strong> within a specified radius.<br>
+Format: <code>nearby a/ADDRESS d/DISTANCE</code><br>
+Alternatives: <code>n</code>, <code>nearme</code>, <code>closeby</code>, <code>neighbours</code> <code>neighbors</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nearby a/Blk 123 Kent Ridge Drive d/500</code><br>
+Shows a list of people with address 500m away from Blk 123 Kent Ridge Drive.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>DISTANCE</code> specified is in metres.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-central-location-among-a-group-of-persons-code-central-code-em-coming-in-v2-0-em"><a class="link" href="#finding-a-central-location-among-a-group-of-persons-code-central-code-em-coming-in-v2-0-em">4.5. Finding a central location among a group of persons : <code>central</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>"Where is a good place for us to meet?" UniFy everyone&#8217;s location to find a central one.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>After listing persons, shows the central location among the persons most recently listed<br>
+Format: <code>central [a/ADDRESS] [INDEX]&#8230;&#8203;</code><br>
+Alternatives: <code>ct</code>, <code>center</code>, <code>wheremeet</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Specifying an <code>ADDRESS</code> will include that address in calculating the central location.</p>
+</li>
+<li>
+<p>If an <code>INDEX</code>, or more than one <code>INDEX</code> is specified, shows the central location among the specified people with these indexes.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>central</code><br>
+Shows the central location among the persons most recently listed.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>central a/Blk 123 Kent Ridge Drive</code><br>
+Shows the central location among the persons most recently listed and Blk 123 Kent Ridge Drive.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>central 1 5 6</code><br>
+Shows the central location among the persons most recently listed with Index 1, 5 and 6.</p>
+</li>
+<li>
+<p><code>list t/jcfriends</code><br>
+<code>central</code><br>
+Shows the central locaton among the persons tagged as 'jcfriends'.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-all-persons-code-sort-code-em-coming-in-v2-0-em"><a class="link" href="#sorting-all-persons-code-sort-code-em-coming-in-v2-0-em">4.6. Sorting all persons : <code>sort</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Sometimes, you just meet too many people in University. Don&#8217;t worry, get all your contacts in order.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Shows the list of all persons in the current list in your address book by arranging their names in alphabetical order.<br>
+Format:<br>
+<em>(Sort by name in ascending order)</em> <code>sort ASC</code><br>
+<em>(Sort by name in descending order)</em> <code>sort DESC</code><br>
+Alternatives: <code>s</code> , <code>sortall</code>, <code>arrange</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-a-password-for-your-address-book-code-password-code-em-coming-in-v2-0-em"><a class="link" href="#setting-a-password-for-your-address-book-code-password-code-em-coming-in-v2-0-em">4.7. Setting a password for your address book : <code>password</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Your privacy is important. Prevent others from viewing the contact details you possess.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Sets or changes the password that allows access to the address book<br>
+Format: <code>password pw/PASSWORD</code><br>
+Alternatives: <code>p</code> , <code>code</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>PASSWORD</code> length is limited to 20 characters.</p>
+</li>
+<li>
+<p>Remove the password by putting <code>PASSWORD</code> as <code>PASSWORD</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>password pw/PASSWORD</code> removes the password in UniFy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>password 123456789</code><br>
+Adds 123456789 as a password.</p>
+</li>
+<li>
+<p><code>password</code><br>
+To clear the password set.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">4. Command Summary</a></h2>
+<h2 id="other-features"><a class="link" href="#other-features">5. Other features</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Here are some features in UniFy that are not in the form of commands, but good to know to aid in your productivity.</em></p>
+</div>
+<div class="sect2">
+<h3 id="command-suggestion-em-since-v1-5-em"><a class="link" href="#command-suggestion-em-since-v1-5-em">5.1. Command Suggestion <em>(Since v1.5)</em></a></h3>
+<div class="paragraph">
+<p>Typing a mispelled word for a command will trigger the address book to suggest the correct phrasing for that command</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/command_suggestion.png" alt="command suggestion" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.1 : Typing the command <code>delet</code> will make UniFy reply `Do you mean delete?`</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tag-bar-em-since-v1-5-em"><a class="link" href="#tag-bar-em-since-v1-5-em">5.2. Tag Bar <em>(Since v1.5)</em></a></h3>
+<div class="paragraph">
+<p>You can easily view all existing tags as icons, displayed above the person card</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/tag_bar.png" alt="tag bar" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.2 : The tag bar is right above the information of the person displayed</em></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For tags that are not in use for any people, they will be in grey and after all the other tags
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><em>(Coming in v2.0)</em> You can click a tag and all people with that tag will be displayed!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="font-size-em-coming-in-v2-0-em"><a class="link" href="#font-size-em-coming-in-v2-0-em">5.3. Font Size <em>(Coming in v2.0)</em></a></h3>
+<div class="paragraph">
+<p>If you find the font too big or too small, the font size can be changed in <strong>Appearance</strong> &#8594; <strong>Themes</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="footer-bar-em-coming-in-v2-0-em"><a class="link" href="#footer-bar-em-coming-in-v2-0-em">5.4. Footer Bar <em>(Coming in v2.0)</em></a></h3>
+<div class="paragraph">
+<p>Clicking on a tag will display the number of people associated with that tag.<br>
+By default, the footer bar shows the total number of people stored.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="google-maps-integration-with-address-em-coming-in-v2-0-em"><a class="link" href="#google-maps-integration-with-address-em-coming-in-v2-0-em">5.5. Google Maps Integration with Address <em>(Coming in v2.0)</em></a></h3>
+<div class="paragraph">
+<p>Clicking on the address in the address book will open a Google Map map view of the address location.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">6. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the folder that <code>UniFy.jar</code> is in, find the <code>data</code> folder</p>
+</li>
+<li>
+<p>Copy the <code>addressbook.xml</code> storage file inside</p>
+</li>
+<li>
+<p>Transfer that file to the other computer</p>
+</li>
+<li>
+<p>Place it in the <code>data</code> folder of <code>UniFy.jar</code>, on the other computer</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary-v1-5"><a class="link" href="#command-summary-v1-5">7. Command Summary (v1.5)</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><strong>Add</strong> : <code>add n/NAME [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/A0134232H tt/http://modsn.us/abCdE t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
+<p><strong>Delete</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Delete (Person)</strong> : <code>delete INDEX1 INDEX2 INDEX3</code><br>
+e.g. <code>delete 1 2 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+<p><strong>Delete (Tag)</strong> : <code>delete t/TAG&#8230;&#8203;</code><br>
+e.g. <code>delete t/modulemate t/colleague</code></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
+<p><strong>Edit</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Edit (Person)</strong> : <code>edit INDEX [n/NAME] [g/GENDER] [m/MATRIC_NO] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/James Lee e/jameslee@example.com b/19051994</code></p>
+</li>
+<li>
+<p><strong>Edit (Tag)</strong> : <code>edit old/TAG new/TAG</code><br>
+e.g. <code>edit tag/friends tag/enemy</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Photo</strong> : <code>photo INDEX ph/PHOTO_PATH</code><br>
+e.g. <code>photo 1 ph/ C:/desktop/photo.jpg</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Delete Photo</strong> : <code>photo INDEX</code><br>
+e.g. <code>photo 1</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Remark</strong> : <code>remark INDEX r/REMARK1 [r/REMARK2]&#8230;&#8203;</code><br>
+e.g. <code>remark 2 r/Likes to drink coffee r/CAP 5.0</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Delete Remark</strong> : <code>remark INDEX</code><br>
+e.g. <code>remark 2</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find [n/NAME] [t/Tag] [p/PHONE] [e/EMAIL] [b/BIRTHDAY MONTH] [a/ADDRESS]&#8230;&#8203;</code><br>
+e.g. <code>find n/James Jake</code></p>
+</li>
+<li>
+<p><strong>Google Maps</strong> <code>gmaps INDEX</code><br>
+e.g. <code>gmaps 2</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Finding Directions</strong> <code>gmaps INDEX a/ADDRESS</code><br>
+e.g. <code>gmaps 1 a/NUS</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>View Combined Timetables</strong> <code>whenfree INDEX [OTHER INDEXES]</code><br>
+e.g. <code>whenfree 1 4 5</code></p>
+</li>
+<li>
+<p><strong>Change Theme</strong> <code>theme THEME NAME</code><br>
+e.g. <code>theme light</code></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list</code></p>
@@ -532,10 +1719,244 @@ e.g.<code>select 2</code></p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="command-alternatives-reference-table"><a class="link" href="#command-alternatives-reference-table">8. Command Alternatives Reference Table</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>In alphabetical order</em></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 15%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Alternatives</th>
+<th class="tableblock halign-left valign-top">-</th>
+<th class="tableblock halign-left valign-top">-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">insert</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clear</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wipe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modify</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">change</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">f</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gmaps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">g</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maps</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F1</kbd></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">past</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">l</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">showall</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">viewall</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">photo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ph</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">redo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">r</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">select</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">choose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">theme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">th</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">changetheme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">whenfree</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timetable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">u</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="version-notes"><a class="link" href="#version-notes">9. Version Notes</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="version-1-1"><a class="link" href="#version-1-1">9.1. Version 1.1</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>remark</code> command</p>
+</li>
+<li>
+<p><code>delete</code> support for tags</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="version-1-2"><a class="link" href="#version-1-2">9.2. Version 1.2</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added new person contact information fields</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Birthday</p>
+</li>
+<li>
+<p>Timetable</p>
+</li>
+<li>
+<p>Gender</p>
+</li>
+<li>
+<p>Matriculation Number</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>edit</code> support for tags</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="version-1-3"><a class="link" href="#version-1-3">9.3. Version 1.3</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gmaps</code> command</p>
+</li>
+<li>
+<p><code>delete</code> support for multiple persons</p>
+</li>
+<li>
+<p>Auto-correct command suggested</p>
+</li>
+<li>
+<p>Display of person&#8217;s information on <code>select</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="version-1-4"><a class="link" href="#version-1-4">9.4. Version 1.4</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Display of all tags</p>
+</li>
+<li>
+<p>Display of person&#8217;s timetable on <code>select</code></p>
+</li>
+<li>
+<p>Support for profile photo uploading</p>
+</li>
+<li>
+<p>Support for <code>find</code> using more fields</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="version-1-5"><a class="link" href="#version-1-5">9.5. Version 1.5</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Viewing of combined timetables</p>
+</li>
+<li>
+<p>Improve UI, add InfoPersonPanel</p>
+</li>
+<li>
+<p>Make add command fields optional</p>
+</li>
+<li>
+<p>Change the themes of the app</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-21 15:57:58 +00:00
+Last updated 2017-11-13 08:29:17 +00:00
 </div>
 </div>
 </body>

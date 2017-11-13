@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Zachary Tang Tjun Chii - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Zachary Tang Tjun Chii - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-unify"><a class="link" href="#project-unify">Project: UniFy</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>UniFy is a desktop Address Book application for University students, particularly those from NUS (National University of Singapore).</p>
+</div>
+<div class="paragraph">
+<p>The user is able to manage the many people he meets in University, keep track of his friends' Birthdays, view his friend’s timetables, and much more.
+Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
+about 6kLoC.</p>
+</div>
+<div class="paragraph">
+<p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/main/zacharytang.md">Functional code</a>]
+[<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/test/zacharytang.md">Test code</a>]<br></p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-timetable-features"><a class="link" href="#enhancement-added-timetable-features">Enhancement Added: Timetable Features</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-combined-timetables-code-whenfree-code-em-since-v1-5-em"><a class="link" href="#viewing-combined-timetables-code-whenfree-code-em-since-v1-5-em">Viewing combined timetables : <code>whenfree</code> <em>(Since v1.5)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>"When are all of you free?" is an extremely common question in University. Let us solve that.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can view the combined timetables of a group of people, selected by indexes.<br>
+Format: <code>whenfree [INDEX]&#8230;&#8203;</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/whenfree.png" alt="whenfree" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.10 : View the combined timetables of your contacts easily</em></p>
+</div>
+<div class="paragraph">
+<p>The cells that are filled with another colour are the times when somebody has a lesson<br>
+<em>(Coming in v2.0)</em>: View who has lessons at each timeslot, and what lessons they have!</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>whenfree 1 2</code><br>
+Displays a combined timetable for the 1st and 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>whenfree</code><br>
+Displays a combined timetable for all listed users.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Creates a combined timetable representing all the persons chosen.</p>
+</li>
+<li>
+<p>If no index is specified, displays the timetable representing all the persons currently listed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>NUS students are the target audience of our application, and most planning of events or group meetings require the
+usage of an individual&#8217;s timetables. By implementing the storage of timetables and viewing of combined timetables, users will be
+able to easily see when common free times between groups of people are.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="timetables-attribute"><a class="link" href="#timetables-attribute">Timetables Attribute</a></h3>
+<div class="paragraph">
+<p>Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.</p>
+</div>
+<div class="sect3">
+<h4 id="retrieval-of-lesson-information"><a class="link" href="#retrieval-of-lesson-information">Retrieval of Lesson Information</a></h4>
+<div class="paragraph">
+<p>NUSMods URLs are in the format of <code>&#8230;&#8203;/timetable/ACAD_YEAR/SEM?MODULE_CODE[LESSON_TYPE]=LESSON_NO&amp;&#8230;&#8203;</code>  We use <code>TimetableParserUtil:expandUrl()</code> to get an expanded URL from shortened URL provided, then parse the expanded URL accordingly to obtain lesson data.
+Lessons for each module are stored in <code>ModuleInfoFromUrl</code>, which is then represented in <code>TimetableInfoFromUrl</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/nusmodifications/nusmods-api">NUSMods API</a> is used to retrieve data related to lessons parsed from URLs. JSON objects representing each module is retrieved and
+cast to a <code>Map</code> using <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a>. Lesson data is then retrieved as a list of <code>Lesson</code> objects.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// read JSON as map</span>
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; mappedJson = mapper.readValue(url, <span class="predefined-type">HashMap</span>.class);
+<span class="comment">// retrieve lesson data</span>
+<span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; lessonInfo = mappedJson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">Timetable</span><span class="delimiter">&quot;</span></span>);
+
+<span class="predefined-type">ArrayList</span>&lt;Lesson&gt; lessons = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+<span class="keyword">for</span> (<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; lesson : lessonInfo) {
+    Lesson lessonToAdd = <span class="keyword">new</span> Lesson(...);
+    lessons.add(lessonToAdd);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TimetableParserUtil</code> in <code>commons.util.timetable</code> contains all utility methods for parsing of NUSMods URLs and conversion between terms parsed from URLs and terms used in NUSMods API.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="representation-of-timetables"><a class="link" href="#representation-of-timetables">Representation of Timetables</a></h4>
+<div class="paragraph">
+<p>Storing of timetables is facilitated by an immutable <code>Timetable</code> object, which is a component of <code>Person</code>. The information regarding the timings of each lesson is stored in a single <code>TimetableInfo</code> object within <code>Timetable</code>.
+More specific information for a person&#8217;s lessons is abstracted further as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Information for odd/even weeks are stored by two <code>TimetableWeek</code> objects within <code>TimetableInfo</code></p>
+</li>
+<li>
+<p>Each day of the timetable (Monday to Friday) is represented by five <code>TimetableDay</code> objects in <code>TimetableWeek</code></p>
+</li>
+<li>
+<p>To represent each timeslot in <code>TimetableDay</code>, a <code>TimetableSlot</code> class is used to represent a 30 minute interval. 32 instances of <code>TimetableSlot</code> are used to represent a full day from 0800 to 0000</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following UML diagram represents the implementation of the classes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TimetableClassDiagram.png" alt="TimetableClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.1 : Timetable class diagram (XYZComponent refers to all other components that <code>Person</code> is composed of, the class diagram is not complete)</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displaying-of-timetables"><a class="link" href="#displaying-of-timetables">Displaying of Timetables</a></h4>
+<div class="paragraph">
+<p>Displaying of timetables is facilitated using a single <code>TimetableDisplay</code> component, which resides above <code>BrowserPanel</code>. Both these
+components are contained within <code>InfoPanel</code>, which handles specific events to bring either panel to the front.</p>
+</div>
+<div class="paragraph">
+<p>Upon execution of a <code>whenfree</code> command, the following happens:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>TimetableCommandParser</code> parses the input to determine which timetables to display.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If no arguments are passed, empty <code>ArrayList&lt;Index&gt;</code> is used.</p>
+</li>
+<li>
+<p>Otherwise, arguments are parsed into their respective <code>Index</code> and stored in an <code>ArrayList&lt;Index&gt;</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>A new <code>TimetableCommand</code> is constructed, using the list created by the parser.</p>
+</li>
+<li>
+<p>When <code>TimetableCommand:execute()</code> is called, the list of <code>Index</code>, is used to obtain the <code>ReadOnlyPerson</code> to display,
+and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
+</li>
+<li>
+<p>A <code>TimetableDisplayEvent</code> is then posted with the list of people to be displayed.</p>
+</li>
+<li>
+<p>The event is then handled by the <code>InfoPanel</code>, which creates a new <code>TimetableDisplay</code> component and brings it to the front.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Each <code>Timetable</code> to be displayed is obtained from the list of people from the <code>TimetableDisplayEvent</code> handled.</p>
+</li>
+<li>
+<p>When <code>TimetableDisplay</code> component is created, <code>fillInitialGrid()</code> first populates the timetable with empty slots.</p>
+</li>
+<li>
+<p>After which, each <code>Timetable</code> is added to the grid by <code>fillSingleTimetable()</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Execution of a <code>select</code> command is similar, except that a <code>PersonSelectedEvent</code> is handled instead of a <code>TimetableDisplayEvent</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Representation of timetables<br>
+<strong>Alternative 1 (current choice):</strong> Abstraction of timetable grid using classes for weeks/days/slots is used.<br>
+<strong>Pros:</strong> This is easily extendable to include new functionality e.g. lessons that occur in each slot.<br>
+<strong>Cons:</strong> This requires many method call chains to update and query timetable, might not be intuitive for new programmers. It is hard to iterate through entire timetable.<br>
+<strong>Alternative 2:</strong> A 3D array to represent the entire timetable is used.<br>
+<strong>Pros:</strong> It is simple and easy to understand,  easy to iterate through.<br>
+<strong>Cons:</strong> This does not follow OOP concepts, and cannot be extended to implement new functionalities.<br>
+<strong>Alternative 3:</strong> Individual lesson timings and information are stored.<br>
+<strong>Pros:</strong> Building the timetable is not required<br>
+<strong>Cons:</strong> Queries are inefficient if a timing has a lesson, needs to iterate through every lesson stored.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> The use of Shortened URLs versus full-length URLs<br>
+<strong>Alternative 1 (current choice):</strong> Only short URLs are accepted.<br>
+<strong>Pros:</strong> There is no need to deal with multiple types of URL.<br>
+<strong>Cons:</strong> This is less user friendly as users need to supply specific type of URL.<br>
+<strong>Alternative 2:</strong> Both shortened and full-length NUSMods URLs are accepted.<br>
+<strong>Pros:</strong> This is more user friendly as any type of NUSMods URL is accepted.<br>
+<strong>Cons:</strong> This is much harder to detect malformed URL as parsing data does not detect errors in lesson tokens in URL. Shortened URL gives 403 response on bad URL.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Behaviour of app when there is no internet connection<br>
+<strong>Alternative 1:</strong> Store timetable information after retrieval from NUSMods once<br>
+<strong>Pros:</strong> We only need to retrieve lesson information once per person<br>
+<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts<br>
+<strong>Alternative 2 (current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable<br>
+<strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person<br>
+<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-changing-of-font-size"><a class="link" href="#enhancement-proposed-changing-of-font-size">Enhancement Proposed: Changing of font size</a></h3>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="font-size-em-coming-in-v2-0-em"><a class="link" href="#font-size-em-coming-in-v2-0-em">Font Size <em>(Coming in v2.0)</em></a></h3>
+<div class="paragraph">
+<p>If you find the font too big or too small, the font size can be changed in <strong>Appearance</strong> &#8594; <strong>Themes</strong></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Integration of individual UI enhancement and fixes (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/136">#136</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/141">#141</a>)</p>
+</li>
+<li>
+<p>UI: Display of selected person in main window (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/87">#87</a>)</p>
+</li>
+<li>
+<p>UI: Updated footer to include number of persons (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/14">#14</a>)</p>
+</li>
+<li>
+<p>Added aliases for commands (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/13">#13</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/2">#2</a>)</p>
+</li>
+<li>
+<p>Maintained project repo documentation (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/15">#15</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/9">#9</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/1">#1</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project"><a class="link" href="#project">Project:</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Worked CP2106 Independent Software Development Project (Orbital)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-13 08:29:17 +00:00
+</div>
+</div>
+</body>
+</html>

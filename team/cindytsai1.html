@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Tsai Yu Hsuan - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Tsai Yu Hsuan - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-unify"><a class="link" href="#project-unify">Project: UniFy</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>UniFy is a desktop Address Book application for students from National University of Singapore.</p>
+</div>
+<div class="paragraph">
+<p>The user is able to manage the people he meets in University, such as keeping track of his friends' Birthdays, viewing his friend’s timetables.
+Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
+about 6kLoC.</p>
+</div>
+<div class="paragraph">
+<p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/main/CindyTsai1.md">Functional code</a>]
+[<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/test/CindyTsai1.md">Test code</a>]<br></p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-birthday-command"><a class="link" href="#enhancement-added-birthday-command">Enhancement Added: Birthday Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>First thing to do with UniFy is to start adding the various people you&#8217;ve met in University, as well as important people like your family.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="sect3">
+<h4 id="adding-a-person-manually"><a class="link" href="#adding-a-person-manually">Adding a person manually</a></h4>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Add contact information you want to remember! Your group mate&#8217;s timetable, your friend&#8217;s birthday. Tag your
+module mates with appropriate tags too!</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Use this to add a person to <strong>UniFy</strong><br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add n/NAME [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MATRIC_NUMBER] [b/BIRTHDAY] [tt/TIMETABLE_URL] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>a</code> , <code>insert</code><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PersonCard.png" alt="PersonCard">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.2.1 : A person with various contact information</em></p>
+</div>
+<div class="paragraph">
+<p>You can view the contacts you have added in UniFy in the form of <em>cards</em>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Here are the following information a person can have:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Name</code> field is compulsory while others are not.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Gender</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GENDER</code> is either Male/Female or M/F <em>(case insensitive)</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Phone number</strong></p>
+</li>
+<li>
+<p><strong>Email</strong></p>
+</li>
+<li>
+<p><strong>Address</strong></p>
+</li>
+<li>
+<p><strong>Matriculation number</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MATRIC_NUMBER</code> should be a 9-character string starting with 'A or a', followed by 7 digits, and ending with a letter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Birthday</strong> <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The format for <code>BIRTHDAY</code> is DDMMYYYY.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Timetable</strong> via an NUSMods shortlink <em>(Added since v1.2)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The full link is not allowed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example of a shortlink: <a href="http://modsn.us/AC71u" class="bare">http://modsn.us/AC71u</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Tags</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A person can have any number of tags.</p>
+</li>
+<li>
+<p>Tags are alphanumeric and without spaces.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/A0134232H tt/http://modsn.us/etYEX</code></p>
+</li>
+<li>
+<p><code>add n/Betsy Crowe g/Female p/1234567 e/betsycrowe@example.com a/Newgate Prison t/friend t/criminal</code></p>
+</li>
+<li>
+<p><code>add n/Amy Tan g/F p/82974823 e/amy_tan@example.com a/PGP m/a0142323T</code></p>
+</li>
+<li>
+<p><code>add n/Betty g/F p/12345678 e/betty@example.com b/23051998</code></p>
+</li>
+<li>
+<p><code>add n/Jasmine p/12345678</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>Users are able to store birthdays by inputting in the format of DDMMYYYY when adding a person. This allows the user to get a list of people having the same birthday month which is especially important for university students who celebrates friends' birthdays.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">Birthday Attribute</a></h3>
+<div class="paragraph">
+<p>Users are able to store birthdays by inputting in the format of DDMMYYYY when adding a person. You will be able to understand how Birthday is being stored and parsed over.
+This allows the user to get a list of people having the same birthday month.</p>
+</div>
+<div class="paragraph">
+<p>In general, the ability to store a person&#8217;s birthday was implemented via an <em>augmentation</em> of the component of <code>Person</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="representation-of-birthdays"><a class="link" href="#representation-of-birthdays">Representation of Birthdays</a></h4>
+<div class="paragraph">
+<p>Storing of birthdays is facilitated by an immutable <code>Birthday</code> object, which is a component of <code>Person</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following are the main classes edited to implement this:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>AddCommand</p>
+</li>
+<li>
+<p>AddCommandParser</p>
+</li>
+<li>
+<p>EditCommand</p>
+</li>
+<li>
+<p>EditCommandParser</p>
+</li>
+<li>
+<p>Person</p>
+</li>
+<li>
+<p>PersonListCard, PersonCardHandle</p>
+</li>
+<li>
+<p>XmlAdaptedPerson</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following UML diagram represents the implementation of the classes in the Model component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BirthdayModelComponentClassDiagram.png" alt="BirthdayModelComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.5.1 : UML diagram for updated Model with Birthday</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="validation-of-birthdays"><a class="link" href="#validation-of-birthdays">Validation of Birthdays</a></h4>
+<div class="paragraph">
+<p>After the birthday is input, it will be checked if the date is valid.
+The number of digits input will be checked first.
+Then the year would be checked from the 20th century until now.
+Range of day input will then be checked according to month.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidBirthday(<span class="predefined-type">String</span> test) {
+
+    <span class="keyword">if</span> (test.matches(BIRTHDAY_VALIDATION_REGEX)) {
+        <span class="keyword">try</span> {
+            <span class="predefined-type">DateFormat</span> df = <span class="keyword">new</span> <span class="predefined-type">SimpleDateFormat</span>(DATE_FORMAT);
+            df.setLenient(<span class="predefined-constant">false</span>);
+            df.parse(test);
+            <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+        } <span class="keyword">catch</span> (<span class="exception">ParseException</span> pe) {
+            <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Representation of birthdays<br>
+<strong>Alternative 1 (current choice):</strong> The birthday of the specified contact is displayed as string of numbers.<br>
+<strong>Pros:</strong> This is easy to implement as there is no need to alter the input.<br>
+<strong>Cons:</strong> It is difficult to recognise the date from the number displayed.<br>
+<strong>Alternative 2:</strong> The birthday is in the format of 25 Dec 1997.<br>
+<strong>Pros:</strong> It is simple and easy to understand.<br>
+<strong>Cons:</strong> It requires extra methods to change the format displayed.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-password-command"><a class="link" href="#enhancement-proposed-password-command">Enhancement Proposed: Password command</a></h3>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-a-password-for-your-address-book-code-password-code-em-coming-in-v2-0-em"><a class="link" href="#setting-a-password-for-your-address-book-code-password-code-em-coming-in-v2-0-em">Setting a password for your address book : <code>password</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Your privacy is important. Prevent others from viewing the contact details you possess.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Sets or changes the password that allows access to the address book<br>
+Format: <code>password pw/PASSWORD</code><br>
+Alternatives: <code>p</code> , <code>code</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>PASSWORD</code> length is limited to 20 characters.</p>
+</li>
+<li>
+<p>Remove the password by putting <code>PASSWORD</code> as <code>PASSWORD</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>password pw/PASSWORD</code> removes the password in UniFy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>password 123456789</code><br>
+Adds 123456789 as a password.</p>
+</li>
+<li>
+<p><code>password</code><br>
+To clear the password set.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Suggest command (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/86">#86</a>)</p>
+</li>
+<li>
+<p>Find by multiple field (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/97">#97</a>)</p>
+</li>
+<li>
+<p>Make add command fields optional (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/154">#154</a>)</p>
+</li>
+<li>
+<p>UI: Change error message colour (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/57">#57</a>)</p>
+</li>
+<li>
+<p>Modified or added to test to maintain or increase coverage
+(Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/86">#86</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project"><a class="link" href="#project">Project:</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Worked CP2106 Independent Software Development Project (Orbital)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-13 08:29:17 +00:00
+</div>
+</div>
+</body>
+</html>
