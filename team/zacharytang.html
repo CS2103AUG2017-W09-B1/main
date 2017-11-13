@@ -178,7 +178,7 @@ More specific information for a person&#8217;s lessons is abstracted further as 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.2.1 : Timetable class diagram (XYZComponent refers to all other components that <code>Person</code> is composed of, the class diagram is not complete)</em></p>
+<p><em>Figure 4.2.2.1 : Timetable class diagram (XYZComponent refers to all other components that <code>Person</code> is composed of, the class diagram is not complete)</em></p>
 </div>
 </div>
 <div class="sect3">
@@ -264,12 +264,12 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Behaviour of app when there is no internet connection<br>
-<strong>Alternative 1:</strong> Store timetable information after retrieval from NUSMods once<br>
-<strong>Pros:</strong> We only need to retrieve lesson information once per person<br>
-<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts<br>
-<strong>Alternative 2 (current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable<br>
+<strong>Alternative 1(current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable<br>
 <strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person<br>
-<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons</p>
+<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons<br>
+<strong>Alternative 2:</strong> Store timetable information after retrieval from NUSMods once<br>
+<strong>Pros:</strong> We only need to retrieve lesson information once per person<br>
+<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -372,7 +372,7 @@ to use <strong>UniFy</strong>, no more searching for hidden buttons or navigatin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:15:16 +00:00
+Last updated 2017-11-13 14:24:06 +00:00
 </div>
 </div>
 </body>

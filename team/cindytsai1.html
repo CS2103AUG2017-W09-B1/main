@@ -34,7 +34,7 @@ about 6kLoC.</p>
 [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/test/CindyTsai1.md">Test code</a>]<br></p>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-birthday-command"><a class="link" href="#enhancement-added-birthday-command">Enhancement Added: Birthday Command</a></h3>
+<h3 id="enhancement-added-birthday-attribute"><a class="link" href="#enhancement-added-birthday-attribute">Enhancement Added: Birthday Attribute</a></h3>
 <div class="sect3">
 <h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
 <hr>
@@ -262,7 +262,7 @@ This allows the user to get a list of people having the same birthday month.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.1 : UML diagram for updated Model with Birthday</em></p>
+<p><em>Figure 4.8.1.1 : UML diagram for updated Model with Birthday</em></p>
 </div>
 </div>
 <div class="sect3">
@@ -296,12 +296,420 @@ Range of day input will then be checked according to month.</p>
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Representation of birthdays<br>
-<strong>Alternative 1 (current choice):</strong> The birthday of the specified contact is displayed as string of numbers.<br>
+<strong>Alternative 1 (current choice):</strong> The birthday of the specified contact is displayed as string of numbers with <code>/</code> separating the day, month and year.<br>
 <strong>Pros:</strong> This is easy to implement as there is no need to alter the input.<br>
 <strong>Cons:</strong> It is difficult to recognise the date from the number displayed.<br>
 <strong>Alternative 2:</strong> The birthday is in the format of 25 Dec 1997.<br>
 <strong>Pros:</strong> It is simple and easy to understand.<br>
 <strong>Cons:</strong> It requires extra methods to change the format displayed.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-find-command"><a class="link" href="#enhancement-added-find-command">Enhancement Added: Find Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-filters-code-find-code-em-since-v1-4-em"><a class="link" href="#locating-persons-by-filters-code-find-code-em-since-v1-4-em">Locating persons by filters : <code>find</code> <em>(Since v1.4)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Display your contacts how you like it. All of them? Just your classmates for a particular module?<br>
+Want to know who&#8217;s birthday is in this month? Unify every common contact together and list them as one.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>You can find people whose information contains all given keywords (inclusive) from each category.<br>
+Format: <code>find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY MONTH] [t/TAG]&#8230;&#8203;</code><br>
+Alternatives: <code>f</code> , <code>search</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>At least one field should be specified.</p>
+</li>
+<li>
+<p>You can specify multiple keywords related to one field by using whitespace to split them.</p>
+</li>
+<li>
+<p>Persons matching at least one of the keywords will be returned.</p>
+</li>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the categories does not matter. e.g. <code>p/</code> can come before <code>t/</code></p>
+</li>
+<li>
+<p>Mentioned attributes are searched.</p>
+</li>
+<li>
+<p>Partial words will be matched. e.g. <code>Han</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>MONTH should be inputted by numbers. e.g <code>12</code> searches for December babies</p>
+</li>
+<li>
+<p>Only one birthday month is to be input.</p>
+</li>
+<li>
+<p>Single digit months needs to be preceded by a 0 in front. e.g. <code>02</code> searches for those born in February</p>
+</li>
+<li>
+<p>Only the birthday month is searched.</p>
+</li>
+<li>
+<p>Typing with one of the prefix keyword empty will be considered as not searching for that prefix. e.g. <code>find n/an p/</code> will only return the persons containing <code>an</code> in their names</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find n/ian zach</code><br>
+Returns any person with name including 'ian' and 'zach'</p>
+</li>
+<li>
+<p><code>find n/Joe t/friends</code><br>
+Returns any person with name including <code>Joe</code> and tagged by <code>friends</code></p>
+</li>
+<li>
+<p><code>find t/friends p/1234</code><br>
+Returns any person tagged by <code>friends</code>, and having phone numbers containing <code>1234</code></p>
+</li>
+<li>
+<p><code>find t/jcfriends computing</code><br>
+Returns all persons in UniFy containing <strong>both</strong> 'JCfriends' and 'computing'</p>
+</li>
+<li>
+<p><code>find b/12</code><br>
+Returns all persons in UniFy having birthdays in <code>December</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-command-filter-mechanism"><a class="link" href="#find-command-filter-mechanism">Find Command [Filter] Mechanism</a></h3>
+<div class="paragraph">
+<p>Finding a person by filters means that users will be able to find a person using different fields of information. Currently, UniFy supports users to find a person by name, phone, email, address, tags and birthday month. This allows users to have more flexibility in the way they search for their contacts.<br>
+Only persons who match all keywords in all fields will be returned. You will be able to understand how the result of the find command is determined.</p>
+</div>
+<div class="paragraph">
+<p>In general, the ability to find persons by filters was implemented by modifying the existing <code>find</code> command.</p>
+</div>
+<div class="paragraph">
+<p>The modification involves:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parsing of user input in the FindCommandParser</p>
+</li>
+<li>
+<p>Searching of different fields for the person list in the FindCommand</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="parsing-of-user-input"><a class="link" href="#parsing-of-user-input">Parsing of user input</a></h4>
+<div class="paragraph">
+<p>The input will be tokenized against the <code>n/</code>, <code>p/</code>, <code>e/</code>, <code>a/</code>, <code>t/</code> and <code>b/</code> prefixes which are for name, phone, email, address, tags and birthday month respectively. This can be done by the <code>ArgumentTokenizer</code> class.<br>
+The user input will be parsed as an ArrayList with prefixes and keywords separated. If the index of <code>n/</code> is 1, the keywords for the name field will be at the index of 2 in the ArrayList.<br></p>
+</div>
+<div class="paragraph">
+<p>The implementation of this parse is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (argsMultimap.getValue(PREFIX_NAME).isPresent()) {
+    nameList = argsMultimap.getValue(PREFIX_NAME).get();
+    predicate.add(PREFIX_NAME.getPrefix());
+    predicate.add(nameList);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since the field of <code>b/</code> only takes in birthday month, a small check is implemented to determine the validity of the keyword input. The birthday month is checked to only contain integer and be within the range of 1 to 12.</p>
+</div>
+<div class="paragraph">
+<p>The implementation of this check is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// checks if birthday month contains non-integers, and returns &quot;Keyword input must be in integer.&quot;</span>
+<span class="keyword">if</span> (!birthdayList.matches(<span class="string"><span class="delimiter">&quot;</span><span class="content">[0-9]+</span><span class="delimiter">&quot;</span></span>)) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(FindCommand.MESSAGE_BIRTHDAYKEYWORD_NONNUMBER);
+
+<span class="comment">// checks if birthday month in out of bound, and returns &quot;Month %1$s does not exist.&quot;</span>
+} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="predefined-type">Integer</span>.parseInt(birthdayList.trim()) &gt; <span class="integer">12</span> || <span class="predefined-type">Integer</span>.parseInt(birthdayList.trim()) &lt; <span class="integer">1</span>) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(FindCommand.MESSAGE_BIRTHDAYKEYWORD_NONEXIST, birthdayList.trim()));
+
+} <span class="keyword">else</span> <span class="keyword">if</span> (birthdayList.trim().length() == <span class="integer">1</span>) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(FindCommand.MESSAGE_BIRTHDAYKEYWORD_INVALID, birthdayList.trim()));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="searching-of-persons-using-several-fields-of-information"><a class="link" href="#searching-of-persons-using-several-fields-of-information">Searching of Persons using several fields of information</a></h4>
+<div class="paragraph">
+<p>The search is done using the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The code searches persons matching the keyword in the name field, followed by the rest of the fields.</p>
+</li>
+<li>
+<p>The persons matching the keyword will be added into a HashMap&lt;String, Integer&gt; that stores the name of the person and the number of times the person matches the keywords.</p>
+</li>
+<li>
+<p>The persons are then added to a new ArrayList if the number of times the person matches the keywords equals to the number of keywords input.</p>
+</li>
+<li>
+<p>The ArrayList containing names of persons, having information that matches all keywords in respective fields, will be updated in the filtered list.</p>
+</li>
+<li>
+<p>The find result displayed to users.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The implementation of person&#8217;s phone being searched is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; findPersonsWithPhone(<span class="predefined-type">String</span> phone) {
+    <span class="comment">// Get the list of persons in UniFy</span>
+    ObservableList&lt;ReadOnlyPerson&gt; personList = model.getAddressBook().getPersonList();
+
+    <span class="predefined-type">String</span><span class="type">[]</span> phoneKeyword = phone.split(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>);
+
+    <span class="comment">// Keeping track of the number of keywords input in total</span>
+    count += phoneKeyword.length;
+
+    <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; phoneList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+
+    <span class="keyword">for</span> (ReadOnlyPerson person : personList) {
+        <span class="keyword">for</span> (<span class="predefined-type">String</span> keyword : phoneKeyword) {
+            <span class="predefined-type">String</span> phones = person.getPhone().toString();
+
+            <span class="comment">// keyword is a subset of phones (do not have to match fully)</span>
+            <span class="keyword">if</span> (phones.contains(keyword)) {
+                phoneList.add(person.getName().toString());
+            }
+        }
+    }
+    <span class="keyword">return</span> phoneList;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation of tracking the number of times a person being matched is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// if phone prefix is input</span>
+<span class="keyword">if</span> (predicates.equals(PREFIX_PHONE.getPrefix())) {
+
+    <span class="comment">// Result from the code above</span>
+    <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; personsWithPhone = findPersonsWithPhone(predicate.get(i + <span class="integer">1</span>));
+
+    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="integer">0</span>; j &lt; personsWithPhone.size(); j++) {
+
+        <span class="comment">// if it is the first time this person is being searched, add the person in with time of matches = 1</span>
+        <span class="keyword">if</span> (!predicateMap.containsKey(personsWithPhone.get(j))) {
+            predicateMap.put(personsWithPhone.get(j), <span class="integer">1</span>);
+            predicateList.add(personsWithPhone.get(j));
+
+        <span class="comment">// if the person is searched before, increase the time of matches by 1</span>
+        } <span class="keyword">else</span> {
+            predicateMap.put(personsWithPhone.get(j), predicateMap.remove(personsWithPhone.get(j)) + <span class="integer">1</span>);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="command-logic"><a class="link" href="#command-logic">Command Logic</a></h4>
+<div class="paragraph">
+<p>The following is the logic component class diagram for <code>FindCommand</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindCommandLogicComponentSequenceDiagram.png" alt="FindCommandLogicComponentSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.9.3.1 : FindCommand Logic Component Class Diagram</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of find command<br>
+<strong>Alternative 1 (current choice):</strong> Only the persons matching all keywords are returned.<br>
+<strong>Pros:</strong> This aligns with the purpose of implementing this enhancement to allow users to refine and limit their search by inputting more keywords in different fields.<br>
+<strong>Cons:</strong> It is harder to implement as we need to keep track of how many times a person is being matched.<br>
+<strong>Alternative 2:</strong> All persons matching one or more keywords are returned.<br>
+<strong>Pros:</strong> It is simple to implement.<br>
+<strong>Cons:</strong> By typing more keywords in different fields, more persons matching one of the keywords will be returned which defeats the purpose of having this enhancement.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-suggest-command"><a class="link" href="#enhancement-added-suggest-command">Enhancement Added: Suggest Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-suggestion-em-since-v1-5-em"><a class="link" href="#command-suggestion-em-since-v1-5-em">Command Suggestion <em>(Since v1.5)</em></a></h3>
+<div class="paragraph">
+<p>Typing a misspelled word for a command will trigger the address book to suggest the correct phrasing for that command</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/command_suggestion.png" alt="command suggestion" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.1 : Typing the command <code>delet</code> will make UniFy reply `Do you mean delete?`</em></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="suggest-command-mechanism"><a class="link" href="#suggest-command-mechanism">Suggest Command Mechanism</a></h3>
+<div class="paragraph">
+<p>This feature will conduct spelling check if the command input does not match any of the existing commands. It will prompt an error message suggesting the correct spelling of the command word. You will be able to understand how the code determines the correct spelling.<br>
+This is implemented because there is many commands to remember in UniFy and we suspect users might have typos during their usage.</p>
+</div>
+<div class="paragraph">
+<p>In general, the ability of this command was implemented by adding a SuggestCommand class.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-suggest-command"><a class="link" href="#implementation-of-suggest-command">Implementation of Suggest Command</a></h4>
+<div class="paragraph">
+<p><code>SuggestCommand</code> class calls the <code>UniqueCommandList</code> class to determine the possible correct spellings and to retrieve the list of command words existing in the address book.</p>
+</div>
+<div class="paragraph">
+<p>We have identified a few spelling mistakes that our users might make.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Two alphabets swapping positions</p>
+</li>
+<li>
+<p>One extra alphabet added</p>
+</li>
+<li>
+<p>One alphabet lacking</p>
+</li>
+<li>
+<p>One alphabet mistyped</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The implementation of the determination of possible spellings is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">TreeSet</span>&lt;<span class="predefined-type">String</span>&gt; getPossibleCommandList(<span class="predefined-type">String</span> command) {
+    possibleCommandList = <span class="keyword">new</span> <span class="predefined-type">TreeSet</span>&lt;&gt;();
+
+    <span class="comment">// Swapping i with i+1</span>
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">1</span>; i &lt; command.length() - <span class="integer">1</span>; i++) {
+        possibleCommandList.add(command.substring(<span class="integer">0</span>, i) + command.charAt(i + <span class="integer">1</span>) + command.charAt(i) + command.substring(i + <span class="integer">2</span>));
+    }
+
+    <span class="comment">// deleting one char, skipping i</span>
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; command.length(); i++) {
+        possibleCommandList.add(command.substring(<span class="integer">0</span>, i) + command.substring(i + <span class="integer">1</span>));
+    }
+
+    <span class="comment">// inserting one char</span>
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; command.length() + <span class="integer">1</span>; i++) {
+        <span class="keyword">for</span> (<span class="type">char</span> j = <span class="string"><span class="delimiter">'</span><span class="content">a</span><span class="delimiter">'</span></span>; j &lt;= <span class="string"><span class="delimiter">'</span><span class="content">z</span><span class="delimiter">'</span></span>; j++) {
+            possibleCommandList.add(command.substring(<span class="integer">0</span>, i) + j + command.substring(i));
+            <span class="comment">// replacing one char</span>
+            <span class="keyword">if</span> (i &lt; command.length()) {
+                possibleCommandList.add(command.substring(<span class="integer">0</span>, i) + j + command.substring(i + <span class="integer">1</span>));
+            }
+        }
+    }
+    <span class="keyword">return</span> possibleCommandList;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of suggest command<br>
+<strong>Alternative 1 (current choice):</strong> An error message suggesting the correct spelling for the command word is returned.<br>
+<strong>Pros:</strong> This is easier to implement without modification of other command classes.<br>
+<strong>Cons:</strong> This would still require the user to correct his spelling error by himself.<br>
+<strong>Alternative 2:</strong> The suggested command is conducted then prompt to ask if the user is intending to conduct such an action.<br>
+<strong>Pros:</strong> This does not require the user to retype to correct his spelling error.<br>
+<strong>Cons:</strong> This is harder to implement and if the user do not intent to conduct the suggested command action, the user has to do an extra step to undo the command, which might be inconvenient.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -372,6 +780,34 @@ To clear the password set.</p>
 <hr>
 </div>
 <div class="sect2">
+<h3 id="enhancement-proposed-sort-command"><a class="link" href="#enhancement-proposed-sort-command">Enhancement Proposed: Sort command</a></h3>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-all-persons-code-sort-code-em-coming-in-v2-0-em"><a class="link" href="#sorting-all-persons-code-sort-code-em-coming-in-v2-0-em">Sorting all persons : <code>sort</code> <em>(Coming in v2.0)</em></a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><em>Sometimes, you just meet too many people in University. Don&#8217;t worry, get all your contacts in order.</em></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Shows the list of all persons in the current list in your address book by arranging their names in alphabetical order.<br>
+Format:<br>
+<em>(Sort by name in ascending order)</em> <code>sort ASC</code><br>
+<em>(Sort by name in descending order)</em> <code>sort DESC</code><br>
+Alternatives: <code>s</code> , <code>sortall</code>, <code>arrange</code></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 <div class="ulist">
 <ul>
@@ -411,7 +847,7 @@ To clear the password set.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:15:16 +00:00
+Last updated 2017-11-13 14:24:06 +00:00
 </div>
 </div>
 </body>

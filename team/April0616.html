@@ -163,8 +163,8 @@ Also, the display picture of a contact can be easily changed or deleted by the P
 <h3 id="photo-command-mechanism"><a class="link" href="#photo-command-mechanism">Photo Command Mechanism</a></h3>
 <div class="paragraph">
 <p>The photo command allows users to assign photos to their contacts, and it also supports adding, editing and deleting photos as the remark command.
-It accepts the absolute path in the user&#8217;s computer, copying the original photo to the default folder of the file.
-We are implementing this <code>PhotoCommand</code> as NUS students may forget what their classmates look like.</p>
+You will be able to understand how it accepts the absolute path in the user&#8217;s computer and copies the original photo to the default folder of the file.
+We are implementing this <code>PhotoCommand</code> as NUS students may want to keep themselves reminded of how their contacts look like.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -292,7 +292,7 @@ Up to now, the photo command hasn&#8217;t supported the <code>RedoCommand</code>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.1 : High-level Sequence Diagram</em></p>
+<p><em>Figure 4.7.2.1 : High-level Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>For the logic component part, the <code>PhotoCommandParser</code> is created by the <code>AddressBookParser</code>, and the <code>PhotoCommand</code> is created by the <code>PhotoCommandParser</code>.
@@ -304,7 +304,7 @@ The logic component class diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.2 : Logic Component Class Diagram</em></p>
+<p><em>Figure 4.7.2.2 : Logic Component Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>Also, the <code>PhotoCommand</code> class inherits from the <code>UndoableCommand</code> class.
@@ -321,7 +321,7 @@ The implementation is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As shown in Figure 4.7.3, the <code>AddressBook</code> consists of one <code>UniqueTagList</code>, one <code>UniquePersonList</code>, and one <code>UniquePhotoPathList</code>.
+<p>As shown in Figure 4.7.2.3, the <code>AddressBook</code> consists of one <code>UniqueTagList</code>, one <code>UniquePersonList</code>, and one <code>UniquePhotoPathList</code>.
 The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</code> objects.</p>
 </div>
 <div class="imageblock">
@@ -330,7 +330,7 @@ The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</co
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.3 : Model Component Class Diagram</em></p>
+<p><em>Figure 4.7.2.3 : Model Component Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>We create a new <code>PhotoPath</code> attribute, and the <code>Person</code> class is linked to it.</p>
@@ -362,11 +362,11 @@ The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</co
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspects:</strong> How to fetch the contact photo saved in users' computers<br>
-<strong>Alternative 1(current choice):</strong> Let users specify the absolute path of the photo<br>
+<p><strong>Aspects:</strong> The way the contact photo saved in users' computers is retrieved<br>
+<strong>Alternative 1 (current choice):</strong> Users are required to specify the absolute path of the photo<br>
 <strong>Pros:</strong> This might be inconvenient as users need additional steps to get the absolute file of the photo.<br>
 <strong>Cons:</strong> The image file is specified accurately by using the command line.<br>
-<strong>Alternative 2:</strong> Provide a pop-up window for the user to choose the photo<br>
+<strong>Alternative 2:</strong> Users are provided a pop-up window to choose the photo<br>
 <strong>Pros:</strong> It is more convenient for the user to choose the file.<br>
 <strong>Cons:</strong> This becomes no more a command-line input in this command-line application.</p>
 </div>
@@ -580,7 +580,7 @@ In the <code>EditCommand</code> class, a new attribute <code>updatedRemark</code
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.1 : High-level sequence diagram</em></p>
+<p><em>Figure 4.6.2.1 : High-level sequence diagram</em></p>
 </div>
 <div class="paragraph">
 <p><code>RemarkCommand</code> extends <code>UndoableCommand</code>, which is an abstract subclass of abstract class command, so the user can also undo the added remark.
@@ -592,7 +592,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.2 : Class Inheritance Diagram</em></p>
+<p><em>Figure 4.6.2.2 : Class Inheritance Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -616,7 +616,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.3 : Logic Component Sequence Diagram</em></p>
+<p><em>Figure 4.6.2.3 : Logic Component Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>We create a new <code>Remark</code> attribute, and the <code>Person</code> class is linked to it. Its model component class diagram is shown below:</p>
@@ -627,7 +627,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.4 : Component Class Diagram</em></p>
+<p><em>Figure 4.6.2.4 : Component Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The implementation is shown below.</p>
@@ -658,7 +658,7 @@ The class inheritance diagram is shown below:</p>
 </div>
 <div class="paragraph">
 <p><strong>Aspects:</strong> The command nature of Remark<br>
-<strong>Alternative 1(current choice):</strong> A RemarkCommand is used to add remarks to a contact.<br>
+<strong>Alternative 1(current choice):</strong> A RemarkCommand to add remarks to a contact is used.<br>
 <strong>Pros:</strong> It is not the compulsory field when a person is added as most people do not add remarks to a newly added contact.<br>
 <strong>Cons:</strong> It is an extra command for the user to remember.<br>
 <strong>Alternative 2:</strong> AddCommand and EditCommand are used for adding and editing of the remark.<br>
@@ -1076,7 +1076,7 @@ best strategy in the competition. Write the basic source code for this mathemati
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:15:16 +00:00
+Last updated 2017-11-13 14:24:06 +00:00
 </div>
 </div>
 </body>

@@ -134,7 +134,7 @@ tag to be deleted.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">Delete Tag Mechanism</a></h3>
+<h3 id="delete-command-tag-mechanism"><a class="link" href="#delete-command-tag-mechanism">Delete Command [Tag] Mechanism</a></h3>
 <div class="paragraph">
 <p>Deleting a tag means deleting a specified tag in all persons who contain that tag, as well as deleting the tag from the master list of tags in the Address Book.
 This is significantly different from deleting a tag for a person via the <code>edit</code> command.
@@ -173,7 +173,7 @@ to both delete one or more persons or delete one or more tags.</p>
 <p>For both types of <code>delete</code> commands, the same <code>delete</code> command word is used but the parameters provided in the command line are different.</p>
 </div>
 <div class="paragraph">
-<p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>/t</code> prefix for tags.</p>
+<p>The two types of commands are distinguished by the <code>preamble</code> of the parameter arguments after the word <code>delete</code>, when tokenized against the <code>t/</code> prefix for tags.</p>
 </div>
 <div class="paragraph">
 <p>Preamble for</p>
@@ -299,7 +299,7 @@ delete of person(s) have been abstracted to apply SLAP (Single Level of Abstract
 <p>The following sequence diagram shows the interactions with the <code>Model</code> Component.</p>
 </div>
 <div class="paragraph">
-<p>Not shown in Figure 4.3.1, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
+<p>Not shown in Figure 4.3.4.1, <code>listTags</code> are checked against <code>listOfExistingTags</code>, i.e. all tags
 to be deleted are checked whether each of them already exist in the address book. If this check fails, an exception is thrown.
 The sequence diagram demonstrates a <strong>successful</strong> deletion, hence this aspect of the logic is omitted for clarity.</p>
 </div>
@@ -309,7 +309,7 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.1 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
+<p><em>Figure 4.3.4.1 : The tags parsed are put into an ArrayList and iterated through for deletion</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -317,14 +317,14 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.2 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
+<p><em>Figure 4.3.4.2 : How each tag is removed from the Address Book and each Person&#8217;s list of tags</em></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Delete Tags<br>
-<strong>Alternative 1 (current choice):</strong> Modify the existing <code>delete</code> command.<br>
+<strong>Alternative 1 (current choice):</strong> The existing <code>delete</code> command is modified<br>
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
 <strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
 Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
@@ -443,13 +443,17 @@ would be extremely inefficient. Hence, this feature would be convenient and esse
 </div>
 </div>
 <div class="sect2">
-<h3 id="edit-tag-mechanism"><a class="link" href="#edit-tag-mechanism">Edit Tag Mechanism</a></h3>
+<h3 id="edit-command-tag-mechanism"><a class="link" href="#edit-command-tag-mechanism">Edit Command [Tag] Mechanism</a></h3>
 <div class="paragraph">
 <p>Editing a tag means editing a specified tag (the old tag) in all persons who contain that tag,
-as well as editing the tag from the master list of tags in the Address Book.
-This is significantly different from editing a person&#8217;s tag via the <code>edit</code> command.
-There is a need for this because a user would like to edit a tag for multiple people containing that tag.
-To edit a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
+as well as editing the tag from the master list of tags in the Address Book.</p>
+</div>
+<div class="paragraph">
+<p>This is significantly different from editing a person&#8217;s tag via the <code>edit</code> command.
+There is a need for this because a user would like to edit a tag for multiple people containing that tag.</p>
+</div>
+<div class="paragraph">
+<p>To edit a particular tag across multiple contacts, by editing each contact, would be a tedious process, hence, the addition of this feature.</p>
 </div>
 <div class="paragraph">
 <p>In this section, you will see that the implementation of editing a tag is very similar to deleting a tag.</p>
@@ -597,7 +601,7 @@ editing of person(s) have been abstracted to apply SLAP (Single Level of Abstrac
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.4.1 : How each tag is edited from the Address Book and each Person&#8217;s list of tags</em></p>
+<p><em>Figure 4.4.4.1 : How each tag is edited from the Address Book and each Person&#8217;s list of tags</em></p>
 </div>
 </div>
 <div class="sect3">
@@ -611,7 +615,6 @@ editing of person(s) have been abstracted to apply SLAP (Single Level of Abstrac
 <div class="paragraph">
 <p>Modifying the existing <code>edit</code> command was picked over creating a new command <code>edittag</code></p>
 </div>
-<hr>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -1096,7 +1099,7 @@ They drift away, and out of UniFy they go as well.</em></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:15:16 +00:00
+Last updated 2017-11-13 14:24:06 +00:00
 </div>
 </div>
 </body>
