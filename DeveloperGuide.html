@@ -80,10 +80,9 @@
 <li><a href="#managing-dependencies">7.4. Managing Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#user-stories">Appendix A: User Stories</a></li>
-<li><a href="#use-cases">Appendix B: Use Cases</a></li>
-<li><a href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix D: Glossary</a></li>
+<li><a href="#use-cases">Appendix A: Use Cases</a></li>
+<li><a href="#non-functional-requirements">Appendix B: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix C: Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -463,7 +462,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>The UI consists of a <code>MainWindow</code> that is made up of several parts such as <code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, and <code>BrowserPanel</code>. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103AUG2017-W09-B1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103AUG2017-W09-B1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103AUG2017-W09-B1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103AUG2017-W09-B1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -950,7 +949,7 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <strong>Pros:</strong> It is simple and easy to understand,  easy to iterate through.<br>
 <strong>Cons:</strong> This does not follow OOP concepts, and cannot be extended to implement new functionalities.<br>
 <strong>Alternative 3:</strong> Individual lesson timings and information are stored.<br>
-<strong>Pros:</strong> Building the timetable is not required<br>
+<strong>Pros:</strong> Building the timetable is not required.<br>
 <strong>Cons:</strong> Queries are inefficient if a timing has a lesson, needs to iterate through every lesson stored.</p>
 </div>
 <hr>
@@ -966,12 +965,12 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Behaviour of app when there is no internet connection<br>
-<strong>Alternative 1(current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable<br>
-<strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person<br>
-<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons<br>
-<strong>Alternative 2:</strong> Store timetable information after retrieval from NUSMods once<br>
-<strong>Pros:</strong> We only need to retrieve lesson information once per person<br>
-<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts</p>
+<strong>Alternative 1(current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable.<br>
+<strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person.<br>
+<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons.<br>
+<strong>Alternative 2:</strong> Store timetable information after retrieval from NUSMods once.<br>
+<strong>Pros:</strong> We only need to retrieve lesson information once per person.<br>
+<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts.</p>
 </div>
 </div>
 </div>
@@ -1166,7 +1165,7 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.5. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Delete Tags<br>
-<strong>Alternative 1 (current choice):</strong> The existing <code>delete</code> command is modified<br>
+<strong>Alternative 1 (current choice):</strong> The existing <code>delete</code> command is modified.<br>
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
 <strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
 Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
@@ -1414,7 +1413,7 @@ as all the these components require rendering tags, especially in the <code>init
 <strong>Pros:</strong> This is easy to implement and easy to access from any UI Component.<br>
 <strong>Cons:</strong> This increases coupling across the code base. Difficult to replace TagColorMap with a stub when doing tests.<br>
 <strong>Alternative 2:</strong> TagColorMap as a class attribute of MainWindow is used and is passed as a parameter to the constructors of relevant UI components. <br>
-<strong>Pros:</strong> This is a naive method and straightforward to implement<br>
+<strong>Pros:</strong> This is a naive method and straightforward to implement.<br>
 <strong>Cons:</strong> This requires a large amount of modification of existing code base of the <code>UI</code> component.</p>
 </div>
 <hr>
@@ -1826,11 +1825,11 @@ The <code>UniquePhotoPathList</code> acts as a container for <code>PhotoPath</co
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.3. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspects:</strong> The way the contact photo saved in users' computers is retrieved<br>
-<strong>Alternative 1 (current choice):</strong> Users are required to specify the absolute path of the photo<br>
+<p><strong>Aspects:</strong> The way the contact photo saved in users' computers is retrieved.<br>
+<strong>Alternative 1 (current choice):</strong> Users are required to specify the absolute path of the photo.<br>
 <strong>Pros:</strong> This might be inconvenient as users need additional steps to get the absolute file of the photo.<br>
 <strong>Cons:</strong> The image file is specified accurately by using the command line.<br>
-<strong>Alternative 2:</strong> Users are provided a pop-up window to choose the photo<br>
+<strong>Alternative 2:</strong> Users are provided a pop-up window to choose the photo.<br>
 <strong>Pros:</strong> It is more convenient for the user to choose the file.<br>
 <strong>Cons:</strong> This becomes no more a command-line input in this command-line application.</p>
 </div>
@@ -2464,297 +2463,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
-</div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
-<colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit a person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">correct any outdated information</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clear the entire address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove all entries without tedious single deletions</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see a history of commands</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve a command to execute again or see past actions</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list all the people in the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see all the contacts I have</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">select a person from a list by the index</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">easily select a person from a list I have just seen</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a person by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of persons without having to go through the entire list</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many contacts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort contacts by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate a contact easily</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">undo my previous action</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">reverse what I did previously</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">redo my previous action</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">reverse what an undo command</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">exit the program</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add remarks to a contact</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see more details</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who has many friends</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view different groups of my friends by their tags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">manage my large list of contacts well</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view an <a href="#attribute">attribute</a> called 'matriculation no.' &amp; 'gender'</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see more details of my friends</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view an <a href="#attribute">attribute</a> called 'birthday'</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the birthdays of my friends</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who likes to celebrates my friends' birthdays</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view different groups of my friends by the month</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">better plan their celebrations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use multiple synonyms of a command word (example 'list', 'find', 'search') to execute a command</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the application will be more intuitive for me</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be <a href="#suggested">suggested</a> a correct command if I type a command incorrectly</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">not need to always check help to see the list of commands</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the total number of contacts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a sense of the size of the address book</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the total number of contacts for a given tag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">easily keep track of how many contacts in a specific group/type</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete multiple contacts at the same time</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">not have to key in the delete command multiple times</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be informed who I deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">confirm if I have deleted the correct person</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who likes using social media platform</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">extract the contact data from social media automatically</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">not need to type and save them manually</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">impatient user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">type my commands in shorthand form</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">execute commands quickly and be more productive</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the tags in different colors</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">identify what tags and contacts i have faster</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove a specific tag that exists in some/all my contacts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove a tag label that is no longer needed</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit a specific tag name for all contacts with this tag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">update a specific tag common to multiple contacts easily</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search my contacts using different filters simultaneously, such as tags, keyword, birthday month and gender</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find the person faster</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">save and see the photos of my contacts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recognise them when I click their names</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">access the Google Maps service for a given address</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">quickly find the directions or the map locations of a contact</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see who lives near me</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find out who I can conveniently meet nearby</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who has a limited disk space</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete the contacts who I haven&#8217;t viewed for a certain time</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">manage the large number of people I meet in University</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see all the existing tag icons in the UI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see at a glance how many type of groups of people/tags there are</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">click one of the tag icons in the UI and see all the contacts under this tag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">easily access tag groups of people</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">access my address book using a password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ensure my data is secured</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have temporary tags for semester-based project groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">can delete my contacts after one semester</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who likes different styles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">change the theme(color) of the UI</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student with many friends</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">save my friends' timetables</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know when my friends are free to meet up</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student with many friends</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">combine my friends' timetables by selecting the contacts one by one or by tags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know when is the common time slot for everyone to meet up</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">near-sighted user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">change the font size of the Address Book</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student who has many outdoor activities</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a day mode and night mode in the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have the application more visible on the screen outdoors</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many friends</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find the centre location of a certain group of addresses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a place that is convenient for everyone to meet up</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix B: Use Cases</a></h2>
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix A: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
@@ -2985,7 +2694,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix B: Non Functional Requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -3027,7 +2736,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix D: Glossary</a></h2>
+<h2 id="glossary"><a class="link" href="#glossary">Appendix C: Glossary</a></h2>
 <div class="sectionbody">
 <div id="mainstream-os" class="paragraph">
 <p>Mainstream OS</p>
@@ -3082,7 +2791,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:27:07 +00:00
+Last updated 2017-11-13 15:15:09 +00:00
 </div>
 </div>
 </body>

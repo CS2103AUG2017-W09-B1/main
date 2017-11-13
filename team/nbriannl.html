@@ -19,13 +19,13 @@
 <h2 id="purpose"><a class="link" href="#purpose">Purpose</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This project portfolio documents the software experience I have in the module
-CS2103/T (Software Engineering).</p>
+<p>This project portfolio documents the software experience I have in the module CS2103/T (Software Engineering).</p>
 </div>
 <div class="paragraph">
 <p>A section titled 'Documentation Contributions (For CS2101 Use)' contains <strong>additional</strong>
-documentation contribution I would like the evaluators in CS2101 (Effective Communication for Computing Professionals) to take note of.
-It is <strong>not</strong> for CS2103/T.</p>
+documentation contribution I would like the evaluators in CS2101 (Effective Communication for Computing Professionals) to
+take additional note of.
+It is <strong>not</strong> for CS2103/T use.</p>
 </div>
 </div>
 </div>
@@ -41,7 +41,7 @@ Most of the user interactions are via Command Line Interface, while there exists
 about 8kLoC.</p>
 </div>
 <div class="paragraph">
-<p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
+<p>The source code is based on the <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B1/main/blob/master/collated/main/nbriannl.md">Functional code</a>]
@@ -119,8 +119,7 @@ as an essential feature by a busy University student seeking efficiency.</p>
 </div>
 <div class="paragraph">
 <p>For example, a University Student, who wants to delete an irrelevant tag (such as 'ProjectGroupMate', when a project is completed),
-would
-want to delete the tag from every contact containing that tag. It would be very inefficient for him
+would want to delete the tag from every contact containing that tag. It would be very inefficient for him
 to find all his contacts with that tag, and edit each and every contact with a new set of tags, which excludes the
 tag to be deleted.</p>
 </div>
@@ -324,7 +323,7 @@ The sequence diagram demonstrates a <strong>successful</strong> deletion, hence 
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Delete Tags<br>
-<strong>Alternative 1 (current choice):</strong> The existing <code>delete</code> command is modified<br>
+<strong>Alternative 1 (current choice):</strong> The existing <code>delete</code> command is modified.<br>
 <strong>Pros:</strong> The same command word <code>delete</code> is used which is an intuitive way to invoke a deletion of some object (person or tag). <br>
 <strong>Cons:</strong> The <code>DeleteCommand</code> class is no longer responsible for deletion of a person <strong>only</strong> but is now responsible for deleting a tag as well.
 Modifying the command via overriding constructors, adding new attributes and modifying the parse may seem too convoluted a solution.
@@ -680,8 +679,8 @@ or for group projects. If the meet up location is at the house of one of his fri
 to easily search for the location since he may have stored the friend&#8217;s address in the application.</p>
 </div>
 <div class="paragraph">
-<p>Furthermore, if he is at some location, for example, at school, and would like to find the directions to his friend&#8217;s house.
-He is able to quickly type a command to get direction to his friend&#8217;s house from his location.</p>
+<p>Furthermore, if he is at some location, for example, at school, and would like to find the directions to his friend&#8217;s house,
+he is able to quickly type a command to get directions to his friend&#8217;s house from his location.</p>
 </div>
 </div>
 </div>
@@ -733,7 +732,7 @@ For tags that are not in use for any people, they will be in grey and after all 
 <p>Being able to see all tags that exist in the address book has many benefits to the User Experience.<br></p>
 </div>
 <div class="paragraph">
-<p>It is a useful overview of all the distinct groups of people he may know in University, be it friends,
+<p>It is a useful overview of all the distinct groups of people he may want to he know he has in University, be it friends,
 classmates or teaching staff.<br></p>
 </div>
 <div class="paragraph">
@@ -787,7 +786,7 @@ Alternatives: <code>th</code>, <code>changetheme</code></p>
 <div class="sect3">
 <h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
 <div class="paragraph">
-<p>Theming adds on to the User Experience by providing variety to the user interface.</p>
+<p>The 2 themes and the Theme Command adds on to the User Experience by providing variety to the user interface.</p>
 </div>
 <div class="paragraph">
 <p>This enhancement lays on the groundwork for future CSS stylesheets to be added in the application.</p>
@@ -899,26 +898,77 @@ Shows the central locaton among the persons tagged as 'jcfriends'.</p>
 <hr>
 </div>
 <div class="sect2">
+<h3 id="pull-requests-references-for-the-above-features"><a class="link" href="#pull-requests-references-for-the-above-features">Pull Requests References For The Above Features</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Delete Tag: (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/5">#5</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/12">#12</a>)</p>
+</li>
+<li>
+<p>Edit Tag: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/69">#69</a>)</p>
+</li>
+<li>
+<p>GMaps Command: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/74">#74</a>)</p>
+</li>
+<li>
+<p>Tag Bar: (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/88">#88</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/152">#152</a>,)</p>
+</li>
+<li>
+<p>Themes and Theme Command: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/134">#134</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Edit Tag (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/69">#69</a>)</p>
+<p>Fixed White Screen Bug (Trivial Fix, shared by peers): (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/75">#75</a>)</p>
 </li>
 <li>
-<p>GMaps Command (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/74">#74</a>)</p>
+<p>Major Edit Pass for User Guide (Audience-centric Language): (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/81">#81</a>)</p>
 </li>
 <li>
-<p>UI: Added a Tag List Bar (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/88">#88</a>)</p>
+<p>Fix response of Person Overview to GMapsCommand: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/135">#135</a>)</p>
 </li>
 <li>
-<p>UI: Added Theme Switching and did 2 stylesheets
-(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/134">#134</a>,
-<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/134">#138</a>)</p>
+<p>Minor UI Adjustments: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/138">#138</a>)</p>
 </li>
 <li>
-<p>Fixed Person Info Panel (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/134">#133</a>) to respond if current
-person being viewed is deleted, modified (via edit or delete tag) or on address book clear.</p>
+<p>Standardized Color Across All Tags in UI Using a Singleton class TagColorMap: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/143">#143</a>)</p>
+</li>
+<li>
+<p>Fixed Person Info Panel (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/147">#147</a>)</p>
+</li>
+<li>
+<p>Various Fixes For Final v1.5 Product</p>
+<div class="ulist">
+<ul>
+<li>
+<p>UI: (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/183">#183</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/185">#185</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/209">#209</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/225">#225</a>)</p>
+</li>
+<li>
+<p>Delete Tag: (Pull request: <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/219">#219</a>)</p>
+</li>
+<li>
+<p>Birthday Attribute: (Pull requests: <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/220">#220</a>, <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/234">#234</a>,)</p>
+</li>
+<li>
+<p>Edit Tag: (Pull request: <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/227">#227</a>)</p>
+</li>
+<li>
+<p>Prompt Remark on too long a tag: (Pull request: <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/229">#229</a>)</p>
+</li>
+<li>
+<p>Updated SampleData for Manual Testing: (Pull request: <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/237">#237</a>)</p>
+</li>
+<li>
+<p>GMaps Command: (Pull request <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/239">#239</a>)</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Modified or added to test to maintain or increase coverage
@@ -1099,7 +1149,7 @@ They drift away, and out of UniFy they go as well.</em></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:27:07 +00:00
+Last updated 2017-11-13 15:15:09 +00:00
 </div>
 </div>
 </body>

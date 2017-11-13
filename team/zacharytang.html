@@ -23,8 +23,8 @@
 </div>
 <div class="paragraph">
 <p>The user is able to manage the many people he meets in University, keep track of his friends' Birthdays, view his friend’s timetables, and much more.
-Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
-about 6kLoC.</p>
+Most of the user interactions are via a command line interface, while there exists a graphic user interface created with JavaFX. It is written in Java and has
+about 8kLoC.</p>
 </div>
 <div class="paragraph">
 <p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
@@ -35,6 +35,14 @@ about 6kLoC.</p>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-timetable-features"><a class="link" href="#enhancement-added-timetable-features">Enhancement Added: Timetable Features</a></h3>
+<div class="paragraph">
+<p>Covers features relating to the saving of a person&#8217;s timetables, and displaying of timetable information</p>
+</div>
+<div class="paragraph">
+<p><strong>Code implemented</strong>: Pull requests <a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/54">#54</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/98">#98</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B1/main/pull/129">#129</a></p>
+</div>
 <div class="sect3">
 <h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
 <hr>
@@ -248,7 +256,7 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <strong>Pros:</strong> It is simple and easy to understand,  easy to iterate through.<br>
 <strong>Cons:</strong> This does not follow OOP concepts, and cannot be extended to implement new functionalities.<br>
 <strong>Alternative 3:</strong> Individual lesson timings and information are stored.<br>
-<strong>Pros:</strong> Building the timetable is not required<br>
+<strong>Pros:</strong> Building the timetable is not required.<br>
 <strong>Cons:</strong> Queries are inefficient if a timing has a lesson, needs to iterate through every lesson stored.</p>
 </div>
 <hr>
@@ -264,12 +272,12 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Behaviour of app when there is no internet connection<br>
-<strong>Alternative 1(current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable<br>
-<strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person<br>
-<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons<br>
-<strong>Alternative 2:</strong> Store timetable information after retrieval from NUSMods once<br>
-<strong>Pros:</strong> We only need to retrieve lesson information once per person<br>
-<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts</p>
+<strong>Alternative 1(current choice):</strong> Only store timetable URLs, and query each time app is launched. If no internet, start with empty timetable.<br>
+<strong>Pros:</strong> Storage needed is minimal, as only a single string is stored for each person.<br>
+<strong>Cons:</strong> Startup of app can be slow if there is a large number of persons.<br>
+<strong>Alternative 2:</strong> Store timetable information after retrieval from NUSMods once.<br>
+<strong>Pros:</strong> We only need to retrieve lesson information once per person.<br>
+<strong>Cons:</strong> Storage of entire timetables can be very costly, and storage can be expensive with a large number of contacts.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -372,7 +380,7 @@ to use <strong>UniFy</strong>, no more searching for hidden buttons or navigatin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:27:07 +00:00
+Last updated 2017-11-13 15:15:09 +00:00
 </div>
 </div>
 </body>
