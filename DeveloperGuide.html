@@ -821,10 +821,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect2">
 <h3 id="timetables-attribute"><a class="link" href="#timetables-attribute">4.2. Timetables Attribute</a></h3>
 <div class="paragraph">
-<p>Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.</p>
+<p>Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.
+==== Retrieval of Lesson Information</p>
 </div>
-<div class="sect3">
-<h4 id="retrieval-of-lesson-information"><a class="link" href="#retrieval-of-lesson-information">4.2.1. Retrieval of Lesson Information</a></h4>
 <div class="paragraph">
 <p>NUSMods URLs are in the format of <code>&#8230;&#8203;/timetable/ACAD_YEAR/SEM?MODULE_CODE[LESSON_TYPE]=LESSON_NO&amp;&#8230;&#8203;</code>  We use <code>TimetableParserUtil:expandUrl()</code> to get an expanded URL from shortened URL provided, then parse the expanded URL accordingly to obtain lesson data.
 Lessons for each module are stored in <code>ModuleInfoFromUrl</code>, which is then represented in <code>TimetableInfoFromUrl</code>.</p>
@@ -850,9 +849,8 @@ cast to a <code>Map</code> using <a href="http://wiki.fasterxml.com/JacksonHome"
 <div class="paragraph">
 <p><code>TimetableParserUtil</code> in <code>commons.util.timetable</code> contains all utility methods for parsing of NUSMods URLs and conversion between terms parsed from URLs and terms used in NUSMods API.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="representation-of-timetables"><a class="link" href="#representation-of-timetables">4.2.2. Representation of Timetables</a></h4>
+<h4 id="representation-of-timetables"><a class="link" href="#representation-of-timetables">4.2.1. Representation of Timetables</a></h4>
 <div class="paragraph">
 <p>Storing of timetables is facilitated by an immutable <code>Timetable</code> object, which is a component of <code>Person</code>. The information regarding the timings of each lesson is stored in a single <code>TimetableInfo</code> object within <code>Timetable</code>.
 More specific information for a person&#8217;s lessons is abstracted further as follows:</p>
@@ -883,7 +881,7 @@ More specific information for a person&#8217;s lessons is abstracted further as 
 </div>
 </div>
 <div class="sect3">
-<h4 id="displaying-of-timetables"><a class="link" href="#displaying-of-timetables">4.2.3. Displaying of Timetables</a></h4>
+<h4 id="displaying-of-timetables"><a class="link" href="#displaying-of-timetables">4.2.2. Displaying of Timetables</a></h4>
 <div class="paragraph">
 <p>Displaying of timetables is facilitated using a single <code>TimetableDisplay</code> component, which resides above <code>BrowserPanel</code>. Both these
 components are contained within <code>InfoPanel</code>, which handles specific events to bring either panel to the front.</p>
@@ -939,7 +937,7 @@ and stores it in a <code>List&lt;ReadOnlyPerson&gt;</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.4. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Representation of timetables<br>
 <strong>Alternative 1 (current choice):</strong> Abstraction of timetable grid using classes for weeks/days/slots is used.<br>
@@ -1369,10 +1367,8 @@ editing of person(s) have been abstracted to apply SLAP (Single Level of Abstrac
 <div class="sect2">
 <h3 id="tag-colouring-mechanism"><a class="link" href="#tag-colouring-mechanism">4.5. Tag Colouring Mechanism</a></h3>
 <div class="paragraph">
-<p>Tag labels appear in various <code>UI</code> components: <code>PersonCard</code>, <code>TagListPanel</code> and <code>PersonInfoPanel</code>.<br></p>
-</div>
-<div class="paragraph">
-<p>In order for a tag to have the same color across all components, there was a need for the <code>UI</code> Components
+<p>Tag labels appear in various <code>UI</code> components: <code>PersonCard</code>, <code>TagListPanel</code> and <code>PersonInfoPanel</code>.<br>
+In order for a tag to have the same color across all components, there was a need for the <code>UI</code> Components
 to keep track of what colors have been used and which color was a tag tied to.<br>
 You will be able to understand how a Singleton class <code>TagColorMap</code> was implemented.</p>
 </div>
@@ -2791,7 +2787,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 15:15:09 +00:00
+Last updated 2017-11-19 15:08:58 +00:00
 </div>
 </div>
 </body>

@@ -128,10 +128,9 @@ able to easily see when common free times between groups of people are.</p>
 <div class="sect2">
 <h3 id="timetables-attribute"><a class="link" href="#timetables-attribute">Timetables Attribute</a></h3>
 <div class="paragraph">
-<p>Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.</p>
+<p>Users are able to store timetables by supplying a shortened NUSMods URL when adding a person. You will be able to understand how NUSMods URLs are being parsed and how the timetable information is being extracted. This need is especially crucial for NUS students who require friends' timetables in order to find out a time to meet up.
+==== Retrieval of Lesson Information</p>
 </div>
-<div class="sect3">
-<h4 id="retrieval-of-lesson-information"><a class="link" href="#retrieval-of-lesson-information">Retrieval of Lesson Information</a></h4>
 <div class="paragraph">
 <p>NUSMods URLs are in the format of <code>&#8230;&#8203;/timetable/ACAD_YEAR/SEM?MODULE_CODE[LESSON_TYPE]=LESSON_NO&amp;&#8230;&#8203;</code>  We use <code>TimetableParserUtil:expandUrl()</code> to get an expanded URL from shortened URL provided, then parse the expanded URL accordingly to obtain lesson data.
 Lessons for each module are stored in <code>ModuleInfoFromUrl</code>, which is then represented in <code>TimetableInfoFromUrl</code>.</p>
@@ -156,7 +155,6 @@ cast to a <code>Map</code> using <a href="http://wiki.fasterxml.com/JacksonHome"
 </div>
 <div class="paragraph">
 <p><code>TimetableParserUtil</code> in <code>commons.util.timetable</code> contains all utility methods for parsing of NUSMods URLs and conversion between terms parsed from URLs and terms used in NUSMods API.</p>
-</div>
 </div>
 <div class="sect3">
 <h4 id="representation-of-timetables"><a class="link" href="#representation-of-timetables">Representation of Timetables</a></h4>
@@ -380,7 +378,7 @@ to use <strong>UniFy</strong>, no more searching for hidden buttons or navigatin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 15:15:09 +00:00
+Last updated 2017-11-19 15:08:58 +00:00
 </div>
 </div>
 </body>
